@@ -1,0 +1,602 @@
+"use client"
+
+import { JetBrains_Mono } from "next/font/google"
+import ContactForm from "@/components/contact-form"
+import ContactModal from "@/components/contact-modal"
+import ConversionChart from "@/components/conversion-chart"
+import { Button } from "@/components/ui/button"
+import Image from "next/image"
+import {
+  ChevronDown,
+  ChevronUp,
+  ArrowRight,
+  HelpCircle,
+  Building2,
+  Settings,
+  Clock,
+  ClipboardList,
+  Search,
+  Trophy,
+} from "lucide-react"
+import { useState, useEffect } from "react"
+import { trackEvent, useScrollTracking } from "@/lib/analytics"
+
+// Font
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+  fallback: ["Monaco", "Menlo", "Ubuntu Mono", "monospace"],
+})
+
+// URL de prise de RDV Calendly
+const CALENDLY_URL = "https://app.reclaim.ai/m/edouard-tiem/scan-de-votre-machine-de-vente-simple-sales"
+
+const faqData = [
+  {
+    question: "Quel est le « piège » ? Pourquoi est-ce gratuit ?",
+    answer:
+      "C'est simple : c'est la meilleure façon pour nous de prouver notre valeur. Notre conviction est que si l'analyse gratuite que nous vous offrons est suffisamment percutante, certains dirigeants voudront naturellement aller plus loin avec nous. Si ce n'est pas votre cas, vous repartez avec une analyse objective de vos angles morts, sans aucune pression ni obligation. C'est notre investissement initial pour mériter votre confiance.",
+    icon: "HelpCircle",
+  },
+  {
+    question: "Est-ce que c'est vraiment adapté à mon entreprise ?",
+    answer:
+      "Oui. Ce diagnostic a été spécifiquement conçu pour les dirigeants de PME et d'ETI de services B2B (de 15 à 500 salariés). Il ne s'agit pas d'une approche de grand groupe diluée, mais d'une analyse centrée sur les leviers de croissance agiles qui fonctionnent dans votre contexte : cycles de vente rapides, équipes polyvalentes et besoin de résultats tangibles.",
+    icon: "Building2",
+  },
+  {
+    question: "Vais-je recevoir un simple rapport automatisé ?",
+    answer:
+      "Non. C'est un processus hybride qui garantit la pertinence. Notre système analyse les données brutes de votre questionnaire pour identifier des schémas. Mais ensuite, chaque rapport est personnellement revu, enrichi et validé par moi-même (Edouard) pour m'assurer que les angles morts identifiés correspondent à votre réalité de terrain. C'est ce qui nous permet de vous apporter une réelle valeur en 48h.",
+    icon: "Settings",
+  },
+  {
+    question: "Combien de temps cela va-t-il vraiment me prendre ?",
+    answer:
+      "Nous respectons votre temps. Le processus est radicalement efficace :\n\n1. 5 minutes chrono pour remplir le questionnaire en ligne.\n2. Vous recevez votre rapport d'analyse personnalisé sous 48h.\n3. Vous réservez une session de travail de 30 minutes avec moi pour discuter des résultats.",
+    icon: "Clock",
+  },
+  {
+    question: "Que se passe-t-il juste après avoir rempli le questionnaire ?",
+    answer:
+      "Dès que vous validez le questionnaire, vous accédez directement à mon agenda pour choisir le créneau de 30 minutes qui vous arrange pour notre session de travail. Si vous préférez attendre, pas d'inquiétude : vous retrouverez ce même lien dans l'email contenant votre score pour réserver notre session plus tard. C'est vous qui gardez le contrôle.",
+    icon: "ArrowRight",
+  },
+]
+
+function FAQItem({ question, answer, icon }: { question: string; answer: string; icon: string }) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const IconComponent =
+    {
+      HelpCircle,
+      Building2,
+      Settings,
+      Clock,
+      ArrowRight,
+    }[icon] || HelpCircle
+
+  return (
+    <div className="border-b border-gray-200 py-6">
+      <button className="flex w-full items-center justify-between text-left" onClick={() => setIsOpen(!isOpen)}>
+        <div className="flex items-center space-x-3">
+          <IconComponent className="h-5 w-5 text-gray-600 flex-shrink-0" strokeWidth={1.5} />
+          <h3 className="text-lg font-medium">{question}</h3>
+        </div>
+        {isOpen ? <ChevronUp className="h-5 w-5 text-gray-500" /> : <ChevronDown className="h-5 w-5 text-gray-500" />}
+      </button>
+      {isOpen && (
+        <div className="mt-4 ml-8">
+          <div className="text-gray-600 whitespace-pre-line leading-relaxed">{answer}</div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default function ClientPage() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [showFloatingCTA, setShowFloatingCTA] = useState(false)
+  const cleanupScrollTracking = useScrollTracking("original")
+
+  const handleTakeAppointment = () => {
+    trackEvent("calendly_click", {
+      variant: "original",
+      cta_position: "services_section",
+    })
+
+    try {
+      window.open(CALENDLY_URL, "_blank")
+    } catch (error) {
+      console.error("Error opening Calendly:", error)
+    }
+  }
+
+  const handleCTAClick = (position: string) => {
+    trackEvent("cta_click", {
+      variant: "original",
+      cta_position: position,
+    })
+    setIsModalOpen(true)
+  }
+
+  // Gérer l'affichage du CTA flottant et le tracking du scroll
+  useEffect(() => {
+    // Track page view
+    trackEvent("page_view", {
+      variant: "original",
+    })
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+      setShowFloatingCTA(scrollY > 100) // Afficher après 100px de scroll
+    }
+
+    window.addEventListener("scroll", handleScroll)
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      if (cleanupScrollTracking) cleanupScrollTracking()
+    }
+  }, [])
+
+  return (
+    <main id="top" className={`${jetbrainsMono.variable} min-h-screen bg-[#f5f1eb] text-[#1a1a1a] font-mono`}>
+      {/* Header simplifié - sans CTA */}
+      <div className="fixed top-0 left-0 right-0 z-10 bg-[#f5f1eb] px-4 py-4 border-b border-gray-200">
+        <div className="container mx-auto">
+          <div className="flex items-center justify-between">
+            <a
+              href="#top"
+              className="text-sm font-mono text-[#1a1a1a] hover:opacity-70 transition-opacity cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault()
+                window.scrollTo({ top: 0, behavior: "smooth" })
+              }}
+            >
+              simple.sales
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Contact Modal */}
+      <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} variant="original" />
+
+      {/* CTA Flottant */}
+      <div
+        className={`fixed bottom-6 right-6 z-50 transition-all duration-300 ${
+          showFloatingCTA ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+        }`}
+      >
+        <Button
+          onClick={() => handleCTAClick("floating")}
+          className="bg-[#f6c344] hover:bg-[#f4b82e] text-[#1a1a1a] px-6 py-3 rounded-full shadow-lg font-medium text-sm md:text-base whitespace-nowrap"
+        >
+          Obtenir mon Score Gratuit
+        </Button>
+      </div>
+
+      {/* Hero Section avec animation typewriter */}
+      <section className="min-h-[60vh] md:min-h-[70vh] flex flex-col px-4 py-16 md:py-24 pt-24 md:pt-32">
+        <div className="flex-1"></div>
+        <div className="container mx-auto text-center">
+          <h1
+            className="text-2xl font-medium tracking-tight md:text-3xl lg:text-4xl [font-family:var(--font-jetbrains-mono),Monaco,Menlo,'Ubuntu_Mono',monospace] mb-8"
+            style={{ lineHeight: "1.8" }}
+          >
+            Vos ventes stagnent ?<br />
+            Le vrai problème est rarement celui que vous croyez.
+          </h1>
+          <div className="mx-auto max-w-[640px] lg:max-w-[760px]">
+            <h2 className="mt-4 md:mt-6 text-base md:text-lg lg:text-xl font-medium text-gray-700 leading-relaxed">
+              Notre diagnostic gratuit révèle les 3 angles morts qui freinent réellement votre croissance.
+            </h2>
+          </div>
+          <div className="mt-12 md:mt-16 flex justify-center">
+            <Button
+              className="group bg-[#f6c344] px-6 md:px-10 py-4 md:py-6 text-lg md:text-xl font-medium text-[#1a1a1a] hover:bg-[#f4b82e] rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 flex items-center justify-center gap-2 md:gap-3 w-auto max-w-sm md:max-w-none"
+              onClick={() => handleCTAClick("hero")}
+            >
+              <span className="text-center leading-tight">Révéler mon Score d'Efficacité</span>
+              <ArrowRight className="h-4 w-4 md:h-5 md:w-5 transition-transform duration-300 group-hover:translate-x-1 flex-shrink-0" />
+            </Button>
+          </div>
+          <p className="mt-3 md:mt-4 text-xs md:text-sm text-gray-600 italic">
+            Gratuit, sans engagement et 100% confidentiel
+          </p>
+
+          {/* Social proof avec logos - directement sous le CTA */}
+          <div className="mt-12 md:mt-16">
+            <h3 className="text-base md:text-lg font-medium mb-3 md:mb-4">
+              Une approche éprouvée auprès de leaders comme :
+            </h3>
+            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 py-4 md:py-6">
+              <Image
+                src="/images/chargemap-logo.png"
+                alt="Chargemap"
+                width={100}
+                height={40}
+                className="h-6 md:h-8 w-auto object-contain hover:opacity-80 transition-opacity"
+              />
+              <Image
+                src="/images/planity-logo.png"
+                alt="Planity"
+                width={100}
+                height={40}
+                className="h-6 md:h-8 w-auto object-contain hover:opacity-80 transition-opacity"
+              />
+              <Image
+                src="/images/sodexo-logo.png"
+                alt="Sodexo"
+                width={100}
+                height={40}
+                className="h-6 md:h-8 w-auto object-contain hover:opacity-80 transition-opacity"
+              />
+              <Image
+                src="/images/brigad-logo.png"
+                alt="Brigad"
+                width={100}
+                height={40}
+                className="h-6 md:h-8 w-auto object-contain hover:opacity-80 transition-opacity"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="flex-1"></div>
+      </section>
+
+      {/* Section graphique avec fond divisé */}
+      <section
+        className="relative py-4 md:py-8 lg:py-12 -mt-4 md:-mt-8"
+        style={{
+          background: `linear-gradient(to bottom, #F5F1EB 50%, #1F2937 50%)`,
+        }}
+      >
+        <ConversionChart />
+      </section>
+
+      {/* Section "Ça vous parle ?" - réinsérée */}
+      <section className="bg-[#1F2937] py-36">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-3xl">
+            <h2 className="text-2xl font-medium md:text-3xl mb-8 text-center text-white">
+              Les Signes qui ne Trompent Pas
+            </h2>
+
+            <p className="text-lg text-gray-300 text-center mb-12 max-w-2xl mx-auto">
+              Derrière chaque plateau de performance, je retrouve systématiquement une combinaison de ces symptômes :
+            </p>
+
+            <div className="space-y-8 mb-12">
+              {/* Ligne 1 */}
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="flex items-start space-x-3">
+                  <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
+                  <p className="text-lg text-gray-300">
+                    Vous pilotez vos prévisions à l'instinct, et chaque fin de trimestre est une source de stress.
+                  </p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
+                  <p className="text-lg text-gray-300">
+                    Des deals qui semblaient gagnés se bloquent au dernier moment, et vous ne savez pas pourquoi.
+                  </p>
+                </div>
+              </div>
+
+              {/* Ligne 2 */}
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="flex items-start space-x-3">
+                  <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
+                  <p className="text-lg text-gray-300">
+                    Vous avez l'impression de subir votre CRM au lieu de l'utiliser comme une véritable arme de
+                    croissance.
+                  </p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
+                  <p className="text-lg text-gray-300">
+                    Vous avez encore le goût amer de cette dernière formation coûteuse qui n'a rien changé sur le
+                    terrain.
+                  </p>
+                </div>
+              </div>
+
+              {/* Ligne 3 */}
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="flex items-start space-x-3">
+                  <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
+                  <p className="text-lg text-gray-300">
+                    Votre chiffre d'affaires repose sur les épaules d'un ou deux "héros", et vous redoutez le jour où
+                    ils partiront.
+                  </p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
+                  <p className="text-lg text-gray-300">
+                    Vous entendez vos commerciaux présenter l'offre de 5 manières différentes, diluant votre message et
+                    votre force de frappe.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <Button
+                className="w-auto md:w-auto bg-[#f6c344] px-6 md:px-10 py-4 md:py-6 text-base md:text-lg font-medium text-[#1a1a1a] hover:bg-[#f4b82e] rounded-lg max-w-sm md:max-w-none mx-auto"
+                onClick={() => handleCTAClick("problems_section")}
+              >
+                Obtenir mon Score Gratuit
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Nouvelle section : Plan en 3 étapes */}
+      <section className="container mx-auto px-4 py-36">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="text-2xl font-medium md:text-3xl mb-24 text-center">
+            Votre Plan vers la Performance en 3 Étapes Simples
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-12">
+            {/* Étape 1 */}
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
+                <ClipboardList className="h-12 w-12 text-gray-700" strokeWidth={1} />
+              </div>
+              <h3 className="text-xl font-medium mb-4">1. Clarifiez votre Situation</h3>
+              <p className="text-gray-600 leading-relaxed">
+                En 5 minutes, notre questionnaire stratégique vous aide à mettre des mots précis sur vos défis et vos
+                objectifs.
+              </p>
+            </div>
+
+            {/* Étape 2 */}
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
+                <Search className="h-12 w-12 text-gray-700" strokeWidth={1} />
+              </div>
+              <h3 className="text-xl font-medium mb-4">2. Révélez vos Angles Morts</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Nous analysons vos réponses et identifions les 3 points de friction qui freinent réellement votre
+                croissance.
+              </p>
+            </div>
+
+            {/* Étape 3 */}
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
+                <Trophy className="h-12 w-12 text-gray-700" strokeWidth={1} />
+              </div>
+              <h3 className="text-xl font-medium mb-4">3. Identifiez votre Levier N°1</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Lors d'une session de 30 minutes, nous définissons ensemble l'action prioritaire qui aura le plus
+                d'impact sur vos résultats.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Nouvelle section : Rôles et Mission */}
+      <section className="bg-[#F9FAFB] py-36">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-4xl text-center">
+            <h2 className="text-2xl font-medium md:text-3xl mb-16">
+              Votre rôle est de piloter. Le nôtre est de dissiper le brouillard.
+            </h2>
+
+            <div className="mx-auto max-w-3xl">
+              <div className="space-y-8 text-left">
+                <div className="flex items-start space-x-4">
+                  <div className="h-2 w-2 bg-[#f6c344] rounded-full mt-3 flex-shrink-0"></div>
+                  <p className="text-lg md:text-xl leading-relaxed text-gray-700">
+                    <strong>Vous avez bâti le succès d'hier.</strong> Mais vous sentez que les règles du jeu ont changé
+                    et que votre ancien manuel ne suffit plus.
+                  </p>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="h-2 w-2 bg-[#f6c344] rounded-full mt-3 flex-shrink-0"></div>
+                  <p className="text-lg md:text-xl leading-relaxed text-gray-700">
+                    <strong>Notre rôle est de vous réarmer.</strong> Nous ne prenons pas le volant. Nous vous donnons la
+                    carte du nouveau territoire et transformons l'incertitude en un plan d'action chirurgical.
+                  </p>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="h-2 w-2 bg-[#f6c344] rounded-full mt-3 flex-shrink-0"></div>
+                  <p className="text-lg md:text-xl leading-relaxed text-gray-700">
+                    <strong>Votre focus redevient votre force.</strong> Nous vous libérons du brouillard opérationnel
+                    pour que vous puissiez vous concentrer sur l'essentiel : la stratégie, la croissance, la victoire.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section Expert - mise à jour */}
+      <section className="container mx-auto px-4 py-36">
+        <div className="mx-auto max-w-4xl">
+          <div className="flex flex-col items-center space-y-8">
+            {/* Photo */}
+            <div className="relative w-64 h-64 overflow-hidden rounded-full">
+              <Image
+                src="/images/edouard-tiem-photo.jpg"
+                alt="Edouard Tiem - Consultant Commercial"
+                width={256}
+                height={256}
+                className="object-cover w-full h-full object-top"
+                priority
+                style={{ objectPosition: "center 20%" }}
+              />
+            </div>
+
+            {/* Nom */}
+            <h2 className="text-2xl md:text-3xl font-medium text-center">
+              <strong>Edouard Tiem</strong>
+            </h2>
+
+            {/* Texte biographique */}
+            <div className="max-w-2xl text-left space-y-6">
+              <p className="text-lg leading-relaxed">
+                Après 15 ans à diriger des équipes commerciales, j'ai vu la même histoire se répéter : des dirigeants
+                brillants, la tête dans le guidon, qui sentaient leur croissance ralentir sans en comprendre la cause
+                profonde.
+              </p>
+
+              <p className="text-lg leading-relaxed">
+                Ils pensaient que le problème venait du closing, mais la véritable faille était presque toujours
+                ailleurs : dans la découverte, ou pire, dans l'absence d'un vrai moteur de prospection.{" "}
+                <strong>Une hérésie silencieuse qui coûte des millions.</strong>
+              </p>
+
+              <p className="text-lg leading-relaxed">
+                Au fil du temps, j'ai compris que le véritable changement ne vient jamais d'un outil miracle, mais de
+                trois étapes immuables :
+              </p>
+
+              <div className="space-y-4 text-left max-w-xl">
+                <div className="flex items-start space-x-3">
+                  <span className="text-lg font-medium">•</span>
+                  <p className="text-lg leading-relaxed">
+                    1. <strong>La Prise de Conscience :</strong> Oser regarder la vérité en face pour diagnostiquer le
+                    vrai problème.
+                  </p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <span className="text-lg font-medium">•</span>
+                  <p className="text-lg leading-relaxed">
+                    2. <strong>La Méthode :</strong> Appliquer le bon système, le bon processus, au bon endroit.
+                  </p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <span className="text-lg font-medium">•</span>
+                  <p className="text-lg leading-relaxed">
+                    3. <strong>La Discipline :</strong> Répéter le geste, comme un athlète, jusqu'à ce qu'il devienne un
+                    réflexe pour toute l'équipe.
+                  </p>
+                </div>
+              </div>
+
+              <p className="text-lg leading-relaxed">
+                C'est pour orchestrer ces trois temps que j'ai fondé Simple Sales : pour transformer une prise de
+                conscience en une machine de croissance pérenne, et vous redonner le contrôle.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form */}
+      <section id="contact" className="bg-[#F9FAFB] py-36">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-2xl">
+            <h2 className="mb-12 text-center text-2xl font-medium md:text-3xl">Obtenir mon Score Gratuit</h2>
+            <ContactForm variant="original" formType="page_bottom" />
+          </div>
+        </div>
+      </section>
+
+      {/* Section FAQ - déplacée */}
+      <section className="bg-[#F6F1EB] py-36">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-2xl">
+            <h2 className="text-xl font-medium md:text-2xl mb-12 text-center">
+              <strong>Questions fréquentes</strong>
+            </h2>
+            <div className="space-y-2">
+              {faqData.map((faq, index) => (
+                <FAQItem key={index} question={faq.question} answer={faq.answer} icon={faq.icon} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Dernier appel à l'action */}
+      <section className="py-36">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-2xl font-medium md:text-3xl mb-12">
+              Prêt à transformer vos angles morts en opportunités ?
+            </h2>
+            <Button
+              className="w-auto md:w-auto bg-[#f6c344] px-6 md:px-10 py-4 md:py-6 text-lg md:text-xl font-medium text-[#1a1a1a] hover:bg-[#f4b82e] rounded-lg shadow-lg max-w-sm md:max-w-none mx-auto"
+              onClick={() => handleCTAClick("final_cta")}
+            >
+              Obtenir mon Score Gratuit
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer restructuré */}
+      <footer className="bg-gray-800 text-white py-24">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-3 gap-12">
+            {/* Colonne 1 : Logo + Slogan */}
+            <div className="space-y-4">
+              <h3 className="text-xl font-medium">simple.sales</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Transformer la complexité du terrain en un plan d'action d'une clarté redoutable.
+              </p>
+              <Button
+                onClick={() => window.open("https://www.linkedin.com/in/edouard-tiem", "_blank")}
+                className="bg-[#0077B5] hover:bg-[#005885] text-white px-6 py-3 rounded-lg flex items-center gap-2 transition-colors"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+                Connectons-nous
+              </Button>
+            </div>
+
+            {/* Colonne 2 : Nos Solutions */}
+            <div className="space-y-4">
+              <h3 className="text-xl font-medium">Nos Solutions</h3>
+              <div className="space-y-3">
+                <a href="#" className="block text-gray-300 hover:text-white transition-colors">
+                  Le Diagnostic (Offert)
+                </a>
+                <a href="#" className="block text-gray-300 hover:text-white transition-colors">
+                  Le Plan d'Accélération
+                </a>
+                <a href="#" className="block text-gray-300 hover:text-white transition-colors">
+                  Le Partenariat Stratégique
+                </a>
+              </div>
+            </div>
+
+            {/* Colonne 3 : Légal */}
+            <div className="space-y-4">
+              <h3 className="text-xl font-medium">Légal</h3>
+              <div className="space-y-3">
+                <a href="/mentions-legales" className="block text-gray-300 hover:text-white transition-colors">
+                  Mentions légales
+                </a>
+                <a href="/politique-confidentialite" className="block text-gray-300 hover:text-white transition-colors">
+                  Politique de confidentialité
+                </a>
+                <a href="/conditions-generales" className="block text-gray-300 hover:text-white transition-colors">
+                  CGU/CGV
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Ligne de séparation et copyright */}
+          <div className="border-t border-gray-700 mt-12 pt-8 text-center">
+            <p className="text-gray-400 text-sm">© 2024 Simple Sales. Tous droits réservés.</p>
+          </div>
+        </div>
+      </footer>
+    </main>
+  )
+}
