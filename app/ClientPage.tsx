@@ -597,6 +597,80 @@ export default function ClientPage() {
         </div>
       </section>
 
+      {/* Section Edouard Tiem - Version Simple */}
+      <section className="bg-[#F9FAFB] py-20">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-4xl text-center">
+            {/* Photo d'Edouard */}
+            <div className="w-48 h-48 mx-auto mb-8 rounded-full overflow-hidden bg-gradient-to-br from-orange-300 to-orange-400 p-2">
+              <Image
+                src="/images/edouard-tiem-simple.png"
+                alt="Edouard Tiem"
+                width={192}
+                height={192}
+                className="w-full h-full object-cover rounded-full"
+              />
+            </div>
+
+            {/* Titre */}
+            <h2 className="text-2xl font-bold mb-8 text-[#1a1a1a]">Edouard Tiem</h2>
+
+            {/* Contenu texte */}
+            <div className="max-w-3xl mx-auto space-y-6 text-gray-700 leading-relaxed">
+              <p>
+                Après 15 ans à diriger des équipes commerciales, j'ai vu la même histoire se répéter : des dirigeants
+                brillants, la tête dans le guidon, qui sentaient leur croissance ralentir sans en comprendre la cause
+                profonde.
+              </p>
+
+              <p>
+                Ils pensaient que le problème venait du closing, mais la véritable faille était presque toujours
+                ailleurs : dans la découverte, ou pire, dans l'absence d'un vrai moteur de prospection.{" "}
+                <span className="font-semibold text-red-600">Une hérésie silencieuse qui coûte des millions.</span>
+              </p>
+
+              <p>
+                Au fil du temps, j'ai compris que le véritable changement ne vient jamais d'un outil miracle, mais de
+                trois étapes immuables :
+              </p>
+
+              <div className="text-left max-w-2xl mx-auto space-y-4 mt-8">
+                <div className="flex items-start space-x-4">
+                  <span className="font-bold text-[#f6c344] text-lg">1.</span>
+                  <div>
+                    <span className="font-semibold">La Prise de Conscience :</span> Oser regarder la vérité en face pour
+                    diagnostiquer le <span className="font-semibold text-red-600">vrai problème</span>.
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <span className="font-bold text-[#f6c344] text-lg">2.</span>
+                  <div>
+                    <span className="font-semibold">La Méthode :</span> Appliquer le{" "}
+                    <span className="font-semibold text-[#f6c344]">bon système</span>, le bon processus, au bon endroit.
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <span className="font-bold text-[#f6c344] text-lg">3.</span>
+                  <div>
+                    <span className="font-semibold">La Discipline :</span> Répéter le geste, comme un athlète, jusqu'à
+                    ce qu'il devienne un réflexe pour toute l'équipe.
+                  </div>
+                </div>
+              </div>
+
+              <p className="mt-8">
+                C'est pour orchestrer ces <span className="font-semibold text-[#f6c344]">trois temps</span> que j'ai
+                fondé Simple Sales : pour transformer une prise de conscience en une{" "}
+                <span className="font-semibold text-[#f6c344]">machine de croissance pérenne</span>, et vous redonner le
+                contrôle.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Form */}
       <section id="contact" className="bg-[#F9FAFB] py-20">
         <div className="container mx-auto px-4">
