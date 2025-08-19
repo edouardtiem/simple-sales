@@ -3,8 +3,8 @@
 import { JetBrains_Mono } from "next/font/google"
 import ContactForm from "@/components/contact-form"
 import ContactModal from "@/components/contact-modal"
-import PipelineCompare from "@/components/pipeline-compare"
-// import ConversionChart from "@/components/conversion-chart"
+import ConversionChart from "@/components/conversion-chart"
+// import PipelineCompare from "@/components/pipeline-compare"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import {
@@ -264,9 +264,9 @@ export default function ClientPage() {
           background: `linear-gradient(to bottom, #F5F1EB 50%, #1F2937 50%)`,
         }}
       >
-        <PipelineCompare />
-        {/* Ancien graphique conservé en commentaire au cas où :
         <ConversionChart />
+        {/* Nouveau graphique conservé en commentaire au cas où :
+        <PipelineCompare />
         */}
       </section>
 
@@ -499,7 +499,7 @@ export default function ClientPage() {
                 <div className="flex flex-col md:flex-row items-start md:items-center space-y-6 md:space-y-0 md:space-x-8">
                   <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 flex-shrink-0 shadow-lg border-4 border-white">
                     <Image
-                      src="/images/edouard-tiem.png"
+                      src="/images/edouard-tiem-new.png"
                       alt="Edouard Tiem"
                       width={112}
                       height={112}
@@ -655,7 +655,7 @@ export default function ClientPage() {
                 className="bg-[#0077B5] hover:bg-[#005885] text-white px-5 py-2 rounded-lg flex items-center gap-1 transition-colors"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v11.452zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v11.452zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.136 1.445 2.136 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                 </svg>
                 Connectons-nous
               </Button>
