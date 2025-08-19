@@ -418,57 +418,92 @@ export default function ClientPage() {
       {/* Nouvelle section : Rôles et Mission */}
       <section className="bg-[#F9FAFB] py-20">
         <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-xl md:text-2xl font-medium text-center">
+          <div className="mx-auto max-w-5xl">
+            <h2 className="text-xl md:text-2xl font-medium text-center mb-12">
               <strong>Edouard Tiem</strong>
             </h2>
 
-            {/* Texte biographique */}
-            <div className="max-w-lg text-left space-y-5">
-              <p className="text-base leading-relaxed">
-                Après 15 ans à diriger des équipes commerciales, j'ai vu la même histoire se répéter : des dirigeants
-                brillants, la tête dans le guidon, qui sentaient leur croissance ralentir sans en comprendre la cause
-                profonde.
-              </p>
-
-              <p className="text-base leading-relaxed">
-                Ils pensaient que le problème venait du closing, mais la véritable faille était presque toujours
-                ailleurs : dans la découverte, ou pire, dans l'absence d'un vrai moteur de prospection.{" "}
-                <strong>Une hérésie silencieuse qui coûte des millions.</strong>
-              </p>
-
-              <p className="text-base leading-relaxed">
-                Au fil du temps, j'ai compris que le véritable changement ne vient jamais d'un outil miracle, mais de
-                trois étapes immuables :
-              </p>
-
-              <div className="space-y-3 text-left max-w-md">
-                <div className="flex items-start space-x-3">
-                  <span className="text-base font-medium">•</span>
-                  <p className="text-base leading-relaxed">
-                    1. <strong>La Prise de Conscience :</strong> Oser regarder la vérité en face pour diagnostiquer le
-                    vrai problème.
-                  </p>
+            <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+              {/* Première colonne : Photo + première partie du texte */}
+              <div className="space-y-6">
+                {/* Photo d'Edouard */}
+                <div className="flex justify-center md:justify-start">
+                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden bg-gray-200">
+                    <Image
+                      src="/images/edouard-tiem.jpg"
+                      alt="Edouard Tiem, fondateur de Simple Sales"
+                      width={160}
+                      height={160}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
-                <div className="flex items-start space-x-3">
-                  <span className="text-base font-medium">•</span>
+
+                {/* Première partie du texte */}
+                <div className="space-y-5 text-left">
                   <p className="text-base leading-relaxed">
-                    2. <strong>La Méthode :</strong> Appliquer le bon système, le bon processus, au bon endroit.
+                    Après <span className="font-semibold text-[#1a1a1a]">15 ans</span> à diriger des équipes
+                    commerciales, j'ai vu la même histoire se répéter : des{" "}
+                    <span className="font-semibold text-[#1a1a1a]">dirigeants brillants</span>, la tête dans le guidon,
+                    qui sentaient leur <span className="text-red-600 font-semibold">croissance ralentir</span> sans en
+                    comprendre la cause profonde.
                   </p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <span className="text-base font-medium">•</span>
+
                   <p className="text-base leading-relaxed">
-                    3. <strong>La Discipline :</strong> Répéter le geste, comme un athlète, jusqu'à ce qu'il devienne un
-                    réflexe pour toute l'équipe.
+                    Ils pensaient que le problème venait du{" "}
+                    <span className="font-semibold text-[#1a1a1a]">closing</span>, mais la véritable faille était
+                    presque toujours ailleurs : dans la <span className="text-[#f6c344] font-semibold">découverte</span>
+                    , ou pire, dans l'absence d'un vrai{" "}
+                    <span className="text-[#f6c344] font-semibold">moteur de prospection</span>.{" "}
+                    <strong>Une hérésie silencieuse qui coûte des millions.</strong>
                   </p>
                 </div>
               </div>
 
-              <p className="text-base leading-relaxed">
-                C'est pour orchestrer ces trois temps que j'ai fondé Simple Sales : pour transformer une prise de
-                conscience en une machine de croissance pérenne, et vous redonner le contrôle.
-              </p>
+              {/* Deuxième colonne : deuxième partie du texte */}
+              <div className="space-y-5 text-left">
+                <p className="text-base leading-relaxed">
+                  Au fil du temps, j'ai compris que le{" "}
+                  <span className="font-semibold text-[#1a1a1a]">véritable changement</span> ne vient jamais d'un{" "}
+                  <span className="text-red-600 font-semibold">outil miracle</span>, mais de{" "}
+                  <span className="text-[#f6c344] font-semibold">trois étapes immuables</span> :
+                </p>
+
+                <div className="space-y-4 text-left">
+                  <div className="flex items-start space-x-3">
+                    <span className="text-[#f6c344] font-bold text-lg">1.</span>
+                    <p className="text-base leading-relaxed">
+                      <span className="font-semibold text-[#1a1a1a]">La Prise de Conscience :</span> Oser regarder la
+                      vérité en face pour diagnostiquer le{" "}
+                      <span className="text-red-600 font-semibold">vrai problème</span>.
+                    </p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <span className="text-[#f6c344] font-bold text-lg">2.</span>
+                    <p className="text-base leading-relaxed">
+                      <span className="font-semibold text-[#1a1a1a]">La Méthode :</span> Appliquer le{" "}
+                      <span className="text-[#f6c344] font-semibold">bon système</span>, le bon processus, au bon
+                      endroit.
+                    </p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <span className="text-[#f6c344] font-bold text-lg">3.</span>
+                    <p className="text-base leading-relaxed">
+                      <span className="font-semibold text-[#1a1a1a]">La Discipline :</span> Répéter le geste, comme un{" "}
+                      <span className="font-semibold text-[#1a1a1a]">athlète</span>, jusqu'à ce qu'il devienne un
+                      réflexe pour toute l'équipe.
+                    </p>
+                  </div>
+                </div>
+
+                <p className="text-base leading-relaxed">
+                  C'est pour orchestrer ces <span className="text-[#f6c344] font-semibold">trois temps</span> que j'ai
+                  fondé <span className="font-semibold text-[#1a1a1a]">Simple Sales</span> : pour transformer une prise
+                  de conscience en une{" "}
+                  <span className="text-[#f6c344] font-semibold">machine de croissance pérenne</span>, et vous redonner
+                  le <span className="font-semibold text-[#1a1a1a]">contrôle</span>.
+                </p>
+              </div>
             </div>
           </div>
         </div>
