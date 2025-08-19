@@ -204,7 +204,7 @@ export default function ClientPage() {
             </Button>
           </div>
           <p className="mt-3 md:mt-4 text-xs md:text-sm text-gray-600 italic">
-            Gratuit, sans engagement et 100% confidentiel
+            Gratuit, moins de 5 min et 100% confidentiel
           </p>
 
           {/* Social proof avec logos - directement sous le CTA */}
