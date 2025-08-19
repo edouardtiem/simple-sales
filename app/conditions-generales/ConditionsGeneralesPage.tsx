@@ -11,6 +11,24 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export default function ConditionsGeneralesPage() {
+  const currentDate = new Date()
+  const targetDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 2)
+  const monthNames = [
+    "janvier",
+    "février",
+    "mars",
+    "avril",
+    "mai",
+    "juin",
+    "juillet",
+    "août",
+    "septembre",
+    "octobre",
+    "novembre",
+    "décembre",
+  ]
+  const dynamicDate = `${monthNames[targetDate.getMonth()]} ${targetDate.getFullYear()}`
+
   return (
     <main className={`${jetbrainsMono.variable} min-h-screen bg-[#f5f1eb] text-[#1a1a1a] font-mono`}>
       {/* Header */}
@@ -19,6 +37,12 @@ export default function ConditionsGeneralesPage() {
           <div className="flex items-center justify-between">
             <Link href="/" className="text-sm font-mono text-[#1a1a1a] hover:opacity-70 transition-opacity">
               simple.sales
+            </Link>
+            <Link
+              href="/"
+              className="text-sm font-mono text-[#1a1a1a] hover:opacity-70 transition-opacity border border-gray-300 px-3 py-1 rounded"
+            >
+              ← Précédent
             </Link>
           </div>
         </div>
@@ -148,8 +172,17 @@ export default function ConditionsGeneralesPage() {
             </section>
 
             <div className="pt-8 border-t border-gray-300">
-              <p className="text-sm text-gray-600">Dernière mise à jour : 15 janvier 2024</p>
+              <p className="text-sm text-gray-600">Dernière mise à jour : {dynamicDate}</p>
             </div>
+          </div>
+
+          <div className="mt-8 text-center">
+            <Link
+              href="/"
+              className="inline-block text-sm font-mono text-[#1a1a1a] hover:opacity-70 transition-opacity border border-gray-300 px-4 py-2 rounded"
+            >
+              ← Retour à la page principale
+            </Link>
           </div>
         </div>
       </div>
