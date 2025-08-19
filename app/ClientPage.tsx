@@ -131,7 +131,12 @@ export default function ClientPage() {
 
     const handleScroll = () => {
       const scrollY = window.scrollY
-      setShowFloatingCTA(scrollY > 100) // Afficher après 100px de scroll
+      const windowHeight = window.innerHeight
+      const documentHeight = document.documentElement.scrollHeight
+      const isNearBottom = windowHeight + scrollY >= documentHeight - 200 // 200px avant le bas
+
+      // Afficher le CTA après 100px de scroll mais le cacher quand on arrive en bas
+      setShowFloatingCTA(scrollY > 100 && !isNearBottom)
     }
 
     window.addEventListener("scroll", handleScroll)
@@ -594,7 +599,30 @@ export default function ClientPage() {
 
           {/* Ligne de séparation et copyright */}
           <div className="border-t border-gray-700 mt-7 pt-5 text-center">
-            <p className="text-gray-400 text-sm">© 2024 Simple Sales. Tous droits réservés.</p>
+            <p className="text-gray-400 text-sm">
+              © {(() => {
+                const now = new Date()
+                const currentYear = now.getFullYear()
+                const currentMonth = now.getMonth()
+                const previousMonth = currentMonth === 0 ? 11 : currentMonth - 1
+                const previousMonthYear = currentMonth === 0 ? currentYear - 1 : currentYear
+                const monthNames = [
+                  "Janvier",
+                  "Février",
+                  "Mars",
+                  "Avril",
+                  "Mai",
+                  "Juin",
+                  "Juillet",
+                  "Août",
+                  "Septembre",
+                  "Octobre",
+                  "Novembre",
+                  "Décembre",
+                ]
+                return `${monthNames[previousMonth]} ${previousMonthYear}`
+              })()} Simple Sales. Tous droits réservés.
+            </p>
           </div>
         </div>
       </footer>
