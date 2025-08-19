@@ -423,24 +423,24 @@ export default function ClientPage() {
               <strong>Edouard Tiem</strong>
             </h2>
 
-            <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+            <div className="grid md:grid-cols-2 gap-10 lg:gap-16">
               {/* Première colonne : Photo + première partie du texte */}
-              <div className="space-y-6">
-                {/* Photo d'Edouard */}
-                <div className="flex justify-center md:justify-start">
-                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden bg-gray-200">
+              <div className="space-y-8">
+                {/* Photo d'Edouard - centrée et plus grande */}
+                <div className="flex justify-center">
+                  <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden bg-gray-200 shadow-lg">
                     <Image
-                      src="/images/edouard-tiem.jpg"
+                      src="/images/edouard-tiem.png"
                       alt="Edouard Tiem, fondateur de Simple Sales"
-                      width={160}
-                      height={160}
+                      width={192}
+                      height={192}
                       className="w-full h-full object-cover"
                     />
                   </div>
                 </div>
 
-                {/* Première partie du texte */}
-                <div className="space-y-5 text-left">
+                {/* Première partie du texte - mieux structurée */}
+                <div className="space-y-6 text-left">
                   <p className="text-base leading-relaxed">
                     Après <span className="font-semibold text-[#1a1a1a]">15 ans</span> à diriger des équipes
                     commerciales, j'ai vu la même histoire se répéter : des{" "}
@@ -454,14 +454,17 @@ export default function ClientPage() {
                     <span className="font-semibold text-[#1a1a1a]">closing</span>, mais la véritable faille était
                     presque toujours ailleurs : dans la <span className="text-[#f6c344] font-semibold">découverte</span>
                     , ou pire, dans l'absence d'un vrai{" "}
-                    <span className="text-[#f6c344] font-semibold">moteur de prospection</span>.{" "}
+                    <span className="text-[#f6c344] font-semibold">moteur de prospection</span>.
+                  </p>
+
+                  <p className="text-base leading-relaxed font-medium">
                     <strong>Une hérésie silencieuse qui coûte des millions.</strong>
                   </p>
                 </div>
               </div>
 
-              {/* Deuxième colonne : deuxième partie du texte */}
-              <div className="space-y-5 text-left">
+              {/* Deuxième colonne : deuxième partie du texte - mieux équilibrée */}
+              <div className="space-y-6 text-left flex flex-col justify-center">
                 <p className="text-base leading-relaxed">
                   Au fil du temps, j'ai compris que le{" "}
                   <span className="font-semibold text-[#1a1a1a]">véritable changement</span> ne vient jamais d'un{" "}
@@ -469,25 +472,25 @@ export default function ClientPage() {
                   <span className="text-[#f6c344] font-semibold">trois étapes immuables</span> :
                 </p>
 
-                <div className="space-y-4 text-left">
-                  <div className="flex items-start space-x-3">
-                    <span className="text-[#f6c344] font-bold text-lg">1.</span>
+                <div className="space-y-5 text-left">
+                  <div className="flex items-start space-x-4">
+                    <span className="text-[#f6c344] font-bold text-xl flex-shrink-0">1.</span>
                     <p className="text-base leading-relaxed">
                       <span className="font-semibold text-[#1a1a1a]">La Prise de Conscience :</span> Oser regarder la
                       vérité en face pour diagnostiquer le{" "}
                       <span className="text-red-600 font-semibold">vrai problème</span>.
                     </p>
                   </div>
-                  <div className="flex items-start space-x-3">
-                    <span className="text-[#f6c344] font-bold text-lg">2.</span>
+                  <div className="flex items-start space-x-4">
+                    <span className="text-[#f6c344] font-bold text-xl flex-shrink-0">2.</span>
                     <p className="text-base leading-relaxed">
                       <span className="font-semibold text-[#1a1a1a]">La Méthode :</span> Appliquer le{" "}
                       <span className="text-[#f6c344] font-semibold">bon système</span>, le bon processus, au bon
                       endroit.
                     </p>
                   </div>
-                  <div className="flex items-start space-x-3">
-                    <span className="text-[#f6c344] font-bold text-lg">3.</span>
+                  <div className="flex items-start space-x-4">
+                    <span className="text-[#f6c344] font-bold text-xl flex-shrink-0">3.</span>
                     <p className="text-base leading-relaxed">
                       <span className="font-semibold text-[#1a1a1a]">La Discipline :</span> Répéter le geste, comme un{" "}
                       <span className="font-semibold text-[#1a1a1a]">athlète</span>, jusqu'à ce qu'il devienne un
@@ -496,7 +499,7 @@ export default function ClientPage() {
                   </div>
                 </div>
 
-                <p className="text-base leading-relaxed">
+                <p className="text-base leading-relaxed font-medium">
                   C'est pour orchestrer ces <span className="text-[#f6c344] font-semibold">trois temps</span> que j'ai
                   fondé <span className="font-semibold text-[#1a1a1a]">Simple Sales</span> : pour transformer une prise
                   de conscience en une{" "}
