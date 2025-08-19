@@ -191,7 +191,7 @@ export default function ClientPage() {
           </h1>
           <div className="mx-auto max-w-md lg:max-w-lg">
             <h2 className="mt-3 md:mt-5 text-sm md:text-base lg:text-lg font-medium text-gray-700 leading-relaxed">
-              Notre diagnostic gratuit révèle les 3 angles morts qui freinent réellement votre croissance.
+              Notre diagnostic révèle les 3 angles morts qui freinent réellement votre croissance.
             </h2>
           </div>
           <div className="mt-10 md:mt-14 flex justify-center">
