@@ -228,7 +228,7 @@ export default function ClientPage() {
                   alt="Planity"
                   width={110}
                   height={44}
-                  className="h-7 md:h-9 w-auto object-contain hover:opacity-80 transition-opacity"
+                  className="h-7 md:h-9 w-auto object-contain hover:opacity-80 transition-opacity transform translate-y-0.5"
                 />
               </div>
               <div className="h-9 md:h-11 flex items-end">
@@ -246,7 +246,7 @@ export default function ClientPage() {
                   alt="Brigad"
                   width={110}
                   height={44}
-                  className="h-7 md:h-9 w-auto object-contain hover:opacity-80 transition-opacity transform translate-y-0.5"
+                  className="h-7 md:h-9 w-auto object-contain hover:opacity-80 transition-opacity transform translate-y-0.25"
                 />
               </div>
             </div>
