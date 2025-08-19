@@ -212,7 +212,7 @@ export default function ClientPage() {
             <h3 className="text-sm md:text-base font-medium mb-2 md:mb-3">
               Une approche éprouvée auprès de leaders comme :
             </h3>
-            <div className="flex flex-wrap items-center justify-center gap-5 md:gap-7 py-3 md:py-5">
+            <div className="flex flex-wrap items-end justify-center gap-5 md:gap-7 py-3 md:py-5">
               <Image
                 src="/images/chargemap-logo.png"
                 alt="Chargemap"
