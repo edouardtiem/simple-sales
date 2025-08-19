@@ -91,31 +91,96 @@ export default function PipelineCompare() {
   const columns = ["1er RDV", "Proposition", "Négociation", "Gagnés"]
 
   return (
-    <section className="py-16 md:py-20 bg-gradient-to-br from-gray-50 to-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-mono">
-            Votre Pipeline CRM : Avant vs Après
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto font-mono">
-            Découvrez la transformation de votre pipeline commercial avec Simple Sales. Glissez le curseur pour comparer
-            l'état actuel avec les résultats obtenus.
-          </p>
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="browser-window">
+        <div className="browser-header">
+          <div className="browser-controls">
+            <div className="control-btn close"></div>
+            <div className="control-btn minimize"></div>
+            <div className="control-btn maximize"></div>
+          </div>
+          <div className="browser-address-bar">
+            <div className="address-bar">
+              <span className="protocol">https://</span>
+              <span className="domain">app.simple-sales.fr/pipeline</span>
+            </div>
+          </div>
         </div>
 
         <div className="ss-pipe-compare">
           <style jsx>{`
+            .browser-window {
+              background: #f5f5f5;
+              border-radius: 12px;
+              overflow: hidden;
+              box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+              max-width: 800px;
+              margin: 0 auto;
+            }
+
+            .browser-header {
+              background: linear-gradient(180deg, #e5e5e5 0%, #d4d4d4 100%);
+              padding: 12px 16px;
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              border-bottom: 1px solid #c4c4c4;
+            }
+
+            .browser-controls {
+              display: flex;
+              gap: 8px;
+            }
+
+            .control-btn {
+              width: 12px;
+              height: 12px;
+              border-radius: 50%;
+              cursor: pointer;
+            }
+
+            .control-btn.close {
+              background: #ff5f57;
+            }
+
+            .control-btn.minimize {
+              background: #ffbd2e;
+            }
+
+            .control-btn.maximize {
+              background: #28ca42;
+            }
+
+            .browser-address-bar {
+              flex: 1;
+              max-width: 400px;
+            }
+
+            .address-bar {
+              background: white;
+              border: 1px solid #c4c4c4;
+              border-radius: 6px;
+              padding: 6px 12px;
+              font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Courier New', monospace;
+              font-size: 13px;
+              color: #666;
+            }
+
+            .protocol {
+              color: #999;
+            }
+
+            .domain {
+              color: #333;
+              font-weight: 500;
+            }
+
             .ss-pipe-compare {
-              background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+              background: white;
               padding: 2rem;
-              border-radius: 16px;
               position: relative;
               overflow: hidden;
               min-height: 500px;
-              box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-              border: 1px solid #e2e8f0;
-              max-width: 900px;
-              margin: 0 auto;
             }
 
             .ss-pipe-compare .pipeline-container {
@@ -161,12 +226,17 @@ export default function PipelineCompare() {
               font-weight: 700;
               color: #1F2937;
               margin-bottom: 1rem;
-              font-size: 0.95rem;
+              font-size: 1rem;
               text-transform: uppercase;
               letter-spacing: 0.5px;
               font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Courier New', monospace;
               border-bottom: 2px solid #e2e8f0;
               padding-bottom: 0.5rem;
+              text-align: center;
+              background: linear-gradient(145deg, #f1f5f9 0%, #e2e8f0 100%);
+              margin: -1rem -1rem 1rem -1rem;
+              padding: 0.75rem 1rem;
+              border-radius: 8px 8px 0 0;
             }
 
             .ss-pipe-compare .deal-card {
@@ -273,16 +343,16 @@ export default function PipelineCompare() {
 
             .ss-pipe-compare .label {
               position: absolute;
-              top: 1.5rem;
-              padding: 0.75rem 1.25rem;
-              border-radius: 8px;
-              font-weight: 700;
-              font-size: 0.9rem;
+              top: 4rem;
+              padding: 0.5rem 1rem;
+              border-radius: 6px;
+              font-weight: 600;
+              font-size: 0.8rem;
               z-index: 5;
-              box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+              box-shadow: 0 2px 8px rgba(0,0,0,0.15);
               font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Courier New', monospace;
               text-transform: uppercase;
-              letter-spacing: 0.5px;
+              letter-spacing: 0.3px;
             }
 
             .ss-pipe-compare .label-before {
@@ -298,9 +368,21 @@ export default function PipelineCompare() {
             }
 
             @media (max-width: 768px) {
+              .browser-window {
+                max-width: 100%;
+              }
+              
+              .browser-header {
+                padding: 10px 12px;
+              }
+              
+              .address-bar {
+                font-size: 11px;
+                padding: 4px 8px;
+              }
+              
               .ss-pipe-compare {
                 padding: 1.5rem;
-                max-width: 100%;
               }
               
               .ss-pipe-compare .pipeline-state {
@@ -310,7 +392,7 @@ export default function PipelineCompare() {
               }
               
               .ss-pipe-compare .column-title {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
               }
               
               .ss-pipe-compare .deal-card {
@@ -374,13 +456,7 @@ export default function PipelineCompare() {
             </div>
           </div>
         </div>
-
-        <div className="mt-8 text-center">
-          <p className="text-sm text-gray-500 font-mono">
-            💡 Glissez le curseur jaune pour découvrir la transformation de votre pipeline
-          </p>
-        </div>
       </div>
-    </section>
+    </div>
   )
 }
