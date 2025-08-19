@@ -179,7 +179,7 @@ export default function ClientPage() {
       </div>
 
       {/* Hero Section avec animation typewriter */}
-      <section className="min-h-[34vh] md:min-h-[42vh] flex flex-col px-4 py-10 md:py-14 pt-17 md:pt-20">
+      <section className="min-h-[34vh] md:min-h-[42vh] flex flex-col px-4 py-10 md:py-14 pt-24 md:pt-28">
         <div className="flex-1"></div>
         <div className="container mx-auto text-center">
           <h1
