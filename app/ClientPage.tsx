@@ -419,92 +419,122 @@ export default function ClientPage() {
       <section className="bg-[#F9FAFB] py-20">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-5xl">
-            <h2 className="text-xl md:text-2xl font-medium text-center mb-12">
-              <strong>Edouard Tiem</strong>
+            <h2 className="text-xl md:text-2xl font-medium text-center mb-16">
+              15 ans d'expérience, toujours le même scénario.
             </h2>
 
-            <div className="grid md:grid-cols-2 gap-10 lg:gap-16">
-              {/* Première colonne : Photo + première partie du texte */}
-              <div className="space-y-8">
-                {/* Photo d'Edouard - centrée et plus grande */}
-                <div className="flex justify-center">
-                  <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden bg-gray-200 shadow-lg">
-                    <Image
-                      src="/images/edouard-tiem.png"
-                      alt="Edouard Tiem, fondateur de Simple Sales"
-                      width={192}
-                      height={192}
-                      className="w-full h-full object-cover"
-                    />
+            <div className="relative max-w-4xl mx-auto">
+              {/* Flèche SVG animée */}
+              <div className="absolute left-8 top-0 bottom-0 w-1 flex justify-center">
+                <svg className="w-8 h-full" viewBox="0 0 32 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    id="timeline-arrow"
+                    d="M16 20 L16 360 M8 352 L16 360 L24 352"
+                    stroke="#f6c344"
+                    strokeWidth="2"
+                    strokeDasharray="8 4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="timeline-path"
+                  />
+                </svg>
+              </div>
+
+              {/* Timeline verticale avec 3 étapes */}
+              <div className="space-y-16 pl-20">
+                {/* Étape 1 */}
+                <div className="flex items-start space-x-6 timeline-item">
+                  <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 -ml-24">
+                    <span className="text-2xl">📈</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold mb-3 text-[#1a1a1a]">Pipe rempli → deals stagnants</h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      Des opportunités qui semblent prometteuses mais qui traînent en longueur, sans qu'on comprenne
+                      vraiment pourquoi.
+                    </p>
                   </div>
                 </div>
 
-                {/* Première partie du texte - mieux structurée */}
-                <div className="space-y-6 text-left">
-                  <p className="text-base leading-relaxed">
-                    Après <span className="font-semibold text-[#1a1a1a]">15 ans</span> à diriger des équipes
-                    commerciales, j'ai vu la même histoire se répéter : des{" "}
-                    <span className="font-semibold text-[#1a1a1a]">dirigeants brillants</span>, la tête dans le guidon,
-                    qui sentaient leur <span className="text-red-600 font-semibold">croissance ralentir</span> sans en
-                    comprendre la cause profonde.
-                  </p>
+                {/* Étape 2 */}
+                <div className="flex items-start space-x-6 timeline-item">
+                  <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0 -ml-24">
+                    <span className="text-2xl">📊</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold mb-3 text-[#1a1a1a]">Prévisions à l'instinct</h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      Chaque fin de trimestre devient un stress, car les prévisions reposent plus sur l'espoir que sur
+                      des données fiables.
+                    </p>
+                  </div>
+                </div>
 
-                  <p className="text-base leading-relaxed">
-                    Ils pensaient que le problème venait du{" "}
-                    <span className="font-semibold text-[#1a1a1a]">closing</span>, mais la véritable faille était
-                    presque toujours ailleurs : dans la <span className="text-[#f6c344] font-semibold">découverte</span>
-                    , ou pire, dans l'absence d'un vrai{" "}
-                    <span className="text-[#f6c344] font-semibold">moteur de prospection</span>.
-                  </p>
+                {/* Étape 3 */}
+                <div className="flex items-start space-x-6 timeline-item">
+                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 -ml-24">
+                    <span className="text-2xl">🎓</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold mb-3 text-[#1a1a1a]">Formations sans impact</h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      Des investissements coûteux en formation qui ne changent rien sur le terrain, laissant un goût
+                      amer.
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              {/* Deuxième colonne : deuxième partie du texte - mieux équilibrée */}
-              <div className="space-y-6 text-left flex flex-col justify-center">
-                <p className="text-base leading-relaxed font-medium">
-                  <strong>Une hérésie silencieuse qui coûte des millions.</strong>
-                </p>
-
-                <p className="text-base leading-relaxed">
-                  Au fil du temps, j'ai compris que le{" "}
-                  <span className="font-semibold text-[#1a1a1a]">véritable changement</span> ne vient jamais d'un{" "}
-                  <span className="text-red-600 font-semibold">outil miracle</span>, mais de{" "}
-                  <span className="text-[#f6c344] font-semibold">trois étapes immuables</span> :
-                </p>
-
-                <div className="space-y-5 text-left">
-                  <div className="flex items-start space-x-4">
-                    <span className="text-[#f6c344] font-bold text-xl flex-shrink-0">1.</span>
-                    <p className="text-base leading-relaxed">
-                      <span className="font-semibold text-[#1a1a1a]">La Prise de Conscience :</span> Oser regarder la
-                      vérité en face pour diagnostiquer le{" "}
-                      <span className="text-red-600 font-semibold">vrai problème</span>.
-                    </p>
+              {/* Bloc "Pourquoi je le sais" */}
+              <div className="mt-20 bg-white rounded-lg p-8 shadow-lg border border-gray-200">
+                <div className="flex items-start space-x-6">
+                  <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
+                    <Image
+                      src="/images/edouard-tiem.png"
+                      alt="Edouard Tiem"
+                      width={64}
+                      height={64}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <div className="flex items-start space-x-4">
-                    <span className="text-[#f6c344] font-bold text-xl flex-shrink-0">2.</span>
-                    <p className="text-base leading-relaxed">
-                      <span className="font-semibold text-[#1a1a1a]">La Méthode :</span> Appliquer le{" "}
-                      <span className="text-[#f6c344] font-semibold">bon système</span>, le bon processus, au bon
-                      endroit.
+                  <div>
+                    <h3 className="text-lg font-semibold mb-3 text-[#1a1a1a]">Pourquoi je le sais ?</h3>
+                    <p className="text-gray-700 leading-relaxed mb-4">
+                      Parce que j'ai accompagné plus de{" "}
+                      <span className="font-semibold text-[#f6c344]">50 directions commerciales</span>. Et partout, le
+                      scénario se répète.
                     </p>
-                  </div>
-                  <div className="flex items-start space-x-4">
-                    <span className="text-[#f6c344] font-bold text-xl flex-shrink-0">3.</span>
-                    <p className="text-base leading-relaxed">
-                      <span className="font-semibold text-[#1a1a1a]">La Discipline :</span> Répéter le geste, comme un{" "}
-                      <span className="font-semibold text-[#1a1a1a]">athlète</span>, jusqu'à ce qu'il devienne un
-                      réflexe pour toute l'équipe.
+                    <p className="text-gray-600 italic">
+                      "Les dirigeants pensent que le problème est dans le closing. En réalité, l'angle mort est ailleurs
+                      : prospection, découverte, organisation."
                     </p>
                   </div>
                 </div>
+              </div>
 
-                <p className="text-base leading-relaxed font-medium">
-                  C'est pour orchestrer ces <span className="text-[#f6c344] font-semibold">trois temps</span> que j'ai
-                  fondé <span className="font-semibold text-[#1a1a1a]">Simple Sales</span> : pour transformer une prise
-                  de conscience en une{" "}
-                  <span className="text-[#f6c344] font-semibold">machine de croissance pérenne</span>, et vous redonner
-                  le <span className="font-semibold text-[#1a1a1a]">contrôle</span>.
+              {/* Cartouche coloré "La solution Simple Sales" */}
+              <div className="mt-12 bg-gradient-to-r from-[#f6c344] to-[#f4b82e] rounded-lg p-8 text-[#1a1a1a]">
+                <h3 className="text-xl font-bold mb-4">La solution Simple Sales</h3>
+                <p className="mb-6 leading-relaxed">
+                  Votre Scan gratuit vous apporte ce que j'aurais aimé avoir plus tôt :
+                </p>
+                <div className="grid md:grid-cols-3 gap-4 mb-6">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-[#1a1a1a] rounded-full"></div>
+                    <span className="font-medium">Un feedback externe, objectif</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-[#1a1a1a] rounded-full"></div>
+                    <span className="font-medium">3 leviers activables immédiatement</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-[#1a1a1a] rounded-full"></div>
+                    <span className="font-medium">Un rendu clair en 48h, sans blabla</span>
+                  </div>
+                </div>
+                <p className="font-semibold">
+                  👉 C'est exactement ce recul qui fait la différence entre "tenir le trimestre" et reprendre le
+                  contrôle.
                 </p>
               </div>
             </div>
@@ -615,6 +645,44 @@ export default function ClientPage() {
           </div>
         </div>
       </footer>
+
+      {/* CSS pour les animations */}
+      <style jsx>{`
+        .timeline-path {
+          stroke-dasharray: 200;
+          stroke-dashoffset: 200;
+          animation: drawPath 3s ease-in-out forwards;
+        }
+        
+        .timeline-item {
+          opacity: 0;
+          transform: translateX(-20px);
+          animation: fadeInSlide 0.8s ease-out forwards;
+        }
+        
+        .timeline-item:nth-child(1) { animation-delay: 0.5s; }
+        .timeline-item:nth-child(2) { animation-delay: 1s; }
+        .timeline-item:nth-child(3) { animation-delay: 1.5s; }
+        
+        @keyframes drawPath {
+          to {
+            stroke-dashoffset: 0;
+          }
+        }
+        
+        @keyframes fadeInSlide {
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        @media (max-width: 768px) {
+          .timeline-path {
+            animation: drawPath 2s ease-in-out forwards;
+          }
+        }
+      `}</style>
     </main>
   )
 }
