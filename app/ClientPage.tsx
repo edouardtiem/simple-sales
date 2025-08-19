@@ -422,7 +422,7 @@ export default function ClientPage() {
       {/* Section Edouard Tiem - Version Simple */}
       <section className="bg-[#F9FAFB] py-20">
         <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-4xl text-center">
+          <div className="mx-auto max-w-4xl">
             {/* Photo d'Edouard */}
             <div className="w-48 h-48 mx-auto mb-8 rounded-full overflow-hidden bg-gradient-to-br from-orange-300 to-orange-400 p-2">
               <Image
@@ -436,10 +436,10 @@ export default function ClientPage() {
             </div>
 
             {/* Titre */}
-            <h2 className="text-2xl font-bold mb-8 text-[#1a1a1a]">Edouard Tiem</h2>
+            <h2 className="text-2xl font-bold mb-8 text-[#1a1a1a] text-center">Edouard Tiem</h2>
 
             {/* Contenu texte */}
-            <div className="max-w-3xl mx-auto space-y-6 text-gray-700 leading-relaxed">
+            <div className="max-w-3xl space-y-6 text-gray-700 leading-relaxed">
               <p>
                 Après 15 ans à diriger des équipes commerciales, j'ai vu la même histoire se répéter : des dirigeants
                 brillants, la tête dans le guidon, qui sentaient leur croissance ralentir sans en comprendre la cause
@@ -457,7 +457,8 @@ export default function ClientPage() {
                 trois étapes immuables :
               </p>
 
-              <div className="text-left max-w-2xl mx-auto space-y-4 mt-8">
+              {/* Liste */}
+              <div className="text-left max-w-2xl space-y-4 mt-8">
                 <div className="flex items-start space-x-4">
                   <span className="font-bold text-[#f6c344] text-lg">1.</span>
                   <div>
