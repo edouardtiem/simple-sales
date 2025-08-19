@@ -237,7 +237,7 @@ export default function ClientPage() {
                   alt="Sodexo"
                   width={110}
                   height={44}
-                  className="h-7 md:h-9 w-auto object-contain hover:opacity-80 transition-opacity transform -translate-y-0.5"
+                  className="h-7 md:h-9 w-auto object-contain hover:opacity-80 transition-opacity transform -translate-y-1"
                 />
               </div>
               <div className="h-9 md:h-11 flex items-end">
