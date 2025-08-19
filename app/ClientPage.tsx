@@ -456,15 +456,15 @@ export default function ClientPage() {
                     , ou pire, dans l'absence d'un vrai{" "}
                     <span className="text-[#f6c344] font-semibold">moteur de prospection</span>.
                   </p>
-
-                  <p className="text-base leading-relaxed font-medium">
-                    <strong>Une hérésie silencieuse qui coûte des millions.</strong>
-                  </p>
                 </div>
               </div>
 
               {/* Deuxième colonne : deuxième partie du texte - mieux équilibrée */}
               <div className="space-y-6 text-left flex flex-col justify-center">
+                <p className="text-base leading-relaxed font-medium">
+                  <strong>Une hérésie silencieuse qui coûte des millions.</strong>
+                </p>
+
                 <p className="text-base leading-relaxed">
                   Au fil du temps, j'ai compris que le{" "}
                   <span className="font-semibold text-[#1a1a1a]">véritable changement</span> ne vient jamais d'un{" "}
@@ -570,7 +570,7 @@ export default function ClientPage() {
                 className="bg-[#0077B5] hover:bg-[#005885] text-white px-5 py-2 rounded-lg flex items-center gap-1 transition-colors"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v11.452zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                 </svg>
                 Connectons-nous
               </Button>
