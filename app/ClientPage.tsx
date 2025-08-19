@@ -277,13 +277,17 @@ export default function ClientPage() {
                   <div className="flex items-start space-x-3">
                     <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
                     <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
-                      Vous pilotez vos prévisions à l'instinct, et chaque fin de trimestre est une source de stress.
+                      Vous pilotez vos <span className="text-[#f6c344] font-semibold">prévisions</span> à l'
+                      <strong>instinct</strong>, et chaque fin de trimestre est une source de{" "}
+                      <span className="text-red-400 font-semibold">stress</span>.
                     </p>
                   </div>
                   <div className="flex items-start space-x-3">
                     <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
                     <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
-                      Des deals qui semblaient gagnés se bloquent au dernier moment, et vous ne savez pas pourquoi.
+                      Des <span className="text-[#f6c344] font-semibold">deals</span> qui semblaient gagnés{" "}
+                      <span className="text-red-400 font-semibold">se bloquent</span> au <strong>dernier moment</strong>
+                      , et vous <strong>ne savez pas pourquoi</strong>.
                     </p>
                   </div>
                 </div>
@@ -307,15 +311,17 @@ export default function ClientPage() {
                   <div className="flex items-start space-x-3">
                     <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
                     <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
-                      Vous avez l'impression de subir votre CRM au lieu de l'utiliser comme une véritable arme de
-                      croissance.
+                      Vous avez l'impression de <span className="text-red-400 font-semibold">subir</span> votre{" "}
+                      <span className="text-[#f6c344] font-semibold">CRM</span> au lieu de l'utiliser comme une
+                      véritable arme de croissance.
                     </p>
                   </div>
                   <div className="flex items-start space-x-3">
                     <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
                     <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
-                      Vous avez encore le goût amer de cette dernière formation coûteuse qui n'a rien changé sur le
-                      terrain.
+                      Vous avez encore le <span className="text-red-400 font-semibold">goût amer</span> de cette
+                      dernière <span className="text-[#f6c344] font-semibold">formation coûteuse</span> qui{" "}
+                      <strong>n'a rien changé</strong> sur le terrain.
                     </p>
                   </div>
                 </div>
@@ -326,15 +332,16 @@ export default function ClientPage() {
                 <div className="flex items-start space-x-3">
                   <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
                   <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
-                    Votre chiffre d'affaires repose sur les épaules d'un ou deux "héros", et vous redoutez le jour où
-                    ils partiront.
+                    Votre <span className="text-[#f6c344] font-semibold">chiffre d'affaires</span> repose sur les
+                    épaules d'un ou deux <span className="text-[#f6c344] font-semibold">"héros"</span>, et vous{" "}
+                    <span className="text-red-400 font-semibold">redoutez</span> le jour où ils partiront.
                   </p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
                   <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
-                    Vous entendez vos commerciaux présenter l'offre de 5 manières différentes, diluant votre message et
-                    votre force de frappe.
+                    Vous entendez vos commerciaux présenter l'offre de 5 manières différentes,{" "}
+                    <span className="text-red-400 font-semibold">diluant</span> votre message et votre force de frappe.
                   </p>
                 </div>
               </div>
