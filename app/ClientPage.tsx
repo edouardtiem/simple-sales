@@ -424,15 +424,20 @@ export default function ClientPage() {
             </h2>
 
             <div className="relative max-w-4xl mx-auto">
-              {/* Flèche SVG animée */}
               <div className="absolute left-8 top-0 bottom-0 w-1 flex justify-center">
-                <svg className="w-8 h-full" viewBox="0 0 32 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className="w-12 h-full" viewBox="0 0 48 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stopColor="#f6c344" />
+                      <stop offset="100%" stopColor="#f4b82e" />
+                    </linearGradient>
+                  </defs>
                   <path
                     id="timeline-arrow"
-                    d="M16 20 L16 360 M8 352 L16 360 L24 352"
-                    stroke="#f6c344"
-                    strokeWidth="2"
-                    strokeDasharray="8 4"
+                    d="M24 30 L24 350 M16 342 L24 350 L32 342"
+                    stroke="url(#arrowGradient)"
+                    strokeWidth="3"
+                    strokeDasharray="12 6"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     className="timeline-path"
@@ -443,11 +448,11 @@ export default function ClientPage() {
               {/* Timeline verticale avec 3 étapes */}
               <div className="space-y-16 pl-20">
                 {/* Étape 1 */}
-                <div className="flex items-start space-x-6 timeline-item">
-                  <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 -ml-24">
+                <div className="flex items-start space-x-6 timeline-item" data-step="1">
+                  <div className="w-14 h-14 bg-gradient-to-br from-red-100 to-red-200 rounded-full flex items-center justify-center flex-shrink-0 -ml-28 shadow-lg border-2 border-red-300">
                     <span className="text-2xl">📈</span>
                   </div>
-                  <div>
+                  <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex-1">
                     <h3 className="text-lg font-semibold mb-3 text-[#1a1a1a]">Pipe rempli → deals stagnants</h3>
                     <p className="text-gray-600 leading-relaxed">
                       Des opportunités qui semblent prometteuses mais qui traînent en longueur, sans qu'on comprenne
@@ -457,11 +462,11 @@ export default function ClientPage() {
                 </div>
 
                 {/* Étape 2 */}
-                <div className="flex items-start space-x-6 timeline-item">
-                  <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0 -ml-24">
+                <div className="flex items-start space-x-6 timeline-item" data-step="2">
+                  <div className="w-14 h-14 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-full flex items-center justify-center flex-shrink-0 -ml-28 shadow-lg border-2 border-yellow-300">
                     <span className="text-2xl">📊</span>
                   </div>
-                  <div>
+                  <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex-1">
                     <h3 className="text-lg font-semibold mb-3 text-[#1a1a1a]">Prévisions à l'instinct</h3>
                     <p className="text-gray-600 leading-relaxed">
                       Chaque fin de trimestre devient un stress, car les prévisions reposent plus sur l'espoir que sur
@@ -471,11 +476,11 @@ export default function ClientPage() {
                 </div>
 
                 {/* Étape 3 */}
-                <div className="flex items-start space-x-6 timeline-item">
-                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 -ml-24">
+                <div className="flex items-start space-x-6 timeline-item" data-step="3">
+                  <div className="w-14 h-14 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center flex-shrink-0 -ml-28 shadow-lg border-2 border-blue-300">
                     <span className="text-2xl">🎓</span>
                   </div>
-                  <div>
+                  <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex-1">
                     <h3 className="text-lg font-semibold mb-3 text-[#1a1a1a]">Formations sans impact</h3>
                     <p className="text-gray-600 leading-relaxed">
                       Des investissements coûteux en formation qui ne changent rien sur le terrain, laissant un goût
@@ -649,23 +654,32 @@ export default function ClientPage() {
       {/* CSS pour les animations */}
       <style jsx>{`
         .timeline-path {
-          stroke-dasharray: 200;
-          stroke-dashoffset: 200;
-          animation: drawPath 3s ease-in-out forwards;
+          stroke-dasharray: 300;
+          stroke-dashoffset: 300;
+          animation: drawPath 4s ease-in-out forwards;
+          filter: drop-shadow(0 2px 4px rgba(246, 195, 68, 0.3));
         }
         
         .timeline-item {
           opacity: 0;
-          transform: translateX(-20px);
-          animation: fadeInSlide 0.8s ease-out forwards;
+          transform: translateX(-30px);
+          animation: fadeInSlide 1s ease-out forwards;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .timeline-item:nth-child(1) { animation-delay: 0.5s; }
-        .timeline-item:nth-child(2) { animation-delay: 1s; }
-        .timeline-item:nth-child(3) { animation-delay: 1.5s; }
+        .timeline-item:hover {
+          transform: translateX(5px);
+        }
+        
+        .timeline-item:nth-child(1) { animation-delay: 1s; }
+        .timeline-item:nth-child(2) { animation-delay: 1.5s; }
+        .timeline-item:nth-child(3) { animation-delay: 2s; }
         
         @keyframes drawPath {
-          to {
+          0% {
+            stroke-dashoffset: 300;
+          }
+          100% {
             stroke-dashoffset: 0;
           }
         }
@@ -677,9 +691,30 @@ export default function ClientPage() {
           }
         }
         
+        /* Animation pulse pour les icônes */
+        .timeline-item div:first-child {
+          animation: iconPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes iconPulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.05); }
+        }
+        
         @media (max-width: 768px) {
           .timeline-path {
-            animation: drawPath 2s ease-in-out forwards;
+            animation: drawPath 3s ease-in-out forwards;
+          }
+          
+          .timeline-item {
+            transform: translateY(20px);
+          }
+          
+          @keyframes fadeInSlide {
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
           }
         }
       `}</style>
