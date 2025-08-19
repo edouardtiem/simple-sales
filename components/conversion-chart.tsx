@@ -186,8 +186,8 @@ export default function ConversionChart() {
   }, [isVisible])
 
   return (
-    <section className="container mx-auto px-4 py-8 md:py-12">
-      <div className="mx-auto max-w-6xl">
+    <section className="container mx-auto px-4 py-7 md:py-10">
+      <div className="mx-auto max-w-4xl">
         <div
           className={`browser-window bg-white rounded-lg overflow-hidden mx-auto shadow-2xl transition-all duration-[2400ms] ease-out ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -209,10 +209,10 @@ export default function ConversionChart() {
 
           <div className="browser-content p-4 md:p-6">
             <div className="text-center mb-4">
-              <h3 className="text-base md:text-xl lg:text-2xl font-medium leading-tight">
+              <h3 className="text-xs md:text-base lg:text-lg font-medium leading-tight">
                 La Stagnation est un Scénario, pas une Fatalité.
               </h3>
-              <p className="hidden md:block text-sm text-gray-600 leading-tight mt-2">
+              <p className="hidden md:block text-xs text-gray-600 leading-tight mt-2">
                 Une illustration basée sur notre analyse de la performance des équipes commerciales B2B
               </p>
             </div>
@@ -226,21 +226,22 @@ export default function ConversionChart() {
       <style jsx>{`
         .browser-window {
           width: 100%;
+          max-width: 800px;
         }
         .chart-wrapper {
           position: relative;
-          height: 50vh;
-          max-height: 450px;
-          min-height: 300px;
+          height: 34vh;
+          max-height: 300px;
+          min-height: 210px;
         }
         
         @media (max-width: 767px) {
           .chart-wrapper {
-            min-height: 250px;
-            height: 40vh;
+            min-height: 170px;
+            height: 30vh;
           }
           h3 {
-            font-size: 1rem;
+            font-size: 0.75rem;
           }
           .address-bar {
             font-size: 8px;

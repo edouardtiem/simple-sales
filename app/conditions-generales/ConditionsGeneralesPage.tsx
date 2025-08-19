@@ -47,25 +47,7 @@ export default function ConditionsGeneralesPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 3 - Services proposés</h2>
-              <p>Simple Sales propose les services suivants :</p>
-              <ul className="list-disc list-inside mt-4 space-y-2">
-                <li>
-                  <strong>Diagnostic commercial gratuit :</strong> analyse des processus de vente via un questionnaire
-                  en ligne
-                </li>
-                <li>
-                  <strong>Session de conseil :</strong> entretien de 30 minutes pour présenter les résultats du
-                  diagnostic
-                </li>
-                <li>
-                  <strong>Services de conseil personnalisés :</strong> accompagnement sur mesure (sur devis)
-                </li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 4 - Processus de commande</h2>
+              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 3 - Processus de commande</h2>
               <p>Pour bénéficier du diagnostic gratuit :</p>
               <ol className="list-decimal list-inside mt-4 space-y-2">
                 <li>Remplissez le formulaire de contact sur notre site</li>
@@ -76,7 +58,7 @@ export default function ConditionsGeneralesPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 5 - Prix et paiement</h2>
+              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 4 - Prix et paiement</h2>
               <p>
                 <strong>Diagnostic gratuit :</strong> Le diagnostic initial et la session de conseil de 30 minutes sont
                 entièrement gratuits, sans engagement de votre part.
@@ -89,7 +71,7 @@ export default function ConditionsGeneralesPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 6 - Droit de rétractation</h2>
+              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 5 - Droit de rétractation</h2>
               <p>
                 Conformément à l'article L221-28 du Code de la consommation, le droit de rétractation ne peut être
                 exercé pour les contrats de fourniture de services pleinement exécutés avant la fin du délai de
@@ -98,7 +80,7 @@ export default function ConditionsGeneralesPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 7 - Obligations du client</h2>
+              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 6 - Obligations du client</h2>
               <p>Le client s'engage à :</p>
               <ul className="list-disc list-inside mt-4 space-y-2">
                 <li>Fournir des informations exactes et complètes</li>
@@ -109,7 +91,7 @@ export default function ConditionsGeneralesPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 8 - Obligations de Simple Sales</h2>
+              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 7 - Obligations de Simple Sales</h2>
               <p>Simple Sales s'engage à :</p>
               <ul className="list-disc list-inside mt-4 space-y-2">
                 <li>Fournir un diagnostic personnalisé et de qualité</li>
@@ -120,7 +102,7 @@ export default function ConditionsGeneralesPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 9 - Confidentialité</h2>
+              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 8 - Confidentialité</h2>
               <p>
                 Simple Sales s'engage à maintenir la confidentialité de toutes les informations communiquées par le
                 client dans le cadre de la prestation. Ces informations ne seront utilisées que dans le cadre de la
@@ -129,7 +111,7 @@ export default function ConditionsGeneralesPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 10 - Responsabilité</h2>
+              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 9 - Responsabilité</h2>
               <p>
                 Simple Sales ne saurait être tenue responsable des dommages indirects, tels que la perte de chiffre
                 d'affaires, de bénéfices ou de clientèle, résultant de l'utilisation ou de l'impossibilité d'utiliser
@@ -141,7 +123,7 @@ export default function ConditionsGeneralesPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 11 - Force majeure</h2>
+              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 10 - Force majeure</h2>
               <p>
                 Simple Sales ne pourra être tenue responsable de tout retard ou inexécution consécutif à la survenance
                 d'un cas de force majeure habituellement reconnu par la jurisprudence française.
@@ -149,7 +131,7 @@ export default function ConditionsGeneralesPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 12 - Modification des CGU/CGV</h2>
+              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 11 - Modification des CGU/CGV</h2>
               <p>
                 Simple Sales se réserve le droit de modifier les présentes CGU/CGV à tout moment. Les modifications
                 entreront en vigueur dès leur publication sur le site web. Il appartient au client de consulter
@@ -158,7 +140,7 @@ export default function ConditionsGeneralesPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 13 - Droit applicable et juridiction</h2>
+              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Article 12 - Droit applicable et juridiction</h2>
               <p>
                 Les présentes CGU/CGV sont soumises au droit français. En cas de litige, et après tentative de
                 résolution amiable, les tribunaux français seront seuls compétents.

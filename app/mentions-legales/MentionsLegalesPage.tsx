@@ -33,15 +33,15 @@ export default function MentionsLegalesPage() {
             <section>
               <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Éditeur du site</h2>
               <p>
-                <strong>Raison sociale :</strong> Simple Sales
+                <strong>Raison sociale :</strong> ETH
                 <br />
-                <strong>Forme juridique :</strong> Entreprise individuelle
+                <strong>Forme juridique :</strong> SASU
                 <br />
-                <strong>Adresse :</strong> 123 Rue de la République, 75001 Paris, France
+                <strong>Adresse :</strong> 22 Place de l'ancienne boucherie, 14000, Caen
                 <br />
-                <strong>Téléphone :</strong> +33 1 23 45 67 89
+                <strong>Téléphone :</strong> +33 6 33 24 16 59
                 <br />
-                <strong>Email :</strong> contact@simple-sales.fr
+                <strong>Email :</strong> edouard@tiemh.com
                 <br />
                 <strong>Directeur de la publication :</strong> Edouard Tiem
               </p>
