@@ -422,7 +422,7 @@ export default function ClientPage() {
       {/* Section Edouard Tiem - Version Simple */}
       <section className="bg-[#F9FAFB] py-20">
         <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-4xl">
+          <div className="mx-auto max-w-2xl">
             {/* Photo d'Edouard */}
             <div className="w-48 h-48 mx-auto mb-8 rounded-full overflow-hidden bg-gradient-to-br from-orange-300 to-orange-400 p-2">
               <Image
