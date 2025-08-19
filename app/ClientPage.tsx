@@ -179,7 +179,7 @@ export default function ClientPage() {
       </div>
 
       {/* Hero Section avec animation typewriter */}
-      <section className="min-h-[34vh] md:min-h-[42vh] flex flex-col px-4 py-10 md:py-14 pt-24 md:pt-28">
+      <section className="min-h-[34vh] md:min-h-[42vh] flex flex-col px-4 py-7 md:py-10 pt-28 md:pt-32">
         <div className="flex-1"></div>
         <div className="container mx-auto text-center">
           <h1
@@ -249,7 +249,8 @@ export default function ClientPage() {
 
       {/* Section graphique avec fond divisé */}
       <section
-        className="relative py-3 md:py-7 lg:py-10 -mt-3 md:-mt-7"
+        className="relative py-3 md:py-5 lg:py-7 -mt-3 md:-mt-5"
+        /* Réduit le padding vertical de py-3 md:py-7 lg:py-10 à py-3 md:py-5 lg:py-7 et ajusté les marges négatives pour que le graphique reste visible sur petits écrans */
         style={{
           background: `linear-gradient(to bottom, #F5F1EB 50%, #1F2937 50%)`,
         }}
