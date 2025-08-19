@@ -143,8 +143,8 @@ export default function PolitiqueConfidentialitePage() {
               </ul>
               <p className="mt-4">
                 Pour exercer ces droits, contactez-nous à :{" "}
-                <a href="mailto:contact@simple-sales.fr" className="text-blue-600 hover:underline">
-                  contact@simple-sales.fr
+                <a href="mailto:edouard@tiemh.com" className="text-blue-600 hover:underline">
+                  edouard@tiemh.com
                 </a>
               </p>
             </section>
