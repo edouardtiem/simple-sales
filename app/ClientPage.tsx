@@ -426,11 +426,12 @@ export default function ClientPage() {
             {/* Photo d'Edouard */}
             <div className="w-48 h-48 mx-auto mb-8 rounded-full overflow-hidden bg-gradient-to-br from-orange-300 to-orange-400 p-2">
               <Image
-                src="/images/edouard-tiem-simple.png"
-                alt="Edouard Tiem"
+                src="/images/edouard-tiem-photo.jpg"
+                alt="Edouard Tiem - Consultant Commercial"
                 width={192}
                 height={192}
                 className="w-full h-full object-cover rounded-full"
+                style={{ objectPosition: "center 20%" }}
               />
             </div>
 
