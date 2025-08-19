@@ -179,7 +179,7 @@ export default function ClientPage() {
       </div>
 
       {/* Hero Section avec animation typewriter */}
-      <section className="min-h-[60vh] md:min-h-[70vh] flex flex-col px-4 py-16 md:py-24 pt-24 md:pt-32">
+      <section className="min-h-[40vh] md:min-h-[50vh] flex flex-col px-4 py-12 md:py-16 pt-20 md:pt-24">
         <div className="flex-1"></div>
         <div className="container mx-auto text-center">
           <h1
@@ -258,7 +258,7 @@ export default function ClientPage() {
       </section>
 
       {/* Section "Les Signes qui ne Trompent Pas" - réinsérée */}
-      <section className="bg-[#1F2937] py-36">
+      <section className="bg-[#1F2937] py-24">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-6xl">
             <h2 className="text-2xl font-medium md:text-3xl mb-8 text-center text-white">
@@ -360,13 +360,13 @@ export default function ClientPage() {
       </section>
 
       {/* Nouvelle section : Plan en 3 étapes */}
-      <section className="container mx-auto px-4 py-36">
+      <section className="container mx-auto px-4 py-24">
         <div className="mx-auto max-w-5xl">
-          <h2 className="text-2xl font-medium md:text-3xl mb-24 text-center">
+          <h2 className="text-2xl font-medium md:text-3xl mb-16 text-center">
             Votre Plan vers la Performance en 3 Étapes Simples
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-12">
+          <div className="grid md:grid-cols-3 gap-8">
             {/* Étape 1 */}
             <div className="text-center">
               <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
@@ -407,7 +407,7 @@ export default function ClientPage() {
       </section>
 
       {/* Nouvelle section : Rôles et Mission */}
-      <section className="bg-[#F9FAFB] py-36">
+      <section className="bg-[#F9FAFB] py-24">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-4xl text-center">
             <h2 className="text-2xl md:text-3xl font-medium text-center">
@@ -466,20 +466,20 @@ export default function ClientPage() {
       </section>
 
       {/* Contact Form */}
-      <section id="contact" className="bg-[#F9FAFB] py-36">
+      <section id="contact" className="bg-[#F9FAFB] py-24">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-2xl">
-            <h2 className="mb-12 text-center text-2xl font-medium md:text-3xl">Obtenir mon Score Gratuit</h2>
+            <h2 className="mb-8 text-center text-2xl font-medium md:text-3xl">Obtenir mon Score Gratuit</h2>
             <ContactForm variant="original" formType="page_bottom" />
           </div>
         </div>
       </section>
 
       {/* Section FAQ - déplacée */}
-      <section className="bg-[#F6F1EB] py-36">
+      <section className="bg-[#F6F1EB] py-24">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-2xl">
-            <h2 className="text-xl font-medium md:text-2xl mb-12 text-center">
+            <h2 className="text-xl font-medium md:text-2xl mb-8 text-center">
               <strong>Questions fréquentes</strong>
             </h2>
             <div className="space-y-2">
@@ -492,10 +492,10 @@ export default function ClientPage() {
       </section>
 
       {/* Dernier appel à l'action */}
-      <section className="py-36">
+      <section className="py-24">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-2xl font-medium md:text-3xl mb-12">
+            <h2 className="text-2xl font-medium md:text-3xl mb-8">
               Prêt à transformer vos angles morts en opportunités ?
             </h2>
             <Button
@@ -509,9 +509,9 @@ export default function ClientPage() {
       </section>
 
       {/* Footer restructuré */}
-      <footer className="bg-gray-800 text-white py-24">
+      <footer className="bg-gray-800 text-white py-16">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-12">
+          <div className="grid md:grid-cols-3 gap-8">
             {/* Colonne 1 : Logo + Slogan */}
             <div className="space-y-4">
               <h3 className="text-xl font-medium">simple.sales</h3>
@@ -563,7 +563,7 @@ export default function ClientPage() {
           </div>
 
           {/* Ligne de séparation et copyright */}
-          <div className="border-t border-gray-700 mt-12 pt-8 text-center">
+          <div className="border-t border-gray-700 mt-8 pt-6 text-center">
             <p className="text-gray-400 text-sm">© 2024 Simple Sales. Tous droits réservés.</p>
           </div>
         </div>

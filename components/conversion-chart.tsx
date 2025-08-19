@@ -229,15 +229,15 @@ export default function ConversionChart() {
         }
         .chart-wrapper {
           position: relative;
-          height: 50vh;
-          max-height: 450px;
-          min-height: 300px;
+          height: 40vh;
+          max-height: 350px;
+          min-height: 250px;
         }
         
         @media (max-width: 767px) {
           .chart-wrapper {
-            min-height: 250px;
-            height: 40vh;
+            min-height: 200px;
+            height: 35vh;
           }
           h3 {
             font-size: 1rem;
