@@ -491,56 +491,102 @@ export default function ClientPage() {
               </div>
 
               {/* Bloc "Pourquoi je le sais" */}
-              <div className="mt-20 bg-white rounded-lg p-8 shadow-lg border border-gray-200">
-                <div className="flex items-start space-x-6">
-                  <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
+              <div className="mt-20 bg-white rounded-xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
+                <div className="flex flex-col md:flex-row items-start md:items-center space-y-6 md:space-y-0 md:space-x-8">
+                  <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 flex-shrink-0 shadow-lg border-4 border-white">
                     <Image
                       src="/images/edouard-tiem.png"
                       alt="Edouard Tiem"
-                      width={64}
-                      height={64}
+                      width={112}
+                      height={112}
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div>
-                    <h3 className="text-lg font-semibold mb-3 text-[#1a1a1a]">Pourquoi je le sais ?</h3>
-                    <p className="text-gray-700 leading-relaxed mb-4">
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold mb-4 text-[#1a1a1a] flex items-center gap-2">
+                      <span className="text-2xl">🎯</span>
+                      Pourquoi je le sais ?
+                    </h3>
+                    <p className="text-gray-700 leading-relaxed mb-4 text-lg">
                       Parce que j'ai accompagné plus de{" "}
-                      <span className="font-semibold text-[#f6c344]">50 directions commerciales</span>. Et partout, le
-                      scénario se répète.
+                      <span className="font-bold text-[#f6c344] bg-[#f6c344]/10 px-2 py-1 rounded">
+                        50 directions commerciales
+                      </span>
+                      . Et partout, le scénario se répète.
                     </p>
-                    <p className="text-gray-600 italic">
-                      "Les dirigeants pensent que le problème est dans le closing. En réalité, l'angle mort est ailleurs
-                      : prospection, découverte, organisation."
-                    </p>
+                    <blockquote className="border-l-4 border-[#f6c344] pl-4 bg-gray-50 p-4 rounded-r-lg">
+                      <p className="text-gray-700 italic text-lg leading-relaxed">
+                        "Les dirigeants pensent que le problème est dans le closing. En réalité, l'angle mort est
+                        ailleurs : <span className="font-semibold text-red-600">prospection</span>,{" "}
+                        <span className="font-semibold text-red-600">découverte</span>,{" "}
+                        <span className="font-semibold text-red-600">organisation</span>."
+                      </p>
+                    </blockquote>
                   </div>
                 </div>
               </div>
 
               {/* Cartouche coloré "La solution Simple Sales" */}
-              <div className="mt-12 bg-gradient-to-r from-[#f6c344] to-[#f4b82e] rounded-lg p-8 text-[#1a1a1a]">
-                <h3 className="text-xl font-bold mb-4">La solution Simple Sales</h3>
-                <p className="mb-6 leading-relaxed">
-                  Votre Scan gratuit vous apporte ce que j'aurais aimé avoir plus tôt :
-                </p>
-                <div className="grid md:grid-cols-3 gap-4 mb-6">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-[#1a1a1a] rounded-full"></div>
-                    <span className="font-medium">Un feedback externe, objectif</span>
+              <div className="mt-12 bg-gradient-to-br from-[#f6c344] via-[#f4b82e] to-[#f2a900] rounded-xl p-8 text-[#1a1a1a] shadow-xl border border-[#f4b82e]/20 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
+                <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-12 -translate-x-12"></div>
+
+                <div className="relative z-10">
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="text-3xl">🚀</span>
+                    <h3 className="text-2xl font-bold">La solution Simple Sales</h3>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-[#1a1a1a] rounded-full"></div>
-                    <span className="font-medium">3 leviers activables immédiatement</span>
+
+                  <p className="mb-8 leading-relaxed text-lg font-medium">
+                    Votre Scan gratuit vous apporte ce que j'aurais aimé avoir plus tôt :
+                  </p>
+
+                  <div className="grid md:grid-cols-3 gap-6 mb-8">
+                    <div className="bg-white/15 backdrop-blur-sm rounded-lg p-4 border border-white/20 hover:bg-white/20 transition-all duration-300">
+                      <div className="flex items-center space-x-3 mb-2">
+                        <span className="text-2xl">🎯</span>
+                        <span className="font-bold text-lg">Feedback externe</span>
+                      </div>
+                      <p className="text-sm opacity-90">Un regard objectif sur vos pratiques</p>
+                    </div>
+
+                    <div className="bg-white/15 backdrop-blur-sm rounded-lg p-4 border border-white/20 hover:bg-white/20 transition-all duration-300">
+                      <div className="flex items-center space-x-3 mb-2">
+                        <span className="text-2xl">⚡</span>
+                        <span className="font-bold text-lg">3 leviers activables</span>
+                      </div>
+                      <p className="text-sm opacity-90">Actions concrètes à impact immédiat</p>
+                    </div>
+
+                    <div className="bg-white/15 backdrop-blur-sm rounded-lg p-4 border border-white/20 hover:bg-white/20 transition-all duration-300">
+                      <div className="flex items-center space-x-3 mb-2">
+                        <span className="text-2xl">⏱️</span>
+                        <span className="font-bold text-lg">Rendu en 48h</span>
+                      </div>
+                      <p className="text-sm opacity-90">Clair, précis, sans blabla</p>
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-[#1a1a1a] rounded-full"></div>
-                    <span className="font-medium">Un rendu clair en 48h, sans blabla</span>
+
+                  <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6 border border-white/30">
+                    <p className="font-bold text-xl leading-relaxed flex items-start gap-3">
+                      <span className="text-2xl flex-shrink-0">👉</span>
+                      <span>
+                        C'est exactement ce recul qui fait la différence entre{" "}
+                        <span className="underline decoration-2 decoration-red-600">"tenir le trimestre"</span> et{" "}
+                        <span className="underline decoration-2 decoration-green-600">reprendre le contrôle</span>.
+                      </span>
+                    </p>
+                  </div>
+
+                  <div className="mt-8 text-center">
+                    <Button
+                      className="bg-white text-[#f6c344] hover:bg-gray-50 px-8 py-4 text-lg font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                      onClick={() => handleCTAClick("timeline_solution")}
+                    >
+                      🎯 Obtenir mon Scan Gratuit
+                    </Button>
                   </div>
                 </div>
-                <p className="font-semibold">
-                  👉 C'est exactement ce recul qui fait la différence entre "tenir le trimestre" et reprendre le
-                  contrôle.
-                </p>
               </div>
             </div>
           </div>
@@ -581,10 +627,10 @@ export default function ClientPage() {
               Prêt à transformer vos angles morts en opportunités ?
             </h2>
             <Button
-              className="w-auto md:w-auto bg-[#f6c344] px-5 md:px-8 py-3 md:py-5 text-base md:text-lg font-medium text-[#1a1a1a] hover:bg-[#f4b82e] rounded-lg shadow-lg max-w-sm md:max-w-none mx-auto"
+              className="w-auto md:w-auto bg-[#f6c344] px-5 md:px-8 py-3 md:py-5 text-base md:text-lg font-medium text-[#1a1a1a] hover:bg-[#f4b82e] rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               onClick={() => handleCTAClick("final_cta")}
             >
-              Obtenir mon Score Gratuit
+              🎯 Obtenir mon Scan Gratuit
             </Button>
           </div>
         </div>
