@@ -216,30 +216,30 @@ export default function ClientPage() {
               <Image
                 src="/images/chargemap-logo.png"
                 alt="Chargemap"
-                width={85}
-                height={34}
-                className="h-5 md:h-7 w-auto object-contain hover:opacity-80 transition-opacity"
+                width={110}
+                height={44}
+                className="h-7 md:h-9 w-auto object-contain hover:opacity-80 transition-opacity"
               />
               <Image
                 src="/images/planity-logo.png"
                 alt="Planity"
-                width={85}
-                height={34}
-                className="h-5 md:h-7 w-auto object-contain hover:opacity-80 transition-opacity"
+                width={110}
+                height={44}
+                className="h-7 md:h-9 w-auto object-contain hover:opacity-80 transition-opacity"
               />
               <Image
                 src="/images/sodexo-logo.png"
                 alt="Sodexo"
-                width={85}
-                height={34}
-                className="h-5 md:h-7 w-auto object-contain hover:opacity-80 transition-opacity"
+                width={110}
+                height={44}
+                className="h-7 md:h-9 w-auto object-contain hover:opacity-80 transition-opacity"
               />
               <Image
                 src="/images/brigad-logo.png"
                 alt="Brigad"
-                width={85}
-                height={34}
-                className="h-5 md:h-7 w-auto object-contain hover:opacity-80 transition-opacity"
+                width={110}
+                height={44}
+                className="h-7 md:h-9 w-auto object-contain hover:opacity-80 transition-opacity"
               />
             </div>
           </div>
