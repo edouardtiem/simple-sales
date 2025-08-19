@@ -257,7 +257,7 @@ export default function ClientPage() {
         <ConversionChart />
       </section>
 
-      {/* Section "Ça vous parle ?" - réinsérée */}
+      {/* Section "Les Signes qui ne Trompent Pas" - réinsérée */}
       <section className="bg-[#1F2937] py-36">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl">
