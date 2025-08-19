@@ -260,62 +260,79 @@ export default function ClientPage() {
       {/* Section "Les Signes qui ne Trompent Pas" - réinsérée */}
       <section className="bg-[#1F2937] py-36">
         <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-3xl">
+          <div className="mx-auto max-w-6xl">
             <h2 className="text-2xl font-medium md:text-3xl mb-8 text-center text-white">
               Les Signes qui ne Trompent Pas
             </h2>
 
-            <p className="text-lg text-gray-300 text-center mb-12 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-300 text-center mb-16 max-w-2xl mx-auto">
               Derrière chaque plateau de performance, je retrouve systématiquement une combinaison de ces symptômes :
             </p>
 
-            <div className="space-y-8 mb-12">
-              {/* Ligne 1 */}
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="flex items-start space-x-3">
-                  <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
-                  <p className="text-lg text-gray-300">
-                    Vous pilotez vos prévisions à l'instinct, et chaque fin de trimestre est une source de stress.
-                  </p>
+            <div className="relative">
+              {/* Layout responsive avec CSS Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center">
+                {/* Points de gauche (desktop) / Points du haut (mobile) */}
+                <div className="space-y-8 order-1 lg:order-1">
+                  <div className="flex items-start space-x-3">
+                    <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
+                    <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
+                      Vous pilotez vos prévisions à l'instinct, et chaque fin de trimestre est une source de stress.
+                    </p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
+                    <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
+                      Des deals qui semblaient gagnés se bloquent au dernier moment, et vous ne savez pas pourquoi.
+                    </p>
+                  </div>
                 </div>
-                <div className="flex items-start space-x-3">
-                  <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
-                  <p className="text-lg text-gray-300">
-                    Des deals qui semblaient gagnés se bloquent au dernier moment, et vous ne savez pas pourquoi.
-                  </p>
+
+                {/* Image centrale */}
+                <div className="flex justify-center order-2 lg:order-2">
+                  <div className="relative w-full max-w-sm lg:max-w-md">
+                    <Image
+                      src="/images/stressed-businessman.png"
+                      alt="Dirigeant stressé par les notifications commerciales"
+                      width={400}
+                      height={400}
+                      className="w-full h-auto object-contain"
+                      priority
+                    />
+                  </div>
+                </div>
+
+                {/* Points de droite (desktop) / Points du bas (mobile) */}
+                <div className="space-y-8 order-3 lg:order-3">
+                  <div className="flex items-start space-x-3">
+                    <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
+                    <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
+                      Vous avez l'impression de subir votre CRM au lieu de l'utiliser comme une véritable arme de
+                      croissance.
+                    </p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
+                    <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
+                      Vous avez encore le goût amer de cette dernière formation coûteuse qui n'a rien changé sur le
+                      terrain.
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              {/* Ligne 2 */}
-              <div className="grid md:grid-cols-2 gap-8">
+              {/* Points supplémentaires en bas */}
+              <div className="mt-12 grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 <div className="flex items-start space-x-3">
                   <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
-                  <p className="text-lg text-gray-300">
-                    Vous avez l'impression de subir votre CRM au lieu de l'utiliser comme une véritable arme de
-                    croissance.
-                  </p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
-                  <p className="text-lg text-gray-300">
-                    Vous avez encore le goût amer de cette dernière formation coûteuse qui n'a rien changé sur le
-                    terrain.
-                  </p>
-                </div>
-              </div>
-
-              {/* Ligne 3 */}
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="flex items-start space-x-3">
-                  <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
-                  <p className="text-lg text-gray-300">
+                  <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
                     Votre chiffre d'affaires repose sur les épaules d'un ou deux "héros", et vous redoutez le jour où
                     ils partiront.
                   </p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
-                  <p className="text-lg text-gray-300">
+                  <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
                     Vous entendez vos commerciaux présenter l'offre de 5 manières différentes, diluant votre message et
                     votre force de frappe.
                   </p>
@@ -323,7 +340,7 @@ export default function ClientPage() {
               </div>
             </div>
 
-            <div className="text-center">
+            <div className="text-center mt-16">
               <Button
                 className="w-auto md:w-auto bg-[#f6c344] px-6 md:px-10 py-4 md:py-6 text-base md:text-lg font-medium text-[#1a1a1a] hover:bg-[#f4b82e] rounded-lg max-w-sm md:max-w-none mx-auto"
                 onClick={() => handleCTAClick("problems_section")}
@@ -386,59 +403,6 @@ export default function ClientPage() {
       <section className="bg-[#F9FAFB] py-36">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-4xl text-center">
-            <h2 className="text-2xl font-medium md:text-3xl mb-16">
-              Votre rôle est de piloter. Le nôtre est de dissiper le brouillard.
-            </h2>
-
-            <div className="mx-auto max-w-3xl">
-              <div className="space-y-8 text-left">
-                <div className="flex items-start space-x-4">
-                  <div className="h-2 w-2 bg-[#f6c344] rounded-full mt-3 flex-shrink-0"></div>
-                  <p className="text-lg md:text-xl leading-relaxed text-gray-700">
-                    <strong>Vous avez bâti le succès d'hier.</strong> Mais vous sentez que les règles du jeu ont changé
-                    et que votre ancien manuel ne suffit plus.
-                  </p>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="h-2 w-2 bg-[#f6c344] rounded-full mt-3 flex-shrink-0"></div>
-                  <p className="text-lg md:text-xl leading-relaxed text-gray-700">
-                    <strong>Notre rôle est de vous réarmer.</strong> Nous ne prenons pas le volant. Nous vous donnons la
-                    carte du nouveau territoire et transformons l'incertitude en un plan d'action chirurgical.
-                  </p>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="h-2 w-2 bg-[#f6c344] rounded-full mt-3 flex-shrink-0"></div>
-                  <p className="text-lg md:text-xl leading-relaxed text-gray-700">
-                    <strong>Votre focus redevient votre force.</strong> Nous vous libérons du brouillard opérationnel
-                    pour que vous puissiez vous concentrer sur l'essentiel : la stratégie, la croissance, la victoire.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section Expert - mise à jour */}
-      <section className="container mx-auto px-4 py-36">
-        <div className="mx-auto max-w-4xl">
-          <div className="flex flex-col items-center space-y-8">
-            {/* Photo */}
-            <div className="relative w-64 h-64 overflow-hidden rounded-full">
-              <Image
-                src="/images/edouard-tiem-photo.jpg"
-                alt="Edouard Tiem - Consultant Commercial"
-                width={256}
-                height={256}
-                className="object-cover w-full h-full object-top"
-                priority
-                style={{ objectPosition: "center 20%" }}
-              />
-            </div>
-
-            {/* Nom */}
             <h2 className="text-2xl md:text-3xl font-medium text-center">
               <strong>Edouard Tiem</strong>
             </h2>
