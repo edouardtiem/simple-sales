@@ -212,35 +212,43 @@ export default function ClientPage() {
             <h3 className="text-sm md:text-base font-medium mb-2 md:mb-3">
               Une approche éprouvée auprès de leaders comme :
             </h3>
-            <div className="flex flex-wrap items-end justify-center gap-5 md:gap-7 py-3 md:py-5">
-              <Image
-                src="/images/chargemap-logo.png"
-                alt="Chargemap"
-                width={110}
-                height={44}
-                className="h-7 md:h-9 w-auto object-contain hover:opacity-80 transition-opacity"
-              />
-              <Image
-                src="/images/planity-logo.png"
-                alt="Planity"
-                width={110}
-                height={44}
-                className="h-7 md:h-9 w-auto object-contain hover:opacity-80 transition-opacity"
-              />
-              <Image
-                src="/images/sodexo-logo.png"
-                alt="Sodexo"
-                width={110}
-                height={44}
-                className="h-7 md:h-9 w-auto object-contain hover:opacity-80 transition-opacity"
-              />
-              <Image
-                src="/images/brigad-logo.png"
-                alt="Brigad"
-                width={110}
-                height={44}
-                className="h-7 md:h-9 w-auto object-contain hover:opacity-80 transition-opacity"
-              />
+            <div className="flex flex-wrap items-center justify-center gap-5 md:gap-7 py-3 md:py-5">
+              <div className="h-9 md:h-11 flex items-end">
+                <Image
+                  src="/images/chargemap-logo.png"
+                  alt="Chargemap"
+                  width={110}
+                  height={44}
+                  className="h-7 md:h-9 w-auto object-contain hover:opacity-80 transition-opacity"
+                />
+              </div>
+              <div className="h-9 md:h-11 flex items-end">
+                <Image
+                  src="/images/planity-logo.png"
+                  alt="Planity"
+                  width={110}
+                  height={44}
+                  className="h-7 md:h-9 w-auto object-contain hover:opacity-80 transition-opacity"
+                />
+              </div>
+              <div className="h-9 md:h-11 flex items-end">
+                <Image
+                  src="/images/sodexo-logo.png"
+                  alt="Sodexo"
+                  width={110}
+                  height={44}
+                  className="h-7 md:h-9 w-auto object-contain hover:opacity-80 transition-opacity"
+                />
+              </div>
+              <div className="h-9 md:h-11 flex items-end">
+                <Image
+                  src="/images/brigad-logo.png"
+                  alt="Brigad"
+                  width={110}
+                  height={44}
+                  className="h-7 md:h-9 w-auto object-contain hover:opacity-80 transition-opacity"
+                />
+              </div>
             </div>
           </div>
         </div>
