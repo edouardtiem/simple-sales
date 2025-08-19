@@ -3,7 +3,8 @@
 import { JetBrains_Mono } from "next/font/google"
 import ContactForm from "@/components/contact-form"
 import ContactModal from "@/components/contact-modal"
-import ConversionChart from "@/components/conversion-chart"
+import PipelineCompare from "@/components/pipeline-compare"
+// import ConversionChart from "@/components/conversion-chart"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import {
@@ -263,7 +264,10 @@ export default function ClientPage() {
           background: `linear-gradient(to bottom, #F5F1EB 50%, #1F2937 50%)`,
         }}
       >
+        <PipelineCompare />
+        {/* Ancien graphique conservé en commentaire au cas où :
         <ConversionChart />
+        */}
       </section>
 
       {/* Section "Les Signes qui ne Trompent Pas" - réinsérée */}
