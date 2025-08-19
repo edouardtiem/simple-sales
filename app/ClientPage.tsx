@@ -179,24 +179,24 @@ export default function ClientPage() {
       </div>
 
       {/* Hero Section avec animation typewriter */}
-      <section className="min-h-[40vh] md:min-h-[50vh] flex flex-col px-4 py-12 md:py-16 pt-20 md:pt-24">
+      <section className="min-h-[34vh] md:min-h-[42vh] flex flex-col px-4 py-10 md:py-14 pt-17 md:pt-20">
         <div className="flex-1"></div>
         <div className="container mx-auto text-center">
           <h1
-            className="text-2xl font-medium tracking-tight md:text-3xl lg:text-4xl [font-family:var(--font-jetbrains-mono),Monaco,Menlo,'Ubuntu_Mono',monospace] mb-8"
+            className="text-xl font-medium tracking-tight md:text-2xl lg:text-3xl [font-family:var(--font-jetbrains-mono),Monaco,Menlo,'Ubuntu_Mono',monospace] mb-7"
             style={{ lineHeight: "1.8" }}
           >
             Vos ventes stagnent ?<br />
             Le vrai problème est rarement celui que vous croyez.
           </h1>
-          <div className="mx-auto max-w-[640px] lg:max-w-[760px]">
-            <h2 className="mt-4 md:mt-6 text-base md:text-lg lg:text-xl font-medium text-gray-700 leading-relaxed">
+          <div className="mx-auto max-w-[544px] lg:max-w-[646px]">
+            <h2 className="mt-3 md:mt-5 text-sm md:text-base lg:text-lg font-medium text-gray-700 leading-relaxed">
               Notre diagnostic gratuit révèle les 3 angles morts qui freinent réellement votre croissance.
             </h2>
           </div>
-          <div className="mt-12 md:mt-16 flex justify-center">
+          <div className="mt-10 md:mt-14 flex justify-center">
             <Button
-              className="group bg-[#f6c344] px-6 md:px-10 py-4 md:py-6 text-lg md:text-xl font-medium text-[#1a1a1a] hover:bg-[#f4b82e] rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 flex items-center justify-center gap-2 md:gap-3 w-auto max-w-sm md:max-w-none"
+              className="group bg-[#f6c344] px-5 md:px-8 py-3 md:py-5 text-base md:text-lg font-medium text-[#1a1a1a] hover:bg-[#f4b82e] rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 flex items-center justify-center gap-2 md:gap-3 w-auto max-w-sm md:max-w-none"
               onClick={() => handleCTAClick("hero")}
             >
               <span className="text-center leading-tight">Révéler mon Score d'Efficacité</span>
@@ -208,38 +208,38 @@ export default function ClientPage() {
           </p>
 
           {/* Social proof avec logos - directement sous le CTA */}
-          <div className="mt-12 md:mt-16">
-            <h3 className="text-base md:text-lg font-medium mb-3 md:mb-4">
+          <div className="mt-10 md:mt-14">
+            <h3 className="text-sm md:text-base font-medium mb-2 md:mb-3">
               Une approche éprouvée auprès de leaders comme :
             </h3>
-            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 py-4 md:py-6">
+            <div className="flex flex-wrap items-center justify-center gap-5 md:gap-7 py-3 md:py-5">
               <Image
                 src="/images/chargemap-logo.png"
                 alt="Chargemap"
-                width={100}
-                height={40}
-                className="h-6 md:h-8 w-auto object-contain hover:opacity-80 transition-opacity"
+                width={85}
+                height={34}
+                className="h-5 md:h-7 w-auto object-contain hover:opacity-80 transition-opacity"
               />
               <Image
                 src="/images/planity-logo.png"
                 alt="Planity"
-                width={100}
-                height={40}
-                className="h-6 md:h-8 w-auto object-contain hover:opacity-80 transition-opacity"
+                width={85}
+                height={34}
+                className="h-5 md:h-7 w-auto object-contain hover:opacity-80 transition-opacity"
               />
               <Image
                 src="/images/sodexo-logo.png"
                 alt="Sodexo"
-                width={100}
-                height={40}
-                className="h-6 md:h-8 w-auto object-contain hover:opacity-80 transition-opacity"
+                width={85}
+                height={34}
+                className="h-5 md:h-7 w-auto object-contain hover:opacity-80 transition-opacity"
               />
               <Image
                 src="/images/brigad-logo.png"
                 alt="Brigad"
-                width={100}
-                height={40}
-                className="h-6 md:h-8 w-auto object-contain hover:opacity-80 transition-opacity"
+                width={85}
+                height={34}
+                className="h-5 md:h-7 w-auto object-contain hover:opacity-80 transition-opacity"
               />
             </div>
           </div>
@@ -249,7 +249,7 @@ export default function ClientPage() {
 
       {/* Section graphique avec fond divisé */}
       <section
-        className="relative py-4 md:py-8 lg:py-12 -mt-4 md:-mt-8"
+        className="relative py-3 md:py-7 lg:py-10 -mt-3 md:-mt-7"
         style={{
           background: `linear-gradient(to bottom, #F5F1EB 50%, #1F2937 50%)`,
         }}
@@ -258,25 +258,25 @@ export default function ClientPage() {
       </section>
 
       {/* Section "Les Signes qui ne Trompent Pas" - réinsérée */}
-      <section className="bg-[#1F2937] py-24">
+      <section className="bg-[#1F2937] py-20">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-6xl">
-            <h2 className="text-2xl font-medium md:text-3xl mb-8 text-center text-white">
+            <h2 className="text-xl font-medium md:text-2xl mb-7 text-center text-white">
               Les Signes qui ne Trompent Pas
             </h2>
 
-            <p className="text-lg text-gray-300 text-center mb-16 max-w-2xl mx-auto">
+            <p className="text-base text-gray-300 text-center mb-14 max-w-2xl mx-auto">
               Derrière chaque plateau de performance, je retrouve systématiquement une combinaison de ces symptômes :
             </p>
 
             <div className="relative">
               {/* Layout responsive avec CSS Grid */}
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-7 lg:gap-10 items-center">
                 {/* Points de gauche (desktop) / Points du haut (mobile) */}
-                <div className="space-y-8 order-1 lg:order-1">
+                <div className="space-y-7 order-1 lg:order-1">
                   <div className="flex items-start space-x-3">
                     <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
-                    <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
+                    <p className="text-sm lg:text-base text-gray-300 leading-relaxed">
                       Vous pilotez vos <span className="text-[#f6c344] font-semibold">prévisions</span> à l'
                       <strong>instinct</strong>, et chaque fin de trimestre est une source de{" "}
                       <span className="text-red-400 font-semibold">stress</span>.
@@ -284,7 +284,7 @@ export default function ClientPage() {
                   </div>
                   <div className="flex items-start space-x-3">
                     <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
-                    <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
+                    <p className="text-sm lg:text-base text-gray-300 leading-relaxed">
                       Des <span className="text-[#f6c344] font-semibold">deals</span> qui semblaient gagnés{" "}
                       <span className="text-red-400 font-semibold">se bloquent</span> au <strong>dernier moment</strong>
                       , et vous <strong>ne savez pas pourquoi</strong>.
@@ -298,8 +298,8 @@ export default function ClientPage() {
                     <Image
                       src="/images/stressed-businessman.png"
                       alt="Dirigeant stressé par les notifications commerciales"
-                      width={400}
-                      height={400}
+                      width={340}
+                      height={340}
                       className="w-full h-auto object-contain"
                       priority
                     />
@@ -307,10 +307,10 @@ export default function ClientPage() {
                 </div>
 
                 {/* Points de droite (desktop) / Points du bas (mobile) */}
-                <div className="space-y-8 order-3 lg:order-3">
+                <div className="space-y-7 order-3 lg:order-3">
                   <div className="flex items-start space-x-3">
                     <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
-                    <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
+                    <p className="text-sm lg:text-base text-gray-300 leading-relaxed">
                       Vous avez l'impression de <span className="text-red-400 font-semibold">subir</span> votre{" "}
                       <span className="text-[#f6c344] font-semibold">CRM</span> au lieu de l'utiliser comme une
                       véritable arme de croissance.
@@ -318,7 +318,7 @@ export default function ClientPage() {
                   </div>
                   <div className="flex items-start space-x-3">
                     <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
-                    <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
+                    <p className="text-sm lg:text-base text-gray-300 leading-relaxed">
                       Vous avez encore le <span className="text-red-400 font-semibold">goût amer</span> de cette
                       dernière <span className="text-[#f6c344] font-semibold">formation coûteuse</span> qui{" "}
                       <strong>n'a rien changé</strong> sur le terrain.
@@ -328,10 +328,10 @@ export default function ClientPage() {
               </div>
 
               {/* Points supplémentaires en bas */}
-              <div className="mt-12 grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              <div className="mt-10 grid md:grid-cols-2 gap-7 max-w-4xl mx-auto">
                 <div className="flex items-start space-x-3">
                   <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
-                  <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
+                  <p className="text-sm lg:text-base text-gray-300 leading-relaxed">
                     Votre <span className="text-[#f6c344] font-semibold">chiffre d'affaires</span> repose sur les
                     épaules d'un ou deux <span className="text-[#f6c344] font-semibold">"héros"</span>, et vous{" "}
                     <span className="text-red-400 font-semibold">redoutez</span> le jour où ils partiront.
@@ -339,7 +339,7 @@ export default function ClientPage() {
                 </div>
                 <div className="flex items-start space-x-3">
                   <div className="h-2 w-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
-                  <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
+                  <p className="text-sm lg:text-base text-gray-300 leading-relaxed">
                     Vous entendez vos commerciaux présenter l'offre de 5 manières différentes,{" "}
                     <span className="text-red-400 font-semibold">diluant</span> votre message et votre force de frappe.
                   </p>
@@ -347,9 +347,9 @@ export default function ClientPage() {
               </div>
             </div>
 
-            <div className="text-center mt-16">
+            <div className="text-center mt-14">
               <Button
-                className="w-auto md:w-auto bg-[#f6c344] px-6 md:px-10 py-4 md:py-6 text-base md:text-lg font-medium text-[#1a1a1a] hover:bg-[#f4b82e] rounded-lg max-w-sm md:max-w-none mx-auto"
+                className="w-auto md:w-auto bg-[#f6c344] px-5 md:px-8 py-3 md:py-5 text-sm md:text-base font-medium text-[#1a1a1a] hover:bg-[#f4b82e] rounded-lg max-w-sm md:max-w-none mx-auto"
                 onClick={() => handleCTAClick("problems_section")}
               >
                 Obtenir mon Score Gratuit
@@ -360,19 +360,19 @@ export default function ClientPage() {
       </section>
 
       {/* Nouvelle section : Plan en 3 étapes */}
-      <section className="container mx-auto px-4 py-24">
+      <section className="container mx-auto px-4 py-20">
         <div className="mx-auto max-w-5xl">
-          <h2 className="text-2xl font-medium md:text-3xl mb-16 text-center">
+          <h2 className="text-xl font-medium md:text-2xl mb-14 text-center">
             Votre Plan vers la Performance en 3 Étapes Simples
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-7">
             {/* Étape 1 */}
             <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
-                <ClipboardList className="h-12 w-12 text-gray-700" strokeWidth={1} />
+              <div className="w-14 h-14 mx-auto mb-5 flex items-center justify-center">
+                <ClipboardList className="h-10 w-10 text-gray-700" strokeWidth={1} />
               </div>
-              <h3 className="text-xl font-medium mb-4">1. Clarifiez votre Situation</h3>
+              <h3 className="text-lg font-medium mb-3">1. Clarifiez votre Situation</h3>
               <p className="text-gray-600 leading-relaxed">
                 En 5 minutes, notre questionnaire stratégique vous aide à mettre des mots précis sur vos défis et vos
                 objectifs.
@@ -381,10 +381,10 @@ export default function ClientPage() {
 
             {/* Étape 2 */}
             <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
-                <Search className="h-12 w-12 text-gray-700" strokeWidth={1} />
+              <div className="w-14 h-14 mx-auto mb-5 flex items-center justify-center">
+                <Search className="h-10 w-10 text-gray-700" strokeWidth={1} />
               </div>
-              <h3 className="text-xl font-medium mb-4">2. Révélez vos Angles Morts</h3>
+              <h3 className="text-lg font-medium mb-3">2. Révélez vos Angles Morts</h3>
               <p className="text-gray-600 leading-relaxed">
                 Nous analysons vos réponses et identifions les 3 points de friction qui freinent réellement votre
                 croissance.
@@ -393,10 +393,10 @@ export default function ClientPage() {
 
             {/* Étape 3 */}
             <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
-                <Trophy className="h-12 w-12 text-gray-700" strokeWidth={1} />
+              <div className="w-14 h-14 mx-auto mb-5 flex items-center justify-center">
+                <Trophy className="h-10 w-10 text-gray-700" strokeWidth={1} />
               </div>
-              <h3 className="text-xl font-medium mb-4">3. Identifiez votre Levier N°1</h3>
+              <h3 className="text-lg font-medium mb-3">3. Identifiez votre Levier N°1</h3>
               <p className="text-gray-600 leading-relaxed">
                 Lors d'une session de 30 minutes, nous définissons ensemble l'action prioritaire qui aura le plus
                 d'impact sur vos résultats.
@@ -407,56 +407,56 @@ export default function ClientPage() {
       </section>
 
       {/* Nouvelle section : Rôles et Mission */}
-      <section className="bg-[#F9FAFB] py-24">
+      <section className="bg-[#F9FAFB] py-20">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-4xl text-center">
-            <h2 className="text-2xl md:text-3xl font-medium text-center">
+            <h2 className="text-xl md:text-2xl font-medium text-center">
               <strong>Edouard Tiem</strong>
             </h2>
 
             {/* Texte biographique */}
-            <div className="max-w-2xl text-left space-y-6">
-              <p className="text-lg leading-relaxed">
+            <div className="max-w-2xl text-left space-y-5">
+              <p className="text-base leading-relaxed">
                 Après 15 ans à diriger des équipes commerciales, j'ai vu la même histoire se répéter : des dirigeants
                 brillants, la tête dans le guidon, qui sentaient leur croissance ralentir sans en comprendre la cause
                 profonde.
               </p>
 
-              <p className="text-lg leading-relaxed">
+              <p className="text-base leading-relaxed">
                 Ils pensaient que le problème venait du closing, mais la véritable faille était presque toujours
                 ailleurs : dans la découverte, ou pire, dans l'absence d'un vrai moteur de prospection.{" "}
                 <strong>Une hérésie silencieuse qui coûte des millions.</strong>
               </p>
 
-              <p className="text-lg leading-relaxed">
+              <p className="text-base leading-relaxed">
                 Au fil du temps, j'ai compris que le véritable changement ne vient jamais d'un outil miracle, mais de
                 trois étapes immuables :
               </p>
 
-              <div className="space-y-4 text-left max-w-xl">
+              <div className="space-y-3 text-left max-w-xl">
                 <div className="flex items-start space-x-3">
-                  <span className="text-lg font-medium">•</span>
-                  <p className="text-lg leading-relaxed">
+                  <span className="text-base font-medium">•</span>
+                  <p className="text-base leading-relaxed">
                     1. <strong>La Prise de Conscience :</strong> Oser regarder la vérité en face pour diagnostiquer le
                     vrai problème.
                   </p>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <span className="text-lg font-medium">•</span>
-                  <p className="text-lg leading-relaxed">
+                  <span className="text-base font-medium">•</span>
+                  <p className="text-base leading-relaxed">
                     2. <strong>La Méthode :</strong> Appliquer le bon système, le bon processus, au bon endroit.
                   </p>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <span className="text-lg font-medium">•</span>
-                  <p className="text-lg leading-relaxed">
+                  <span className="text-base font-medium">•</span>
+                  <p className="text-base leading-relaxed">
                     3. <strong>La Discipline :</strong> Répéter le geste, comme un athlète, jusqu'à ce qu'il devienne un
                     réflexe pour toute l'équipe.
                   </p>
                 </div>
               </div>
 
-              <p className="text-lg leading-relaxed">
+              <p className="text-base leading-relaxed">
                 C'est pour orchestrer ces trois temps que j'ai fondé Simple Sales : pour transformer une prise de
                 conscience en une machine de croissance pérenne, et vous redonner le contrôle.
               </p>
@@ -466,20 +466,20 @@ export default function ClientPage() {
       </section>
 
       {/* Contact Form */}
-      <section id="contact" className="bg-[#F9FAFB] py-24">
+      <section id="contact" className="bg-[#F9FAFB] py-20">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-2xl">
-            <h2 className="mb-8 text-center text-2xl font-medium md:text-3xl">Obtenir mon Score Gratuit</h2>
+            <h2 className="mb-7 text-center text-xl font-medium md:text-2xl">Obtenir mon Score Gratuit</h2>
             <ContactForm variant="original" formType="page_bottom" />
           </div>
         </div>
       </section>
 
       {/* Section FAQ - déplacée */}
-      <section className="bg-[#F6F1EB] py-24">
+      <section className="bg-[#F6F1EB] py-20">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-2xl">
-            <h2 className="text-xl font-medium md:text-2xl mb-8 text-center">
+            <h2 className="text-lg font-medium md:text-xl mb-7 text-center">
               <strong>Questions fréquentes</strong>
             </h2>
             <div className="space-y-2">
@@ -492,14 +492,14 @@ export default function ClientPage() {
       </section>
 
       {/* Dernier appel à l'action */}
-      <section className="py-24">
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-2xl font-medium md:text-3xl mb-8">
+            <h2 className="text-xl font-medium md:text-2xl mb-7">
               Prêt à transformer vos angles morts en opportunités ?
             </h2>
             <Button
-              className="w-auto md:w-auto bg-[#f6c344] px-6 md:px-10 py-4 md:py-6 text-lg md:text-xl font-medium text-[#1a1a1a] hover:bg-[#f4b82e] rounded-lg shadow-lg max-w-sm md:max-w-none mx-auto"
+              className="w-auto md:w-auto bg-[#f6c344] px-5 md:px-8 py-3 md:py-5 text-base md:text-lg font-medium text-[#1a1a1a] hover:bg-[#f4b82e] rounded-lg shadow-lg max-w-sm md:max-w-none mx-auto"
               onClick={() => handleCTAClick("final_cta")}
             >
               Obtenir mon Score Gratuit
@@ -509,20 +509,20 @@ export default function ClientPage() {
       </section>
 
       {/* Footer restructuré */}
-      <footer className="bg-gray-800 text-white py-16">
+      <footer className="bg-gray-800 text-white py-14">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-7">
             {/* Colonne 1 : Logo + Slogan */}
             <div className="space-y-4">
-              <h3 className="text-xl font-medium">simple.sales</h3>
+              <h3 className="text-lg font-medium">simple.sales</h3>
               <p className="text-gray-300 leading-relaxed">
                 Transformer la complexité du terrain en un plan d'action d'une clarté redoutable.
               </p>
               <Button
                 onClick={() => window.open("https://www.linkedin.com/in/edouard-tiem", "_blank")}
-                className="bg-[#0077B5] hover:bg-[#005885] text-white px-6 py-3 rounded-lg flex items-center gap-2 transition-colors"
+                className="bg-[#0077B5] hover:bg-[#005885] text-white px-5 py-2 rounded-lg flex items-center gap-1 transition-colors"
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                 </svg>
                 Connectons-nous
@@ -531,8 +531,8 @@ export default function ClientPage() {
 
             {/* Colonne 2 : Nos Solutions */}
             <div className="space-y-4">
-              <h3 className="text-xl font-medium">Nos Solutions</h3>
-              <div className="space-y-3">
+              <h3 className="text-lg font-medium">Nos Solutions</h3>
+              <div className="space-y-2">
                 <a href="#" className="block text-gray-300 hover:text-white transition-colors">
                   Le Diagnostic (Offert)
                 </a>
@@ -547,8 +547,8 @@ export default function ClientPage() {
 
             {/* Colonne 3 : Légal */}
             <div className="space-y-4">
-              <h3 className="text-xl font-medium">Légal</h3>
-              <div className="space-y-3">
+              <h3 className="text-lg font-medium">Légal</h3>
+              <div className="space-y-2">
                 <a href="/mentions-legales" className="block text-gray-300 hover:text-white transition-colors">
                   Mentions légales
                 </a>
@@ -563,7 +563,7 @@ export default function ClientPage() {
           </div>
 
           {/* Ligne de séparation et copyright */}
-          <div className="border-t border-gray-700 mt-8 pt-6 text-center">
+          <div className="border-t border-gray-700 mt-7 pt-5 text-center">
             <p className="text-gray-400 text-sm">© 2024 Simple Sales. Tous droits réservés.</p>
           </div>
         </div>
