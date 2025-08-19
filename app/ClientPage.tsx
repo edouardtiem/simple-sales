@@ -189,7 +189,7 @@ export default function ClientPage() {
             Vos ventes stagnent ?<br />
             Le vrai problème est rarement celui que vous croyez.
           </h1>
-          <div className="mx-auto max-w-[544px] lg:max-w-[646px]">
+          <div className="mx-auto max-w-md lg:max-w-lg">
             <h2 className="mt-3 md:mt-5 text-sm md:text-base lg:text-lg font-medium text-gray-700 leading-relaxed">
               Notre diagnostic gratuit révèle les 3 angles morts qui freinent réellement votre croissance.
             </h2>
@@ -260,12 +260,12 @@ export default function ClientPage() {
       {/* Section "Les Signes qui ne Trompent Pas" - réinsérée */}
       <section className="bg-[#1F2937] py-20">
         <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-6xl">
+          <div className="mx-auto max-w-5xl">
             <h2 className="text-xl font-medium md:text-2xl mb-7 text-center text-white">
               Les Signes qui ne Trompent Pas
             </h2>
 
-            <p className="text-base text-gray-300 text-center mb-14 max-w-2xl mx-auto">
+            <p className="text-base text-gray-300 text-center mb-14 max-w-lg mx-auto">
               Derrière chaque plateau de performance, je retrouve systématiquement une combinaison de ces symptômes :
             </p>
 
@@ -361,7 +361,7 @@ export default function ClientPage() {
 
       {/* Nouvelle section : Plan en 3 étapes */}
       <section className="container mx-auto px-4 py-20">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-4xl">
           <h2 className="text-xl font-medium md:text-2xl mb-14 text-center">
             Votre Plan vers la Performance en 3 Étapes Simples
           </h2>
@@ -409,13 +409,13 @@ export default function ClientPage() {
       {/* Nouvelle section : Rôles et Mission */}
       <section className="bg-[#F9FAFB] py-20">
         <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-4xl text-center">
+          <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-xl md:text-2xl font-medium text-center">
               <strong>Edouard Tiem</strong>
             </h2>
 
             {/* Texte biographique */}
-            <div className="max-w-2xl text-left space-y-5">
+            <div className="max-w-lg text-left space-y-5">
               <p className="text-base leading-relaxed">
                 Après 15 ans à diriger des équipes commerciales, j'ai vu la même histoire se répéter : des dirigeants
                 brillants, la tête dans le guidon, qui sentaient leur croissance ralentir sans en comprendre la cause
@@ -433,7 +433,7 @@ export default function ClientPage() {
                 trois étapes immuables :
               </p>
 
-              <div className="space-y-3 text-left max-w-xl">
+              <div className="space-y-3 text-left max-w-md">
                 <div className="flex items-start space-x-3">
                   <span className="text-base font-medium">•</span>
                   <p className="text-base leading-relaxed">
@@ -468,7 +468,7 @@ export default function ClientPage() {
       {/* Contact Form */}
       <section id="contact" className="bg-[#F9FAFB] py-20">
         <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-2xl">
+          <div className="mx-auto max-w-lg">
             <h2 className="mb-7 text-center text-xl font-medium md:text-2xl">Obtenir mon Score Gratuit</h2>
             <ContactForm variant="original" formType="page_bottom" />
           </div>
@@ -478,7 +478,7 @@ export default function ClientPage() {
       {/* Section FAQ - déplacée */}
       <section className="bg-[#F6F1EB] py-20">
         <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-2xl">
+          <div className="mx-auto max-w-lg">
             <h2 className="text-lg font-medium md:text-xl mb-7 text-center">
               <strong>Questions fréquentes</strong>
             </h2>
@@ -494,7 +494,7 @@ export default function ClientPage() {
       {/* Dernier appel à l'action */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-2xl text-center">
+          <div className="mx-auto max-w-lg text-center">
             <h2 className="text-xl font-medium md:text-2xl mb-7">
               Prêt à transformer vos angles morts en opportunités ?
             </h2>
