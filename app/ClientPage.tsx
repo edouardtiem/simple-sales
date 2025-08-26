@@ -215,7 +215,7 @@ export default function ClientPage() {
 
           {/* Social proof avec logos - directement sous le CTA */}
           <div className="mt-10 md:mt-14">
-            <h3 className="text-sm md:text-base font-medium mb-2 md:mb-3">
+            <h3 className="text-xs md:text-sm font-medium mb-2 md:mb-3">
               Une approche éprouvée auprès de leaders comme :
             </h3>
             <div className="flex flex-wrap items-end justify-center gap-5 md:gap-7 py-3 md:py-5">
