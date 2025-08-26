@@ -568,14 +568,8 @@ export default function ClientPage() {
             <div className="space-y-4">
               <h3 className="text-lg font-medium">Nos Solutions</h3>
               <div className="space-y-2">
-                <a href="#" className="block text-gray-300 hover:text-white transition-colors">
-                  Le Diagnostic (Offert)
-                </a>
-                <a href="#" className="block text-gray-300 hover:text-white transition-colors">
-                  Le Plan d'Accélération
-                </a>
-                <a href="#" className="block text-gray-300 hover:text-white transition-colors">
-                  Le Partenariat Stratégique
+                <a href="/notre-approche" className="block text-gray-300 hover:text-white transition-colors">
+                  Notre approche
                 </a>
               </div>
             </div>
