@@ -1,12 +1,11 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { ArrowLeft, ArrowRight, Calendar } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 interface FormData {
@@ -37,10 +36,7 @@ interface FormData {
   // Question 9
   currentSymptom: string
 
-  // Question 10 - Nouvelle question
-  symptomImpact: string
-
-  // Question 11
+  // Question 10
   firstName: string
   lastName: string
   email: string
@@ -60,7 +56,6 @@ const initialFormData: FormData = {
   weeklyContracts: "",
   cycleDuration: "",
   currentSymptom: "",
-  symptomImpact: "",
   firstName: "",
   lastName: "",
   email: "",
@@ -197,19 +192,16 @@ const questions = [
   },
   {
     id: 10,
-    title: "Justement, parlons-en.",
-    type: "textarea",
-    field: "symptomImpact" as keyof FormData,
-    question:
-      "Pour que votre analyse soit la plus juste possible, décrivez en une phrase l'impact de ce symptôme sur vous ou votre équipe au quotidien.",
-    valueText: "",
-  },
-  {
-    id: 11,
     title: "Parfait ! Pour finir, où envoyons-nous votre analyse ?",
     type: "contact",
     valueText:
-      "💡 Ces informations restent 100% confidentielles et nous permettent de finaliser VOTRE audit personnalisé.",
+      "💡 Ces informations restent 100% confidentielles et servent uniquement à vous envoyer votre audit personnalisé.",
+  },
+  {
+    id: 11,
+    title: "Votre audit est terminé !",
+    type: "final",
+    valueText: "",
   },
 ]
 
@@ -222,24 +214,6 @@ export default function OnboardingForm() {
 
   const totalSteps = questions.length
   const currentQuestion = questions[currentStep - 1]
-
-  // Récupérer l'email depuis sessionStorage au chargement
-  useEffect(() => {
-    const leadInfo = sessionStorage.getItem("leadInfo")
-    if (leadInfo) {
-      try {
-        const parsedInfo = JSON.parse(leadInfo)
-        if (parsedInfo.email) {
-          setFormData((prev) => ({
-            ...prev,
-            email: parsedInfo.email,
-          }))
-        }
-      } catch (error) {
-        console.error("Erreur lors de la récupération des informations:", error)
-      }
-    }
-  }, [])
 
   const handleInputChange = (field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
@@ -273,22 +247,22 @@ export default function OnboardingForm() {
         return formData[currentQuestion.field] !== ""
       case "number":
         return formData[currentQuestion.field] !== "" && !isNaN(Number(formData[currentQuestion.field]))
-      case "textarea":
-        return formData[currentQuestion.field] !== ""
       case "contact":
         return formData.firstName !== "" && formData.lastName !== "" && formData.email !== ""
+      case "final":
+        return true
       default:
         return false
     }
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (finalChoice?: string) => {
     if (isSubmitting) return
     setIsSubmitting(true)
 
     const finalFormData = {
       ...formData,
-      finalChoice: "form_completed",
+      finalChoice: finalChoice || sessionStorage.getItem("finalChoice") || "email_only",
     }
 
     console.log("Form submitted:", finalFormData)
@@ -379,9 +353,6 @@ export default function OnboardingForm() {
               {/* Question Title */}
               <div className="text-center mb-12">
                 <h2 className="text-2xl md:text-3xl font-medium leading-relaxed">{currentQuestion?.title}</h2>
-                {currentQuestion?.question && (
-                  <p className="text-lg text-gray-700 mt-4 leading-relaxed">{currentQuestion.question}</p>
-                )}
               </div>
 
               {/* Answer Zone */}
@@ -419,19 +390,6 @@ export default function OnboardingForm() {
                       onChange={(e) => handleInputChange(currentQuestion.field, e.target.value)}
                       placeholder="Entrez un nombre"
                       className="text-center text-xl py-4 max-w-xs mx-auto font-mono"
-                    />
-                  </div>
-                )}
-
-                {/* Textarea Questions */}
-                {currentQuestion?.type === "textarea" && (
-                  <div className="max-w-lg mx-auto">
-                    <Textarea
-                      value={formData[currentQuestion.field]}
-                      onChange={(e) => handleInputChange(currentQuestion.field, e.target.value)}
-                      placeholder="Décrivez l'impact en quelques mots..."
-                      className="min-h-[120px] text-base leading-relaxed font-mono resize-none"
-                      rows={4}
                     />
                   </div>
                 )}
@@ -478,7 +436,6 @@ export default function OnboardingForm() {
                       {formData.email && !isBusinessEmail(formData.email) && (
                         <p className="text-sm text-red-600">Veuillez utiliser une adresse email professionnelle</p>
                       )}
-                      {formData.email && <p className="text-xs text-green-600">✓ Email récupéré automatiquement</p>}
                     </div>
 
                     <div className="space-y-2">
@@ -491,6 +448,60 @@ export default function OnboardingForm() {
                         placeholder="06 12 34 56 78"
                         className="font-mono"
                       />
+                    </div>
+                  </div>
+                )}
+
+                {/* Final Page */}
+                {currentQuestion?.type === "final" && (
+                  <div className="text-center space-y-8">
+                    <div className="text-6xl mb-6">🎯</div>
+
+                    <div className="bg-green-50 border border-green-200 rounded-lg p-6 space-y-4 max-w-lg mx-auto">
+                      <p className="text-lg">
+                        <strong>Félicitations !</strong> Vous venez de compléter votre audit express SimpleSales.
+                      </p>
+                      <p className="text-base">
+                        📊 <strong>Votre diagnostic personnalisé</strong> vous sera envoyé par email dans les prochaines{" "}
+                        <strong>48 heures</strong>.
+                      </p>
+                    </div>
+
+                    <div className="bg-white border border-gray-200 rounded-lg p-6 max-w-lg mx-auto">
+                      <h3 className="font-medium mb-4">Souhaitez-vous discuter de vos résultats ?</h3>
+                      <p className="text-sm text-gray-600 mb-6">
+                        Réservez un créneau de 30 minutes pour approfondir votre analyse avec un expert.
+                      </p>
+
+                      <div className="space-y-4">
+                        <Button
+                          onClick={() => {
+                            sessionStorage.setItem("finalChoice", "rdv")
+                            window.open(
+                              "https://app.reclaim.ai/m/edouard-tiem/scan-de-votre-machine-de-vente-simple-sales",
+                              "_blank",
+                            )
+                            handleSubmit("rdv")
+                          }}
+                          className="w-full bg-[#f6c344] px-6 py-3 text-base font-medium text-[#1a1a1a] hover:bg-[#f4b82e] rounded-lg flex items-center justify-center"
+                          disabled={isSubmitting}
+                        >
+                          <Calendar className="h-4 w-4 mr-2" />
+                          {isSubmitting ? "Finalisation..." : "Oui, réserver un créneau"}
+                        </Button>
+
+                        <Button
+                          onClick={() => {
+                            sessionStorage.setItem("finalChoice", "email_only")
+                            handleSubmit("email_only")
+                          }}
+                          variant="outline"
+                          className="w-full px-6 py-3 text-base font-medium rounded-lg"
+                          disabled={isSubmitting}
+                        >
+                          {isSubmitting ? "Finalisation..." : "Non, recevoir seulement les résultats par email"}
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -507,31 +518,18 @@ export default function OnboardingForm() {
         </div>
 
         {/* Navigation */}
-        <div className="flex items-center justify-between max-w-2xl mx-auto w-full">
-          <Button
-            variant="outline"
-            onClick={prevStep}
-            disabled={currentStep === 1}
-            className="flex items-center space-x-2 bg-transparent"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            <span>Précédent</span>
-          </Button>
-
-          {currentStep === totalSteps ? (
+        {currentQuestion?.type !== "final" && (
+          <div className="flex items-center justify-between max-w-2xl mx-auto w-full">
             <Button
-              onClick={handleSubmit}
-              disabled={
-                !canProceed() ||
-                (currentQuestion?.type === "contact" && formData.email && !isBusinessEmail(formData.email)) ||
-                isSubmitting
-              }
-              className="flex items-center space-x-2 bg-[#f6c344] text-[#1a1a1a] hover:bg-[#f4b82e]"
+              variant="outline"
+              onClick={prevStep}
+              disabled={currentStep === 1}
+              className="flex items-center space-x-2 bg-transparent"
             >
-              <span>{isSubmitting ? "Finalisation..." : "Terminer"}</span>
-              <ArrowRight className="h-4 w-4" />
+              <ArrowLeft className="h-4 w-4" />
+              <span>Précédent</span>
             </Button>
-          ) : (
+
             <Button
               onClick={nextStep}
               disabled={
@@ -543,8 +541,8 @@ export default function OnboardingForm() {
               <span>Suivant</span>
               <ArrowRight className="h-4 w-4" />
             </Button>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   )

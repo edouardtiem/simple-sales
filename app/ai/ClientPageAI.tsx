@@ -116,12 +116,7 @@ export default function ClientPageAI() {
 
     const handleScroll = () => {
       const scrollY = window.scrollY
-      const windowHeight = window.innerHeight
-      const documentHeight = document.documentElement.scrollHeight
-      const isNearBottom = windowHeight + scrollY >= documentHeight - 200 // 200px avant le bas
-
-      // Afficher le CTA après 100px de scroll mais le cacher quand on arrive en bas
-      setShowFloatingCTA(scrollY > 100 && !isNearBottom)
+      setShowFloatingCTA(scrollY > 100) // Afficher après 100px de scroll
     }
 
     window.addEventListener("scroll", handleScroll)

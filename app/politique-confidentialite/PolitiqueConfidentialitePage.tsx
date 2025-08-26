@@ -1,8 +1,8 @@
 "use client"
 
 import { JetBrains_Mono } from "next/font/google"
-import Link from "next/link"
 
+// Font
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
@@ -11,162 +11,127 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export default function PolitiqueConfidentialitePage() {
-  const currentDate = new Date()
-  const targetDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 2)
-  const monthNames = [
-    "janvier",
-    "février",
-    "mars",
-    "avril",
-    "mai",
-    "juin",
-    "juillet",
-    "août",
-    "septembre",
-    "octobre",
-    "novembre",
-    "décembre",
-  ]
-  const dynamicDate = `${monthNames[targetDate.getMonth()]} ${targetDate.getFullYear()}`
-
   return (
-    <main className={`${jetbrainsMono.variable} min-h-screen bg-[#f5f1eb] text-[#1a1a1a] font-mono`}>
+    <div className={`${jetbrainsMono.variable} min-h-screen bg-[#f5f1eb] text-[#1a1a1a] font-mono`}>
       {/* Header */}
-      <div className="fixed top-0 left-0 right-0 z-10 bg-[#f5f1eb] px-4 py-4 border-b border-gray-200">
+      <div className="border-b border-gray-200 bg-[#f5f1eb] px-4 py-6">
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
-            <Link href="/" className="text-sm font-mono text-[#1a1a1a] hover:opacity-70 transition-opacity">
+            <a href="/" className="text-sm text-[#1a1a1a] hover:opacity-70 transition-opacity">
               simple.sales
-            </Link>
-            <Link
-              href="/"
-              className="text-sm font-mono text-[#1a1a1a] hover:opacity-70 transition-opacity border border-gray-300 px-3 py-1 rounded"
-            >
-              ← Précédent
-            </Link>
+            </a>
           </div>
         </div>
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 py-24 pt-32">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-medium mb-8">Politique de Confidentialité</h1>
+      <div className="container mx-auto px-4 py-12">
+        <div className="mx-auto max-w-4xl">
+          <h1 className="text-3xl font-medium mb-8 flex items-center">
+            <span className="mr-3">🔐</span>
+            Politique de confidentialité
+          </h1>
 
-          <div className="space-y-8 text-gray-700 leading-relaxed">
+          <div className="space-y-8 text-base leading-relaxed">
             <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Introduction</h2>
-              <p>
-                Simple Sales s'engage à protéger la confidentialité de vos données personnelles. Cette politique de
-                confidentialité explique comment nous collectons, utilisons, stockons et protégeons vos informations
-                personnelles lorsque vous utilisez notre site web.
+              <h2 className="text-xl font-medium mb-4">1. Préambule</h2>
+              <div className="space-y-4">
+                <p>
+                  Cette politique de confidentialité a pour but d'expliquer de manière transparente comment sont
+                  collectées, utilisées et protégées vos données personnelles sur le site simplesales.fr.
+                </p>
+                <p>
+                  Edouard Tiem s'engage à respecter le Règlement Général sur la Protection des Données (RGPD – Règlement
+                  UE 2016/679).
+                </p>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-medium mb-4">2. Responsable du traitement</h2>
+              <div className="space-y-2">
+                <p>
+                  <strong>Éditeur :</strong> Edouard Tiem – SASU
+                </p>
+                <p>
+                  <strong>SIRET :</strong> 850 365 701 00026
+                </p>
+                <p>
+                  <strong>Adresse :</strong> 22 Place de l'Ancienne Boucherie
+                </p>
+                <p>
+                  <strong>Email :</strong>{" "}
+                  <a href="mailto:edouard@tiemh.com" className="text-blue-600 hover:underline">
+                    edouard@tiemh.com
+                  </a>
+                </p>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-medium mb-4">3. Données collectées</h2>
+              <p className="mb-4">
+                Nous collectons uniquement les données nécessaires au bon fonctionnement du service.
               </p>
+
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-medium mb-2">Données collectées via le formulaire :</h3>
+                  <ul className="list-disc list-inside space-y-1 ml-4">
+                    <li>Nom</li>
+                    <li>Adresse email</li>
+                    <li>Poste / fonction</li>
+                    <li>Taille de l'équipe commerciale</li>
+                    <li>Réponses au questionnaire de qualification</li>
+                    <li>Autres données librement saisies</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="font-medium mb-2">Données techniques (le cas échéant) :</h3>
+                  <ul className="list-disc list-inside space-y-1 ml-4">
+                    <li>Adresse IP</li>
+                    <li>Données de navigation (via cookies ou outils d'analyse anonymisés)</li>
+                  </ul>
+                </div>
+              </div>
             </section>
 
             <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Données collectées</h2>
-              <p>Nous collectons les types de données suivantes :</p>
-              <ul className="list-disc list-inside mt-4 space-y-2">
-                <li>
-                  <strong>Données d'identification :</strong> nom, prénom, adresse email, numéro de téléphone
-                </li>
-                <li>
-                  <strong>Données professionnelles :</strong> entreprise, poste, secteur d'activité
-                </li>
-                <li>
-                  <strong>Données de navigation :</strong> adresse IP, type de navigateur, pages visitées
-                </li>
-                <li>
-                  <strong>Données de questionnaire :</strong> réponses aux questions de diagnostic commercial
-                </li>
+              <h2 className="text-xl font-medium mb-4">4. Finalités du traitement</h2>
+              <p className="mb-4">Les données sont collectées dans les buts suivants :</p>
+              <ul className="list-disc list-inside space-y-2 ml-4">
+                <li>Réaliser et livrer le scan commercial gratuit</li>
+                <li>Préparer un échange de restitution personnalisé</li>
+                <li>Proposer un accompagnement ou une prestation commerciale</li>
+                <li>Suivre les performances du site (via analytics)</li>
               </ul>
+              <p className="mt-4 font-medium">Aucune donnée n'est revendue ni transmise à des tiers non autorisés.</p>
             </section>
 
             <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Finalités du traitement</h2>
-              <p>Vos données personnelles sont utilisées pour :</p>
-              <ul className="list-disc list-inside mt-4 space-y-2">
-                <li>Fournir nos services de diagnostic commercial</li>
-                <li>Vous contacter pour planifier des rendez-vous</li>
-                <li>Personnaliser nos recommandations</li>
-                <li>Améliorer nos services</li>
-                <li>Respecter nos obligations légales</li>
-              </ul>
+              <h2 className="text-xl font-medium mb-4">5. Durée de conservation</h2>
+              <div className="space-y-2">
+                <p>
+                  <strong>Données commerciales :</strong> conservées pendant 3 ans après le dernier contact actif.
+                </p>
+                <p>
+                  <strong>Données techniques (cookies) :</strong> selon leur finalité, jusqu'à 13 mois maximum.
+                </p>
+              </div>
             </section>
 
             <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Base légale</h2>
-              <p>Le traitement de vos données personnelles est basé sur :</p>
-              <ul className="list-disc list-inside mt-4 space-y-2">
-                <li>
-                  <strong>Votre consentement</strong> pour l'envoi de communications marketing
-                </li>
-                <li>
-                  <strong>L'exécution du contrat</strong> pour la fourniture de nos services
-                </li>
-                <li>
-                  <strong>Notre intérêt légitime</strong> pour l'amélioration de nos services
-                </li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Partage des données</h2>
-              <p>
-                Nous ne vendons, ne louons, ni ne partageons vos données personnelles avec des tiers, sauf dans les cas
-                suivants :
-              </p>
-              <ul className="list-disc list-inside mt-4 space-y-2">
-                <li>Avec votre consentement explicite</li>
-                <li>Pour respecter une obligation légale</li>
-                <li>Avec nos prestataires de services (hébergement, analytics) sous contrat de confidentialité</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Conservation des données</h2>
-              <p>
-                Nous conservons vos données personnelles pendant la durée nécessaire aux finalités pour lesquelles elles
-                ont été collectées :
-              </p>
-              <ul className="list-disc list-inside mt-4 space-y-2">
-                <li>
-                  <strong>Données de contact :</strong> 3 ans après le dernier contact
-                </li>
-                <li>
-                  <strong>Données de diagnostic :</strong> 5 ans pour le suivi de la relation client
-                </li>
-                <li>
-                  <strong>Données de navigation :</strong> 13 mois maximum
-                </li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Vos droits</h2>
-              <p>Conformément au RGPD, vous disposez des droits suivants :</p>
-              <ul className="list-disc list-inside mt-4 space-y-2">
-                <li>
-                  <strong>Droit d'accès :</strong> obtenir une copie de vos données personnelles
-                </li>
-                <li>
-                  <strong>Droit de rectification :</strong> corriger des données inexactes
-                </li>
-                <li>
-                  <strong>Droit à l'effacement :</strong> demander la suppression de vos données
-                </li>
-                <li>
-                  <strong>Droit à la portabilité :</strong> récupérer vos données dans un format structuré
-                </li>
-                <li>
-                  <strong>Droit d'opposition :</strong> vous opposer au traitement de vos données
-                </li>
-                <li>
-                  <strong>Droit de limitation :</strong> limiter le traitement de vos données
-                </li>
+              <h2 className="text-xl font-medium mb-4">6. Vos droits</h2>
+              <p className="mb-4">Conformément au RGPD, vous disposez des droits suivants :</p>
+              <ul className="list-disc list-inside space-y-2 ml-4">
+                <li>Droit d'accès à vos données</li>
+                <li>Droit de rectification ou suppression</li>
+                <li>Droit à la limitation ou opposition au traitement</li>
+                <li>Droit à la portabilité</li>
               </ul>
               <p className="mt-4">
-                Pour exercer ces droits, contactez-nous à :{" "}
+                Pour exercer vos droits, il vous suffit d'écrire à :{" "}
                 <a href="mailto:edouard@tiemh.com" className="text-blue-600 hover:underline">
                   edouard@tiemh.com
                 </a>
@@ -174,54 +139,41 @@ export default function PolitiqueConfidentialitePage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Sécurité</h2>
-              <p>
-                Nous mettons en place des mesures techniques et organisationnelles appropriées pour protéger vos données
-                personnelles contre la perte, l'utilisation abusive, l'accès non autorisé, la divulgation, l'altération
-                ou la destruction.
-              </p>
+              <h2 className="text-xl font-medium mb-4">7. Sécurité des données</h2>
+              <div className="space-y-2">
+                <p>
+                  Les données sont stockées sur des outils sécurisés (formulaires, CRM, plateforme d'automatisation).
+                </p>
+                <p>
+                  Des mesures techniques et organisationnelles sont mises en place pour éviter tout accès non autorisé.
+                </p>
+              </div>
             </section>
 
             <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Cookies</h2>
-              <p>
-                Notre site utilise des cookies pour améliorer votre expérience de navigation et analyser l'utilisation
-                du site. Vous pouvez configurer votre navigateur pour refuser les cookies, mais cela peut affecter
-                certaines fonctionnalités du site.
-              </p>
+              <h2 className="text-xl font-medium mb-4">8. Cookies</h2>
+              <div className="space-y-4">
+                <p>Le site peut utiliser des cookies :</p>
+                <ul className="list-disc list-inside space-y-1 ml-4">
+                  <li>pour assurer son bon fonctionnement,</li>
+                  <li>pour mesurer l'audience (via outils anonymisés comme Plausible, Google Analytics, etc.)</li>
+                </ul>
+                <p>Vous pouvez refuser les cookies via les réglages de votre navigateur.</p>
+              </div>
             </section>
-
-            <section>
-              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Contact</h2>
-              <p>
-                Pour toute question concernant cette politique de confidentialité ou le traitement de vos données
-                personnelles, vous pouvez nous contacter à :
-              </p>
-              <p className="mt-4">
-                <strong>Email :</strong>{" "}
-                <a href="mailto:edouard@tiemh.com" className="text-blue-600 hover:underline">
-                  edouard@tiemh.com
-                </a>
-                <br />
-                <strong>Adresse :</strong> 22 Place de l'ancienne boucherie, 14000, Caen
-              </p>
-            </section>
-
-            <div className="pt-8 border-t border-gray-300">
-              <p className="text-sm text-gray-600">Dernière mise à jour : {dynamicDate}</p>
-            </div>
           </div>
 
-          <div className="mt-8 text-center">
-            <Link
+          {/* Back to home */}
+          <div className="mt-12 pt-8 border-t border-gray-200">
+            <a
               href="/"
-              className="inline-block text-sm font-mono text-[#1a1a1a] hover:opacity-70 transition-opacity border border-gray-300 px-4 py-2 rounded"
+              className="inline-flex items-center text-sm text-gray-600 hover:text-[#1a1a1a] transition-colors"
             >
-              ← Retour à la page principale
-            </Link>
+              ← Retour à l'accueil
+            </a>
           </div>
         </div>
       </div>
-    </main>
+    </div>
   )
 }
