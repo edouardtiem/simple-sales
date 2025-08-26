@@ -3,6 +3,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { ChevronDown, ChevronUp } from "lucide-react"
 import Footer from "@/components/footer"
+import type React from "react"
 
 interface ContentUpgradeProps {
   title: string
@@ -93,6 +94,25 @@ interface GuideTemplateProps {
   backLink?: string
 }
 
+function processContent(content: string): React.ReactNode[] {
+  if (!content) return []
+
+  return content.split("\n\n").map((paragraph, index) => {
+    // Process **bold** text within paragraphs
+    const processedParagraph = paragraph.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+
+    if (paragraph.startsWith("**") && paragraph.endsWith("**")) {
+      return (
+        <p key={index} className="font-semibold text-[#1a1a1a]">
+          {paragraph.replace(/\*\*/g, "")}
+        </p>
+      )
+    }
+
+    return <p key={index} dangerouslySetInnerHTML={{ __html: processedParagraph }} />
+  })
+}
+
 export default function GuideTemplate({
   category,
   title,
@@ -131,7 +151,7 @@ export default function GuideTemplate({
           <h1 className="text-3xl md:text-4xl font-medium mb-8 leading-tight">{title}</h1>
           {summary && (
             <div className="max-w-3xl mx-auto mb-8">
-              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">{summary}</p>
+              <div className="text-lg md:text-xl text-gray-700 leading-relaxed">{processContent(summary)}</div>
             </div>
           )}
         </div>
@@ -142,18 +162,7 @@ export default function GuideTemplate({
         <div className="container mx-auto max-w-4xl">
           <h2 className="text-2xl md:text-3xl font-medium mb-8 text-center">{introduction.title}</h2>
           <div className="max-w-3xl mx-auto">
-            <div className="text-gray-700 leading-relaxed space-y-4">
-              {introduction.content.split("\n\n").map((paragraph, index) => {
-                if (paragraph.startsWith("**") && paragraph.endsWith("**")) {
-                  return (
-                    <p key={index} className="font-semibold text-[#1a1a1a]">
-                      {paragraph.replace(/\*\*/g, "")}
-                    </p>
-                  )
-                }
-                return <p key={index}>{paragraph}</p>
-              })}
-            </div>
+            <div className="text-gray-700 leading-relaxed space-y-4">{processContent(introduction.content)}</div>
           </div>
         </div>
       </section>
@@ -167,18 +176,7 @@ export default function GuideTemplate({
               {symptoms.map((symptom, index) => (
                 <div key={index}>
                   <h3 className="text-xl font-medium mb-4 border-l-4 border-[#f6c344] pl-4">{symptom.title}</h3>
-                  <div className="text-gray-700 leading-relaxed space-y-4">
-                    {symptom.content.split("\n\n").map((paragraph, pIndex) => {
-                      if (paragraph.startsWith("**") && paragraph.endsWith("**")) {
-                        return (
-                          <p key={pIndex} className="font-semibold text-[#1a1a1a]">
-                            {paragraph.replace(/\*\*/g, "")}
-                          </p>
-                        )
-                      }
-                      return <p key={pIndex}>{paragraph}</p>
-                    })}
-                  </div>
+                  <div className="text-gray-700 leading-relaxed space-y-4">{processContent(symptom.content)}</div>
                 </div>
               ))}
             </div>
@@ -205,18 +203,7 @@ export default function GuideTemplate({
                     </span>
                     <div className="flex-1">
                       <h3 className="text-xl font-medium mb-4">{step.title}</h3>
-                      <div className="text-gray-700 leading-relaxed space-y-4">
-                        {step.content.split("\n\n").map((paragraph, pIndex) => {
-                          if (paragraph.startsWith("**") && paragraph.endsWith("**")) {
-                            return (
-                              <p key={pIndex} className="font-semibold text-[#1a1a1a]">
-                                {paragraph.replace(/\*\*/g, "")}
-                              </p>
-                            )
-                          }
-                          return <p key={pIndex}>{paragraph}</p>
-                        })}
-                      </div>
+                      <div className="text-gray-700 leading-relaxed space-y-4">{processContent(step.content)}</div>
                     </div>
                   </div>
                 </div>
@@ -234,27 +221,7 @@ export default function GuideTemplate({
               {practicalAction.title}
             </h2>
             <div className="max-w-3xl mx-auto text-[#1a1a1a]">
-              <div className="space-y-4">
-                {practicalAction.content.split("\n\n").map((paragraph, index) => {
-                  if (paragraph.startsWith("**") && paragraph.endsWith("**")) {
-                    return (
-                      <p key={index} className="font-semibold">
-                        {paragraph.replace(/\*\*/g, "")}
-                      </p>
-                    )
-                  }
-                  if (paragraph.includes("•")) {
-                    return (
-                      <div key={index} className="space-y-2">
-                        {paragraph.split("\n").map((line, lineIndex) => (
-                          <p key={lineIndex}>{line}</p>
-                        ))}
-                      </div>
-                    )
-                  }
-                  return <p key={index}>{paragraph}</p>
-                })}
-              </div>
+              <div className="space-y-4">{processContent(practicalAction.content)}</div>
             </div>
           </div>
         </section>
@@ -266,27 +233,7 @@ export default function GuideTemplate({
           <div className="container mx-auto max-w-4xl">
             <h2 className="text-2xl md:text-3xl font-medium mb-8 text-center">{conclusion.title}</h2>
             <div className="max-w-3xl mx-auto">
-              <div className="text-gray-700 leading-relaxed space-y-4">
-                {conclusion.content.split("\n\n").map((paragraph, index) => {
-                  if (paragraph.startsWith("**") && paragraph.endsWith("**")) {
-                    return (
-                      <p key={index} className="font-semibold text-[#1a1a1a]">
-                        {paragraph.replace(/\*\*/g, "")}
-                      </p>
-                    )
-                  }
-                  if (paragraph.match(/^\d+\./)) {
-                    return (
-                      <div key={index} className="space-y-2">
-                        {paragraph.split("\n").map((line, lineIndex) => (
-                          <p key={lineIndex}>{line}</p>
-                        ))}
-                      </div>
-                    )
-                  }
-                  return <p key={index}>{paragraph}</p>
-                })}
-              </div>
+              <div className="text-gray-700 leading-relaxed space-y-4">{processContent(conclusion.content)}</div>
             </div>
           </div>
         </section>

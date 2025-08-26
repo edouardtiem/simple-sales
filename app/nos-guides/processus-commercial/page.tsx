@@ -1,18 +1,6 @@
 import GuideTemplate from "../../../components/guide-template"
 
 export default function ProcessusCommercialPage() {
-  const contentUpgrade = {
-    title: "Passez à l'Action : Votre Kit d'Audit Gratuit",
-    description: "Obtenez les outils concrets pour auditer votre processus commercial dès aujourd'hui.",
-    benefits: [
-      "La Checklist PDF d'audit complet",
-      "3 Templates d'emails de relance",
-      "Le tableau de bord de suivi des opportunités",
-      "Guide de mise en place étape par étape",
-    ],
-    ctaText: "Obtenir le Kit →",
-  }
-
   const guideContent = {
     introduction: {
       title: "Le Drame Silencieux de Votre Entreprise",
@@ -136,7 +124,6 @@ La méthode est simple, mais le premier pas est souvent le plus intimidant. Entr
       practicalAction={guideContent.practicalAction}
       conclusion={guideContent.conclusion}
       faq={guideContent.faq}
-      contentUpgrade={contentUpgrade}
     />
   )
 }

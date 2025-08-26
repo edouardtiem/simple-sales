@@ -31,56 +31,67 @@ export default function NosGuidesPage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {/* Guide 1 - Processus Commercial */}
               <Link href="/nos-guides/processus-commercial" className="block">
-                <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer min-h-96 flex flex-col">
                   {/* Visual element */}
                   <div className="w-full h-28 bg-gradient-to-br from-[#f6c344] to-[#f4b82e] rounded-lg mb-5 flex items-center justify-center">
                     <div className="text-[#1a1a1a] text-2xl font-bold">📊</div>
                   </div>
 
                   {/* Category tag */}
-                  <div className="inline-block bg-[#f6c344] text-[#1a1a1a] text-xs font-medium px-3 py-1 rounded-full mb-4">
+                  <div className="inline-block bg-[#f6c344] text-[#1a1a1a] text-xs font-medium px-3 py-1 rounded-full mb-4 w-fit">
                     PROCESSUS COMMERCIAL
                   </div>
 
-                  <h2 className="text-lg font-semibold mb-4 leading-tight">
+                  <h2 className="text-lg font-semibold mb-4 leading-tight flex-grow">
                     Comment Réparer Votre Processus Commercial et Stopper les Fuites de Revenus
                   </h2>
 
                   {/* Description */}
-                  <p className="text-gray-600 mb-4 leading-relaxed text-sm">
+                  <p className="text-gray-600 leading-relaxed text-sm">
                     Découvrez la méthode en 5 étapes pour auditer votre cycle de vente, identifier les "fuites" de
                     revenus cachées et transformer votre processus en une véritable machine de conversion.
                   </p>
                 </div>
               </Link>
 
-              {/* Placeholder cards for future guides */}
-              <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm opacity-50">
+              {/* Guide 2 - Recruitment */}
+              <Link href="/nos-guides/recruter-commercial-elite" className="block">
+                <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer min-h-96 flex flex-col">
+                  {/* Visual element */}
+                  <div className="w-full h-28 bg-gradient-to-br from-[#f6c344] to-[#f4b82e] rounded-lg mb-5 flex items-center justify-center">
+                    <div className="text-[#1a1a1a] text-2xl font-bold">🎯</div>
+                  </div>
+
+                  {/* Category tag */}
+                  <div className="inline-block bg-[#f6c344] text-[#1a1a1a] text-xs font-medium px-3 py-1 rounded-full mb-4 w-fit">
+                    RECRUTEMENT
+                  </div>
+
+                  <h2 className="text-lg font-semibold mb-4 leading-tight flex-grow">
+                    Le Guide Définitif : Recruter un Commercial d'Élite en PME
+                  </h2>
+
+                  {/* Description */}
+                  <p className="text-gray-600 leading-relaxed text-sm">
+                    La méthode en 3 phases pour transformer vos recrutements commerciaux en accélérateur de croissance.
+                    Inclut le test révélateur du "jeu de vente" pour identifier les vrais talents.
+                  </p>
+                </div>
+              </Link>
+
+              {/* Placeholder card for future guides */}
+              <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm opacity-50 min-h-96 flex flex-col">
                 <div className="w-full h-28 bg-gray-100 rounded-lg mb-5 flex items-center justify-center">
                   <div className="text-gray-400 text-2xl">📈</div>
                 </div>
-                <div className="inline-block bg-gray-200 text-gray-600 text-xs font-medium px-3 py-1 rounded-full mb-4">
+                <div className="inline-block bg-gray-200 text-gray-600 text-xs font-medium px-3 py-1 rounded-full mb-4 w-fit">
                   MANAGEMENT
                 </div>
-                <h2 className="text-lg font-semibold mb-4 text-gray-400">Prochain guide en préparation</h2>
-                <p className="text-gray-400 mb-4 text-sm">
+                <h2 className="text-lg font-semibold mb-4 text-gray-400 flex-grow">Prochain guide en préparation</h2>
+                <p className="text-gray-400 text-sm">
                   Un nouveau guide sera bientôt disponible pour vous accompagner dans vos défis managériaux.
                 </p>
-                <span className="text-gray-400 font-medium text-sm">Bientôt disponible</span>
-              </div>
-
-              <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm opacity-50">
-                <div className="w-full h-28 bg-gray-100 rounded-lg mb-5 flex items-center justify-center">
-                  <div className="text-gray-400 text-2xl">🎯</div>
-                </div>
-                <div className="inline-block bg-gray-200 text-gray-600 text-xs font-medium px-3 py-1 rounded-full mb-4">
-                  STRATÉGIE
-                </div>
-                <h2 className="text-lg font-semibold mb-4 text-gray-400">Prochain guide en préparation</h2>
-                <p className="text-gray-400 mb-4 text-sm">
-                  Un nouveau guide sera bientôt disponible pour vous accompagner dans vos défis stratégiques.
-                </p>
-                <span className="text-gray-400 font-medium text-sm">Bientôt disponible</span>
+                <span className="text-gray-400 font-medium text-sm mt-auto">Bientôt disponible</span>
               </div>
             </div>
           </div>
