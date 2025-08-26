@@ -6,6 +6,7 @@ import { ArrowRight, ChevronDown, ChevronUp } from "lucide-react"
 import { useState } from "react"
 import ContactModal from "@/components/contact-modal"
 import { trackEvent } from "@/lib/analytics"
+import Footer from "@/components/footer"
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -404,11 +405,7 @@ export default function NotreApprochePage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-12">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-gray-400 text-sm">© 2024 Simple Sales. Tous droits réservés.</p>
-        </div>
-      </footer>
+      <Footer />
     </main>
   )
 }

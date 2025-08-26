@@ -546,8 +546,8 @@ export default function ClientPage() {
       {/* Footer restructuré */}
       <footer className="bg-gray-800 text-white py-14">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-7">
-            {/* Colonne 1 : Logo + Slogan */}
+          <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-7 md:gap-x-12">
+            {/* Colonne 1 : Logo + Slogan - Plus large */}
             <div className="space-y-4">
               <h3 className="text-lg font-medium">simple.sales</h3>
               <p className="text-gray-300 leading-relaxed">
@@ -574,7 +574,17 @@ export default function ClientPage() {
               </div>
             </div>
 
-            {/* Colonne 3 : Légal */}
+            {/* Colonne 3 : Les Ressources */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium">Les Ressources</h3>
+              <div className="space-y-2">
+                <a href="/nos-guides" className="block text-gray-300 hover:text-white transition-colors">
+                  Nos guides
+                </a>
+              </div>
+            </div>
+
+            {/* Colonne 4 : Légal */}
             <div className="space-y-4">
               <h3 className="text-lg font-medium">Légal</h3>
               <div className="space-y-2">
