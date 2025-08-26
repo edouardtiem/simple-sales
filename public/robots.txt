@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://simplesales.fr/sitemap.xml
+Sitemap: https://simple-sales.fr/sitemap.xml

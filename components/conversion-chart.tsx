@@ -12,11 +12,9 @@ export default function ConversionChart() {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    // Délai avant l'apparition du graphique
     const timer = setTimeout(() => {
       setIsVisible(true)
-    }, 1000) // 1 seconde de délai
-
+    }, 1000)
     return () => clearTimeout(timer)
   }, [])
 
@@ -26,7 +24,6 @@ export default function ConversionChart() {
     const ctx = chartRef.current.getContext("2d")
     if (!ctx) return
 
-    // Destroy existing chart if it exists
     if (chartInstance.current) {
       chartInstance.current.destroy()
     }
@@ -69,33 +66,22 @@ export default function ConversionChart() {
           duration: 2000,
           easing: "easeInOutQuart",
         },
+        layout: {
+          padding: {
+            bottom: 20, // Crucial: reserves space within the canvas for labels
+          },
+        },
         plugins: {
           legend: {
-            display: false, // On désactive la légende par défaut
+            display: false,
           },
           tooltip: {
             callbacks: {
-              title: () => "", // Pas de titre
-              label: (context) => {
-                const value = context.parsed.y
-                return `${value}%`
-              },
-              labelColor: (context) => {
-                // Couleur du texte selon le dataset
-                const color = context.dataset.borderColor as string
-                return {
-                  borderColor: "transparent",
-                  backgroundColor: "transparent",
-                  borderWidth: 0,
-                }
-              },
+              title: () => "",
+              label: (context) => `${context.parsed.y}%`,
             },
-            displayColors: false, // Pas de carré coloré
-            backgroundColor: (context) => {
-              // Couleur de fond du tooltip selon le dataset
-              const datasetIndex = context.tooltip.dataPoints[0]?.datasetIndex
-              return datasetIndex === 0 ? "#ef4444" : "#22c55e"
-            },
+            displayColors: false,
+            backgroundColor: (context) => (context.tooltip.dataPoints[0]?.datasetIndex === 0 ? "#ef4444" : "#22c55e"),
             titleColor: "#ffffff",
             bodyColor: "#ffffff",
             borderWidth: 0,
@@ -109,7 +95,6 @@ export default function ConversionChart() {
           },
           annotation: {
             annotations: {
-              // Zone "avant" grisée
               beforeZone: {
                 type: "box",
                 xMin: -0.5,
@@ -120,7 +105,6 @@ export default function ConversionChart() {
                 borderWidth: 0,
                 z: -1,
               },
-              // Zone "après" verdâtre
               afterZone: {
                 type: "box",
                 xMin: 2.5,
@@ -131,7 +115,6 @@ export default function ConversionChart() {
                 borderWidth: 0,
                 z: -1,
               },
-              // Ligne d'intervention
               line1: {
                 type: "line",
                 xMin: 3,
@@ -152,7 +135,6 @@ export default function ConversionChart() {
                     size: 11,
                     weight: "bold",
                   },
-                  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
                 },
               },
             },
@@ -164,7 +146,7 @@ export default function ConversionChart() {
             max: 30,
             ticks: {
               stepSize: 5,
-              callback: (value) => value + "%",
+              callback: (value) => `${value}%`,
               font: {
                 family: "var(--font-jetbrains-mono)",
                 size: 11,
@@ -204,42 +186,38 @@ export default function ConversionChart() {
   }, [isVisible])
 
   return (
-    <section className="container mx-auto px-4 py-4 md:py-6">
-      <div className="mx-auto max-w-6xl">
-        {/* Fenêtre de navigateur avec ombre portée */}
+    <section className="container mx-auto px-4 py-7 md:py-10">
+      <div className="mx-auto max-w-4xl">
         <div
           className={`browser-window bg-white rounded-lg overflow-hidden mx-auto shadow-2xl transition-all duration-[2400ms] ease-out ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          {/* Barre de navigateur */}
           <div className="browser-header bg-gray-100 px-4 py-3 flex items-center justify-between border-b border-gray-200">
             <div className="flex items-center space-x-2">
-              <div className="flex space-x-2">
-                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              </div>
+              <div className="w-3 h-3 bg-red-500 rounded-full" />
+              <div className="w-3 h-3 bg-yellow-500 rounded-full" />
+              <div className="w-3 h-3 bg-green-500 rounded-full" />
             </div>
             <div className="flex-1 mx-4">
-              <div className="bg-white rounded-md px-3 py-1 text-sm text-gray-600 font-mono text-center">
+              <div className="address-bar bg-white rounded-md px-3 py-1 text-sm text-gray-600 font-mono text-center">
                 dashboard.simplesales.fr/client
               </div>
             </div>
-            <div className="w-16"></div>
+            <div className="w-16" />
           </div>
 
-          {/* Contenu du navigateur avec padding augmenté */}
-          <div className="browser-content px-8 py-10 bg-white">
-            <div className="mb-4 text-center">
-              <h3 className="text-xl md:text-2xl font-medium mb-2">La Stagnation est un Scénario, pas une Fatalité.</h3>
-              <p className="text-sm text-gray-600">
+          <div className="browser-content p-4 md:p-6">
+            <div className="text-center mb-4">
+              <h3 className="text-xs md:text-base lg:text-lg font-medium leading-tight">
+                La Stagnation est un Scénario, pas une Fatalité.
+              </h3>
+              <p className="hidden md:block text-xs text-gray-600 leading-tight mt-2">
                 Une illustration basée sur notre analyse de la performance des équipes commerciales B2B
               </p>
             </div>
-
-            <div className="h-96 relative">
-              <canvas ref={chartRef} className="w-full h-full"></canvas>
+            <div className="chart-wrapper">
+              <canvas ref={chartRef} />
             </div>
           </div>
         </div>
@@ -247,15 +225,27 @@ export default function ConversionChart() {
 
       <style jsx>{`
         .browser-window {
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.05);
+          width: 100%;
+          max-width: 800px;
         }
-
-        @media (max-width: 768px) {
-          .browser-header {
-            padding: 8px 12px;
+        .chart-wrapper {
+          position: relative;
+          height: 34vh;
+          max-height: 300px;
+          min-height: 210px;
+        }
+        
+        @media (max-width: 767px) {
+          .chart-wrapper {
+            min-height: 170px;
+            height: 30vh;
           }
-          .browser-content {
-            padding: 20px 16px;
+          h3 {
+            font-size: 0.75rem;
+          }
+          .address-bar {
+            font-size: 8px;
+            padding: 4px 6px;
           }
         }
       `}</style>

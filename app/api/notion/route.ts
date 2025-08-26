@@ -44,27 +44,72 @@ export async function POST(request: NextRequest) {
     })
 
     const formData = await request.json()
-    console.log("📝 Données reçues pour:", formData.companyName || "Entreprise inconnue")
+    console.log("📝 Données reçues pour:", formData.firstName || "Contact inconnu")
 
-    // Créer une page dans la database avec tout le contenu dans le corps de la page
+    // Fonction pour formater les labels des réponses
+    const formatLabel = (field: string, value: string) => {
+      const labels: { [key: string]: { [key: string]: string } } = {
+        function: {
+          "ceo-fondateur": "CEO / Fondateur",
+          "directeur-commercial": "Directeur Commercial",
+          "manager-commercial": "Manager Commercial",
+          autre: "Autre",
+        },
+        sector: {
+          "services-b2b": "Services B2B (Conseil, Agence...)",
+          "produits-b2b": "Produits B2B (Distribution...)",
+          "saas-logiciel": "SaaS / Logiciel",
+          industrie: "Industrie",
+          autre: "Autre",
+        },
+        teamSize: {
+          seul: "Je suis seul(e)",
+          "2-5": "2 à 5 personnes",
+          "6-15": "6 à 15 personnes",
+          "15+": "Plus de 15 personnes",
+        },
+        averageBasket: {
+          "moins-5k": "Moins de 5 000€",
+          "5k-15k": "5 000€ à 15 000€",
+          "15k-50k": "15 000€ à 50 000€",
+          "plus-50k": "Plus de 50 000€",
+        },
+        cycleDuration: {
+          "moins-30j": "Moins de 30 jours",
+          "1-3-mois": "1 à 3 mois",
+          "3-6-mois": "3 à 6 mois",
+          "plus-6-mois": "Plus de 6 mois",
+        },
+        currentSymptom: {
+          "previsions-instinct": "Pilotage des prévisions à l'instinct",
+          "deals-bloques": "Deals qui se bloquent au dernier moment",
+          "crm-subi": "CRM subi plutôt qu'utilisé comme arme de croissance",
+          "formation-inutile": "Formations coûteuses sans impact terrain",
+          "dependance-heros": 'Dépendance à un ou deux "héros" commerciaux',
+          "message-dilue": "Message commercial dilué et incohérent",
+        },
+      }
+      return labels[field]?.[value] || value
+    }
+
+    // Créer une page dans la database avec le nouveau format
     const response = await notion.pages.create({
       parent: {
         database_id: cleanDatabaseId,
       },
       properties: {
-        // Seul le titre est nécessaire (nom de la colonne peut varier)
         title: {
           title: [
             {
               text: {
-                content: `Audit ${formData.companyName || "Entreprise"} - ${new Date().toLocaleDateString("fr-FR")}`,
+                content: `Audit ${formData.firstName} ${formData.lastName} - ${new Date().toLocaleDateString("fr-FR")}`,
               },
             },
           ],
         },
       },
       children: [
-        // En-tête
+        // En-tête principal
         {
           object: "block",
           type: "heading_1",
@@ -73,7 +118,7 @@ export async function POST(request: NextRequest) {
               {
                 type: "text",
                 text: {
-                  content: "🎯 AUDIT COMMERCIAL EXPRESS",
+                  content: "🎯 AUDIT COMMERCIAL SIMPLE.SALES",
                 },
               },
             ],
@@ -87,49 +132,7 @@ export async function POST(request: NextRequest) {
               {
                 type: "text",
                 text: {
-                  content: `Entreprise: ${formData.companyName || "Non renseigné"}`,
-                },
-              },
-            ],
-          },
-        },
-        {
-          object: "block",
-          type: "paragraph",
-          paragraph: {
-            rich_text: [
-              {
-                type: "text",
-                text: {
-                  content: `Site web: ${formData.companyWebsite || "Non renseigné"}`,
-                },
-              },
-            ],
-          },
-        },
-        {
-          object: "block",
-          type: "paragraph",
-          paragraph: {
-            rich_text: [
-              {
-                type: "text",
-                text: {
-                  content: `Contact: ${formData.firstName || ""} ${formData.lastName || ""} - ${formData.email || ""}`,
-                },
-              },
-            ],
-          },
-        },
-        {
-          object: "block",
-          type: "paragraph",
-          paragraph: {
-            rich_text: [
-              {
-                type: "text",
-                text: {
-                  content: `Date: ${new Date().toLocaleString("fr-FR")}`,
+                  content: `Date de soumission : ${new Date().toLocaleString("fr-FR")}`,
                 },
               },
             ],
@@ -139,252 +142,6 @@ export async function POST(request: NextRequest) {
           object: "block",
           type: "divider",
           divider: {},
-        },
-
-        // Section Entreprise
-        {
-          object: "block",
-          type: "heading_2",
-          heading_2: {
-            rich_text: [
-              {
-                type: "text",
-                text: {
-                  content: "🏢 PROFIL ENTREPRISE",
-                },
-              },
-            ],
-          },
-        },
-        {
-          object: "block",
-          type: "bulleted_list_item",
-          bulleted_list_item: {
-            rich_text: [
-              {
-                type: "text",
-                text: {
-                  content: `Entreprise: ${formData.companyName || "Non renseigné"}`,
-                },
-              },
-            ],
-          },
-        },
-        {
-          object: "block",
-          type: "bulleted_list_item",
-          bulleted_list_item: {
-            rich_text: [
-              {
-                type: "text",
-                text: {
-                  content: `Site web: ${formData.companyWebsite || "Non renseigné"}`,
-                },
-              },
-            ],
-          },
-        },
-        {
-          object: "block",
-          type: "bulleted_list_item",
-          bulleted_list_item: {
-            rich_text: [
-              {
-                type: "text",
-                text: {
-                  content: `Fonction: ${formData.function || "Non renseigné"}${formData.functionOther ? ` (${formData.functionOther})` : ""}`,
-                },
-              },
-            ],
-          },
-        },
-        {
-          object: "block",
-          type: "bulleted_list_item",
-          bulleted_list_item: {
-            rich_text: [
-              {
-                type: "text",
-                text: {
-                  content: `Secteur: ${formData.sector || "Non renseigné"}${formData.sectorOther ? ` (${formData.sectorOther})` : ""}`,
-                },
-              },
-            ],
-          },
-        },
-        {
-          object: "block",
-          type: "bulleted_list_item",
-          bulleted_list_item: {
-            rich_text: [
-              {
-                type: "text",
-                text: {
-                  content: `Taille équipe: ${formData.teamSize || "Non renseigné"}`,
-                },
-              },
-            ],
-          },
-        },
-
-        // Section Économique
-        {
-          object: "block",
-          type: "heading_2",
-          heading_2: {
-            rich_text: [
-              {
-                type: "text",
-                text: {
-                  content: "💰 ANALYSE ÉCONOMIQUE",
-                },
-              },
-            ],
-          },
-        },
-        {
-          object: "block",
-          type: "bulleted_list_item",
-          bulleted_list_item: {
-            rich_text: [
-              {
-                type: "text",
-                text: {
-                  content: `Panier moyen: ${formData.averageBasket || "Non renseigné"}`,
-                },
-              },
-            ],
-          },
-        },
-        {
-          object: "block",
-          type: "bulleted_list_item",
-          bulleted_list_item: {
-            rich_text: [
-              {
-                type: "text",
-                text: {
-                  content: `CA annuel: ${formData.annualRevenue || "Non renseigné"}`,
-                },
-              },
-            ],
-          },
-        },
-
-        // Section Activité
-        {
-          object: "block",
-          type: "heading_2",
-          heading_2: {
-            rich_text: [
-              {
-                type: "text",
-                text: {
-                  content: "📊 DIAGNOSTIC ACTIVITÉ",
-                },
-              },
-            ],
-          },
-        },
-        {
-          object: "block",
-          type: "bulleted_list_item",
-          bulleted_list_item: {
-            rich_text: [
-              {
-                type: "text",
-                text: {
-                  content: `RDV/semaine: ${formData.weeklyMeetings || "Non renseigné"}`,
-                },
-              },
-            ],
-          },
-        },
-        {
-          object: "block",
-          type: "bulleted_list_item",
-          bulleted_list_item: {
-            rich_text: [
-              {
-                type: "text",
-                text: {
-                  content: `Propositions/semaine: ${formData.weeklyProposals || "Non renseigné"}`,
-                },
-              },
-            ],
-          },
-        },
-        {
-          object: "block",
-          type: "bulleted_list_item",
-          bulleted_list_item: {
-            rich_text: [
-              {
-                type: "text",
-                text: {
-                  content: `Durée cycle: ${formData.averageCycleDuration || "Non renseigné"}`,
-                },
-              },
-            ],
-          },
-        },
-
-        // Section Performance
-        {
-          object: "block",
-          type: "heading_2",
-          heading_2: {
-            rich_text: [
-              {
-                type: "text",
-                text: {
-                  content: "🎯 ANALYSE CONVERSION",
-                },
-              },
-            ],
-          },
-        },
-        {
-          object: "block",
-          type: "bulleted_list_item",
-          bulleted_list_item: {
-            rich_text: [
-              {
-                type: "text",
-                text: {
-                  content: `Taux RDV → Proposition: ${formData.meetingToProposalRate || "Non renseigné"}`,
-                },
-              },
-            ],
-          },
-        },
-        {
-          object: "block",
-          type: "bulleted_list_item",
-          bulleted_list_item: {
-            rich_text: [
-              {
-                type: "text",
-                text: {
-                  content: `Taux Proposition → Signature: ${formData.proposalToSignatureRate || "Non renseigné"}`,
-                },
-              },
-            ],
-          },
-        },
-        {
-          object: "block",
-          type: "bulleted_list_item",
-          bulleted_list_item: {
-            rich_text: [
-              {
-                type: "text",
-                text: {
-                  content: `Évolution performance: ${formData.performanceEvolution || "Non renseigné"}`,
-                },
-              },
-            ],
-          },
         },
 
         // Section Contact
@@ -396,7 +153,7 @@ export async function POST(request: NextRequest) {
               {
                 type: "text",
                 text: {
-                  content: "📞 CONTACT",
+                  content: "👤 INFORMATIONS CONTACT",
                 },
               },
             ],
@@ -404,13 +161,16 @@ export async function POST(request: NextRequest) {
         },
         {
           object: "block",
-          type: "bulleted_list_item",
-          bulleted_list_item: {
+          type: "paragraph",
+          paragraph: {
             rich_text: [
               {
                 type: "text",
                 text: {
-                  content: `Nom: ${formData.firstName || ""} ${formData.lastName || ""}`,
+                  content: `Nom complet : ${formData.firstName || ""} ${formData.lastName || ""}`,
+                },
+                annotations: {
+                  bold: true,
                 },
               },
             ],
@@ -418,13 +178,13 @@ export async function POST(request: NextRequest) {
         },
         {
           object: "block",
-          type: "bulleted_list_item",
-          bulleted_list_item: {
+          type: "paragraph",
+          paragraph: {
             rich_text: [
               {
                 type: "text",
                 text: {
-                  content: `Email: ${formData.email || "Non renseigné"}`,
+                  content: `Email : ${formData.email || "Non renseigné"}`,
                 },
               },
             ],
@@ -432,20 +192,328 @@ export async function POST(request: NextRequest) {
         },
         {
           object: "block",
-          type: "bulleted_list_item",
-          bulleted_list_item: {
+          type: "paragraph",
+          paragraph: {
             rich_text: [
               {
                 type: "text",
                 text: {
-                  content: `Téléphone: ${formData.phone || "Non renseigné"}`,
+                  content: `Téléphone : ${formData.phone || "Non renseigné"}`,
                 },
               },
             ],
           },
         },
 
-        // Métadonnées
+        // Section Profil Professionnel
+        {
+          object: "block",
+          type: "heading_2",
+          heading_2: {
+            rich_text: [
+              {
+                type: "text",
+                text: {
+                  content: "💼 PROFIL PROFESSIONNEL",
+                },
+              },
+            ],
+          },
+        },
+        {
+          object: "block",
+          type: "paragraph",
+          paragraph: {
+            rich_text: [
+              {
+                type: "text",
+                text: {
+                  content: `Fonction : ${formatLabel("function", formData.function) || "Non renseigné"}`,
+                },
+              },
+            ],
+          },
+        },
+        {
+          object: "block",
+          type: "paragraph",
+          paragraph: {
+            rich_text: [
+              {
+                type: "text",
+                text: {
+                  content: `Secteur d'activité : ${formatLabel("sector", formData.sector) || "Non renseigné"}`,
+                },
+              },
+            ],
+          },
+        },
+        {
+          object: "block",
+          type: "paragraph",
+          paragraph: {
+            rich_text: [
+              {
+                type: "text",
+                text: {
+                  content: `Taille de l'équipe commerciale : ${formatLabel("teamSize", formData.teamSize) || "Non renseigné"}`,
+                },
+              },
+            ],
+          },
+        },
+
+        // Section Données Économiques
+        {
+          object: "block",
+          type: "heading_2",
+          heading_2: {
+            rich_text: [
+              {
+                type: "text",
+                text: {
+                  content: "💰 DONNÉES ÉCONOMIQUES",
+                },
+              },
+            ],
+          },
+        },
+        {
+          object: "block",
+          type: "paragraph",
+          paragraph: {
+            rich_text: [
+              {
+                type: "text",
+                text: {
+                  content: `Panier moyen client : ${formatLabel("averageBasket", formData.averageBasket) || "Non renseigné"}`,
+                },
+              },
+            ],
+          },
+        },
+
+        // Section Métriques d'Activité
+        {
+          object: "block",
+          type: "heading_2",
+          heading_2: {
+            rich_text: [
+              {
+                type: "text",
+                text: {
+                  content: "📊 MÉTRIQUES D'ACTIVITÉ COMMERCIALE",
+                },
+              },
+            ],
+          },
+        },
+        {
+          object: "block",
+          type: "paragraph",
+          paragraph: {
+            rich_text: [
+              {
+                type: "text",
+                text: {
+                  content: `Rendez-vous qualifiés par semaine : ${formData.weeklyMeetings || "Non renseigné"}`,
+                },
+              },
+            ],
+          },
+        },
+        {
+          object: "block",
+          type: "paragraph",
+          paragraph: {
+            rich_text: [
+              {
+                type: "text",
+                text: {
+                  content: `Propositions commerciales par semaine : ${formData.weeklyProposals || "Non renseigné"}`,
+                },
+              },
+            ],
+          },
+        },
+        {
+          object: "block",
+          type: "paragraph",
+          paragraph: {
+            rich_text: [
+              {
+                type: "text",
+                text: {
+                  content: `Nouveaux contrats signés par semaine : ${formData.weeklyContracts || "Non renseigné"}`,
+                },
+              },
+            ],
+          },
+        },
+        {
+          object: "block",
+          type: "paragraph",
+          paragraph: {
+            rich_text: [
+              {
+                type: "text",
+                text: {
+                  content: `Durée moyenne du cycle de vente : ${formatLabel("cycleDuration", formData.cycleDuration) || "Non renseigné"}`,
+                },
+              },
+            ],
+          },
+        },
+
+        // Section Diagnostic Qualitatif
+        {
+          object: "block",
+          type: "heading_2",
+          heading_2: {
+            rich_text: [
+              {
+                type: "text",
+                text: {
+                  content: "🔍 DIAGNOSTIC QUALITATIF",
+                },
+              },
+            ],
+          },
+        },
+        {
+          object: "block",
+          type: "paragraph",
+          paragraph: {
+            rich_text: [
+              {
+                type: "text",
+                text: {
+                  content: "Symptôme principal identifié :",
+                },
+                annotations: {
+                  bold: true,
+                },
+              },
+            ],
+          },
+        },
+        {
+          object: "block",
+          type: "paragraph",
+          paragraph: {
+            rich_text: [
+              {
+                type: "text",
+                text: {
+                  content: formatLabel("currentSymptom", formData.currentSymptom) || "Non renseigné",
+                },
+                annotations: {
+                  italic: true,
+                },
+              },
+            ],
+          },
+        },
+        {
+          object: "block",
+          type: "paragraph",
+          paragraph: {
+            rich_text: [
+              {
+                type: "text",
+                text: {
+                  content: "Impact décrit par le prospect :",
+                },
+                annotations: {
+                  bold: true,
+                },
+              },
+            ],
+          },
+        },
+        {
+          object: "block",
+          type: "quote",
+          quote: {
+            rich_text: [
+              {
+                type: "text",
+                text: {
+                  content: formData.symptomImpact || "Aucun impact décrit",
+                },
+              },
+            ],
+          },
+        },
+
+        // Section Suivi
+        {
+          object: "block",
+          type: "heading_2",
+          heading_2: {
+            rich_text: [
+              {
+                type: "text",
+                text: {
+                  content: "📋 SUIVI ET ACTIONS",
+                },
+              },
+            ],
+          },
+        },
+        {
+          object: "block",
+          type: "paragraph",
+          paragraph: {
+            rich_text: [
+              {
+                type: "text",
+                text: {
+                  content: `Choix du prospect : ${formData.finalChoice === "rdv" ? "🗓️ Rendez-vous demandé" : "📧 Audit par email uniquement"}`,
+                },
+                annotations: {
+                  bold: true,
+                },
+              },
+            ],
+          },
+        },
+        {
+          object: "block",
+          type: "to_do",
+          to_do: {
+            rich_text: [
+              {
+                type: "text",
+                text: {
+                  content: "Envoyer l'audit personnalisé par email",
+                },
+              },
+            ],
+            checked: false,
+          },
+        },
+        ...(formData.finalChoice === "rdv"
+          ? [
+              {
+                object: "block" as const,
+                type: "to_do" as const,
+                to_do: {
+                  rich_text: [
+                    {
+                      type: "text" as const,
+                      text: {
+                        content: "Préparer le rendez-vous de diagnostic approfondi",
+                      },
+                    },
+                  ],
+                  checked: false,
+                },
+              },
+            ]
+          : []),
+
+        // Métadonnées techniques
         {
           object: "block",
           type: "divider",
@@ -459,7 +527,10 @@ export async function POST(request: NextRequest) {
               {
                 type: "text",
                 text: {
-                  content: `Choix final: ${formData.finalChoice || "Non renseigné"}`,
+                  content: `ID de soumission : ${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+                },
+                annotations: {
+                  code: true,
                 },
               },
             ],

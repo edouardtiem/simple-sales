@@ -1,8 +1,8 @@
 "use client"
 
 import { JetBrains_Mono } from "next/font/google"
+import Link from "next/link"
 
-// Font
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
@@ -11,138 +11,145 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export default function MentionsLegalesPage() {
+  const currentDate = new Date()
+  const targetDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 2)
+  const monthNames = [
+    "janvier",
+    "février",
+    "mars",
+    "avril",
+    "mai",
+    "juin",
+    "juillet",
+    "août",
+    "septembre",
+    "octobre",
+    "novembre",
+    "décembre",
+  ]
+  const dynamicDate = `${monthNames[targetDate.getMonth()]} ${targetDate.getFullYear()}`
+
   return (
-    <div className={`${jetbrainsMono.variable} min-h-screen bg-[#f5f1eb] text-[#1a1a1a] font-mono`}>
+    <main className={`${jetbrainsMono.variable} min-h-screen bg-[#f5f1eb] text-[#1a1a1a] font-mono`}>
       {/* Header */}
-      <div className="border-b border-gray-200 bg-[#f5f1eb] px-4 py-6">
+      <div className="fixed top-0 left-0 right-0 z-10 bg-[#f5f1eb] px-4 py-4 border-b border-gray-200">
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
-            <a href="/" className="text-sm text-[#1a1a1a] hover:opacity-70 transition-opacity">
+            <Link href="/" className="text-sm font-mono text-[#1a1a1a] hover:opacity-70 transition-opacity">
               simple.sales
-            </a>
+            </Link>
+            <Link
+              href="/" // Lien vers page principale au lieu du footer
+              className="text-sm font-mono text-[#1a1a1a] hover:opacity-70 transition-opacity border border-gray-300 px-3 py-1 rounded"
+            >
+              ← Précédent
+            </Link>
           </div>
         </div>
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="mx-auto max-w-4xl">
-          <h1 className="text-3xl font-medium mb-8">Mentions légales</h1>
+      <div className="container mx-auto px-4 py-24 pt-32">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-3xl font-medium mb-8">Mentions Légales</h1>
 
-          <div className="space-y-8 text-base leading-relaxed">
-            <p>
-              Conformément aux dispositions des articles 6-III et 19 de la Loi n°2004-575 du 21 juin 2004 pour la
-              confiance dans l'économie numérique, il est porté à la connaissance des utilisateurs du site les présentes
-              mentions légales.
-            </p>
-
+          <div className="space-y-8 text-gray-700 leading-relaxed">
             <section>
-              <h2 className="text-xl font-medium mb-4">1. Éditeur du site</h2>
-              <div className="space-y-2">
-                <p>
-                  <strong>Nom :</strong> Edouard Tiem
-                </p>
-                <p>
-                  <strong>Statut juridique :</strong> SASU
-                </p>
-                <p>
-                  <strong>SIRET :</strong> 850 365 701 00026
-                </p>
-                <p>
-                  <strong>Adresse :</strong> 22 Place de l'Ancienne Boucherie
-                </p>
-                <p>
-                  <strong>Email :</strong>{" "}
-                  <a href="mailto:edouard@tiemh.com" className="text-blue-600 hover:underline">
-                    edouard@tiemh.com
-                  </a>
-                </p>
-                <p>
-                  <strong>Responsable de publication :</strong> Edouard Tiem
-                </p>
-              </div>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-medium mb-4">2. Hébergeur</h2>
-              <div className="space-y-2">
-                <p>
-                  <strong>Hébergeur :</strong> Vercel Inc.
-                </p>
-                <p>
-                  <strong>Site web :</strong>{" "}
-                  <a
-                    href="https://vercel.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 hover:underline"
-                  >
-                    https://vercel.com
-                  </a>
-                </p>
-              </div>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-medium mb-4">3. Propriété intellectuelle</h2>
+              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Éditeur du site</h2>
               <p>
-                L'ensemble du contenu du site (textes, images, graphismes, logo, vidéos, etc.) est la propriété
-                exclusive d'Edouard Tiem, sauf mentions contraires.
-              </p>
-              <p className="mt-2">
-                Toute reproduction, représentation, modification, publication ou adaptation, totale ou partielle, de ces
-                éléments est interdite sans autorisation écrite préalable.
+                <strong>Raison sociale :</strong> ETH
+                <br />
+                <strong>Forme juridique :</strong> SASU
+                <br />
+                <strong>Adresse :</strong> 22 Place de l'ancienne boucherie, 14000, Caen
+                <br />
+                <strong>Téléphone :</strong> +33 6 33 24 16 59
+                <br />
+                <strong>Email :</strong> edouard@tiemh.com
+                <br />
+                <strong>Directeur de la publication :</strong> Edouard Tiem
               </p>
             </section>
 
             <section>
-              <h2 className="text-xl font-medium mb-4">4. Limitation de responsabilité</h2>
+              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Hébergement</h2>
               <p>
-                Le contenu du site est fourni à titre informatif. Bien que les informations soient mises à jour
-                régulièrement, Edouard Tiem ne peut être tenu responsable d'inexactitudes, d'erreurs ou d'omissions.
+                <strong>Hébergeur :</strong> Vercel Inc.
+                <br />
+                <strong>Adresse :</strong> 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis
+                <br />
+                <strong>Site web :</strong>{" "}
+                <a href="https://vercel.com" className="text-blue-600 hover:underline">
+                  https://vercel.com
+                </a>
               </p>
             </section>
 
             <section>
-              <h2 className="text-xl font-medium mb-4">5. Données personnelles</h2>
-              <div className="space-y-2">
-                <p>
-                  Les données collectées via les formulaires sont destinées uniquement à l'usage professionnel d'Edouard
-                  Tiem. Elles ne sont ni vendues ni cédées à des tiers.
-                </p>
-                <p>
-                  Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit
-                  d'accès, de rectification, de suppression et d'opposition.
-                </p>
-                <p>
-                  Pour l'exercer, envoyez un email à :{" "}
-                  <a href="mailto:edouard@tiemh.com" className="text-blue-600 hover:underline">
-                    edouard@tiemh.com
-                  </a>
-                </p>
-              </div>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-medium mb-4">6. Cookies</h2>
+              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Propriété intellectuelle</h2>
               <p>
-                Le site peut utiliser des cookies pour mesurer l'audience ou améliorer l'expérience utilisateur. Vous
-                pouvez configurer votre navigateur pour les refuser.
+                L'ensemble de ce site relève de la législation française et internationale sur le droit d'auteur et la
+                propriété intellectuelle. Tous les droits de reproduction sont réservés, y compris pour les documents
+                téléchargeables et les représentations iconographiques et photographiques.
+              </p>
+              <p className="mt-4">
+                La reproduction de tout ou partie de ce site sur un support électronique quel qu'il soit est
+                formellement interdite sauf autorisation expresse du directeur de la publication.
               </p>
             </section>
+
+            <section>
+              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Responsabilité</h2>
+              <p>
+                Les informations contenues sur ce site sont aussi précises que possible et le site remis à jour à
+                différentes périodes de l'année, mais peut toutefois contenir des inexactitudes ou des omissions.
+              </p>
+              <p className="mt-4">
+                Si vous constatez une lacune, erreur ou ce qui parait être un dysfonctionnement, merci de bien vouloir
+                le signaler par email, à l'adresse contact@simple-sales.fr, en décrivant le problème de la manière la
+                plus précise possible.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Liens hypertextes</h2>
+              <p>
+                Les sites internet peuvent offrir des liens vers d'autres sites internet ou d'autres ressources
+                disponibles sur Internet. Simple Sales ne dispose d'aucun moyen pour contrôler les sites en connexion
+                avec ses sites internet.
+              </p>
+              <p className="mt-4">
+                Simple Sales ne répond pas de la disponibilité de tels sites et sources externes, ni ne la garantit.
+                Elle ne peut être tenue pour responsable de tout dommage, de quelque nature que ce soit, résultant du
+                contenu de ces sites ou sources externes.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-medium mb-4 text-[#1a1a1a]">Droit applicable</h2>
+              <p>
+                Tant le présent site que les modalités et conditions de son utilisation sont régis par le droit
+                français, quel que soit le lieu d'utilisation. En cas de contestation éventuelle, et après l'échec de
+                toute tentative de recherche d'une solution amiable, les tribunaux français seront seuls compétents pour
+                connaître de ce litige.
+              </p>
+            </section>
+
+            <div className="pt-8 border-t border-gray-300">
+              <p className="text-sm text-gray-600">Dernière mise à jour : {dynamicDate}</p>
+            </div>
           </div>
 
-          {/* Back to home */}
-          <div className="mt-12 pt-8 border-t border-gray-200">
-            <a
-              href="/"
-              className="inline-flex items-center text-sm text-gray-600 hover:text-[#1a1a1a] transition-colors"
+          <div className="mt-8 text-center">
+            <Link
+              href="/" // Lien vers page principale au lieu du footer
+              className="inline-block text-sm font-mono text-[#1a1a1a] hover:opacity-70 transition-opacity border border-gray-300 px-4 py-2 rounded"
             >
-              ← Retour à l'accueil
-            </a>
+              ← Retour à la page principale
+            </Link>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   )
 }
