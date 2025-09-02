@@ -113,6 +113,22 @@ La méthode est simple, mais le premier pas est souvent le plus intimidant. Entr
     ],
   }
 
+  const nextGuide = {
+    title: "Recruter un Commercial d'Élite",
+    url: "/nos-guides/recruter-commercial-elite",
+    description: "Découvrez notre guide sur le recrutement des commerciaux qui sauront appliquer votre méthode.",
+    category: "Recrutement",
+  }
+
+  const relatedGuides = [
+    {
+      title: "Recruter un Commercial d'Élite",
+      url: "/nos-guides/recruter-commercial-elite",
+      description: "Découvrez notre guide sur le recrutement des commerciaux qui sauront appliquer votre méthode.",
+      category: "Recrutement",
+    },
+  ]
+
   return (
     <GuideTemplate
       category="PROCESSUS COMMERCIAL"
@@ -124,6 +140,9 @@ La méthode est simple, mais le premier pas est souvent le plus intimidant. Entr
       practicalAction={guideContent.practicalAction}
       conclusion={guideContent.conclusion}
       faq={guideContent.faq}
+      guideId="processus-commercial"
+      nextGuide={nextGuide}
+      relatedGuides={relatedGuides}
     />
   )
 }

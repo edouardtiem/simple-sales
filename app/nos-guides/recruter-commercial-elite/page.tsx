@@ -140,14 +140,12 @@ Cette grille sera votre boussole pour tous vos futurs entretiens.`,
 
 Le jeu de vente est votre détecteur de mensonges ultime. En 10 minutes, il révèle si le candidat a les réflexes de qualification, d'écoute et d'adaptation qui font la différence entre un vendeur moyen et un commercial d'élite.
 
-La différence entre une PME qui stagne et une PME qui décolle ? Souvent, c'est la qualité de son équipe commerciale. Et la qualité de votre équipe commerciale dépend entièrement de la qualité de votre processus de recrutement.
-
-La méthode est simple, mais le premier pas est souvent le plus intimidant. Entre la pression du quotidien et l'urgence de recruter, il est facile de retomber dans les vieux réflexes. C'est précisément pourquoi je propose mon Diagnostic Stratégique offert : 45 minutes pour analyser votre situation actuelle et identifier les leviers prioritaires pour transformer votre approche du recrutement commercial.`,
+La différence entre une PME qui stagne et une PME qui décolle ? Souvent, c'est la qualité de son équipe commerciale. Et la qualité de votre équipe commerciale dépend entièrement de la qualité de votre processus de recrutement commercial.`,
     faq: [
       {
         question: "Cette méthode ne va-t-elle pas rallonger mon processus de recrutement ?",
         answer:
-          "Au contraire. Un processus structuré vous fait gagner du temps en éliminant plus vite les mauvais profils et en sécurisant vos décisions. Le jeu de vente à lui seul vous évite des mois d'erreurs : en 10 minutes, vous savez si le candidat a les bons réflexes. Mieux vaut 3 semaines de recrutement rigoureux que 6 mois à gérer un commercial qui ne performe pas.",
+          "Au contraire. Un processus structuré vous fait gagner du temps en éliminant plus vite les mauvais profils et en sécurisant vos décisions. Le jeu de vente à lui seul vous fait gagner des mois d'erreurs : en 10 minutes, vous savez si le candidat a les bons réflexes. Mieux vaut 3 semaines de recrutement rigoureux que 6 mois à gérer un commercial qui ne performe pas.",
       },
       {
         question: "Le jeu de vente ne risque-t-il pas de stresser ou braquer certains candidats ?",
@@ -167,5 +165,24 @@ La méthode est simple, mais le premier pas est souvent le plus intimidant. Entr
     ],
   }
 
-  return <GuideTemplate {...guideData} />
+  const nextGuide = undefined // No next guide yet, will be added when more guides are created
+
+  const relatedGuides = [
+    {
+      title: "Réparer Votre Processus Commercial",
+      url: "/nos-guides/processus-commercial",
+      description:
+        "Un commercial d'élite a besoin d'un processus solide pour performer. Apprenez à structurer votre approche commerciale.",
+      category: "Processus",
+    },
+  ]
+
+  return (
+    <GuideTemplate
+      {...guideData}
+      guideId="recruter-commercial-elite"
+      nextGuide={nextGuide}
+      relatedGuides={relatedGuides}
+    />
+  )
 }
