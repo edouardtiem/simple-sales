@@ -43,6 +43,7 @@
     "react": "^19",
     "react-dom": "^19",
     "react-dropzone": "latest",
+    "recharts": "latest",
     "svelte": "latest",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",

@@ -7,6 +7,9 @@ import { Progress } from "@/components/ui/progress"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Upload, FileSpreadsheet, AlertCircle, CheckCircle2 } from "lucide-react"
 import { useDropzone } from "react-dropzone"
+import MappingStep from "@/components/forecaster/MappingStep"
+import AnalysisDashboard from "@/components/forecaster/AnalysisDashboard"
+import { analyzeDeals } from "@/lib/analysis-engine"
 
 interface FileUploadState {
   file: File | null
@@ -16,7 +19,16 @@ interface FileUploadState {
   success: boolean
 }
 
+interface ParsedData {
+  headers: string[]
+  data: any[]
+  totalRows: number
+}
+
+type Step = "upload" | "mapping" | "analysis"
+
 export default function ForecasterPage() {
+  const [currentStep, setCurrentStep] = useState<Step>("upload")
   const [uploadState, setUploadState] = useState<FileUploadState>({
     file: null,
     uploading: false,
@@ -24,6 +36,9 @@ export default function ForecasterPage() {
     error: null,
     success: false,
   })
+  const [parsedData, setParsedData] = useState<ParsedData | null>(null)
+  const [mapping, setMapping] = useState<Record<string, string | null>>({})
+  const [analysisData, setAnalysisData] = useState<any>(null)
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0]
@@ -108,10 +123,10 @@ export default function ForecasterPage() {
         success: true,
       }))
 
-      // Redirect to analysis page after success
+      setParsedData(result.data)
       setTimeout(() => {
-        window.location.href = `/forecaster/analysis/${result.analysisId}`
-      }, 1500)
+        setCurrentStep("mapping")
+      }, 1000)
     } catch (error) {
       setUploadState((prev) => ({
         ...prev,
@@ -130,6 +145,58 @@ export default function ForecasterPage() {
       error: null,
       success: false,
     })
+  }
+
+  const handleMappingComplete = (newMapping: Record<string, string | null>) => {
+    console.log("[v0] Mapping completed:", newMapping)
+    setMapping(newMapping)
+
+    if (parsedData) {
+      const analysis = analyzeDeals(parsedData.data, newMapping)
+      setAnalysisData(analysis)
+    }
+
+    setCurrentStep("analysis")
+  }
+
+  const handleBackToUpload = () => {
+    setCurrentStep("upload")
+    setParsedData(null)
+    setMapping({})
+    setAnalysisData(null)
+    resetUpload()
+  }
+
+  const handleBackToMapping = () => {
+    setCurrentStep("mapping")
+    setAnalysisData(null)
+  }
+
+  const handleExportPDF = () => {
+    // TODO: Implement PDF export functionality
+    console.log("[v0] PDF export requested")
+    alert("Export PDF sera disponible dans la prochaine version")
+  }
+
+  if (currentStep === "mapping" && parsedData) {
+    return (
+      <div className="min-h-screen bg-background">
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-4xl mx-auto">
+            <MappingStep
+              headers={parsedData.headers}
+              sampleData={parsedData.data.slice(0, 5)}
+              onMappingComplete={handleMappingComplete}
+              onBack={handleBackToUpload}
+            />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (currentStep === "analysis" && analysisData) {
+    return <AnalysisDashboard data={analysisData} onExportPDF={handleExportPDF} onBackToMapping={handleBackToMapping} />
   }
 
   return (
@@ -207,7 +274,7 @@ export default function ForecasterPage() {
                     <Alert className="border-green-200 bg-green-50">
                       <CheckCircle2 className="h-4 w-4 text-green-600" />
                       <AlertDescription className="text-green-800">
-                        Fichier uploadé avec succès ! Redirection vers l'analyse...
+                        Fichier uploadé avec succès ! Passage au mapping des colonnes...
                       </AlertDescription>
                     </Alert>
                   )}
