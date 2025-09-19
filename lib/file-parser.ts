@@ -43,6 +43,7 @@ export async function parseFile(file: File): Promise<ParseResult> {
 
 async function parseCSV(file: File, fileName: string): Promise<ParseResult> {
   return new Promise((resolve) => {
+    console.log("[v0] Starting CSV parsing for:", fileName)
     Papa.parse(file, {
       header: true,
       skipEmptyLines: true,
@@ -60,12 +61,24 @@ async function parseCSV(file: File, fileName: string): Promise<ParseResult> {
         const headers = results.meta.fields || []
         const rows = results.data as Record<string, any>[]
 
+        const validRows = rows.filter((row) => {
+          return Object.values(row).some(
+            (value) => value !== null && value !== undefined && String(value).trim() !== "",
+          )
+        })
+
+        console.log("[v0] CSV parsed successfully:", {
+          headers: headers.length,
+          totalRows: validRows.length,
+          originalRows: rows.length,
+        })
+
         resolve({
           success: true,
           data: {
             headers,
-            rows,
-            totalRows: rows.length,
+            rows: validRows,
+            totalRows: validRows.length,
             fileName,
           },
         })
@@ -117,7 +130,6 @@ async function parseExcel(file: File, fileName: string): Promise<ParseResult> {
         return obj
       })
       .filter((row) => {
-        // Filter out completely empty rows
         return Object.values(row).some((value) => value !== "")
       })
 

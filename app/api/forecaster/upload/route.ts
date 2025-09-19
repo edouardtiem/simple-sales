@@ -50,18 +50,6 @@ export async function POST(request: NextRequest) {
       analysisId,
     })
 
-    // For now, we'll pass the headers to the next step for AI mapping
-    const fileData = {
-      analysisId,
-      fileName: parseResult.data.fileName,
-      headers: parseResult.data.headers,
-      totalRows: parseResult.data.totalRows,
-      uploadedAt: new Date().toISOString(),
-    }
-
-    // TODO: Save fileData and raw rows to database/storage
-    // TODO: Trigger AI mapping process
-
     return NextResponse.json({
       success: true,
       analysisId,
@@ -69,6 +57,8 @@ export async function POST(request: NextRequest) {
       data: {
         fileName: parseResult.data.fileName,
         headers: parseResult.data.headers,
+        data: parseResult.data.rows, // Include actual row data
+        rows: parseResult.data.rows, // Include both for compatibility
         totalRows: parseResult.data.totalRows,
       },
     })

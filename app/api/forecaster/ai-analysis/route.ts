@@ -24,7 +24,14 @@ export async function POST(req: Request) {
   try {
     const { analysisData, rawData } = await req.json()
 
+    console.log("[v0] AI Analysis request:", {
+      hasAnalysisData: !!analysisData,
+      hasRawData: !!rawData,
+      rawDataLength: Array.isArray(rawData) ? rawData.length : 0,
+    })
+
     if (!rawData || !Array.isArray(rawData) || rawData.length === 0) {
+      console.log("[v0] No data available for analysis")
       return Response.json({
         error: "Aucune donnée à analyser",
         aiAnalysis: {
@@ -38,19 +45,21 @@ export async function POST(req: Request) {
       })
     }
 
+    const sampleData = rawData.slice(0, Math.min(10, rawData.length))
+
     const prompt = `
 Analysez ce pipeline commercial et fournissez des recommandations stratégiques basées sur les données suivantes :
 
 DONNÉES D'ANALYSE :
-- Nombre total d'opportunités : ${analysisData.totalDeals}
-- Valeur totale du pipeline : ${analysisData.totalValue}€
-- Taux de conversion moyen : ${analysisData.conversionRate}%
-- Durée moyenne du cycle : ${analysisData.avgCycleTime} jours
-- Distribution par étapes : ${JSON.stringify(analysisData.stageDistribution)}
-- Top 5 des opportunités : ${JSON.stringify(analysisData.topDeals)}
+- Nombre total d'opportunités : ${analysisData?.totalDeals || 0}
+- Valeur totale du pipeline : ${analysisData?.totalPipeline || 0}€
+- Pipeline pondéré : ${analysisData?.weightedPipeline || 0}€
+- Taille moyenne des deals : ${analysisData?.averageDealSize || 0}€
+- Distribution par étapes : ${JSON.stringify(analysisData?.dealsByStage || [])}
+- Analyse des risques : ${JSON.stringify(analysisData?.riskAnalysis || {})}
 
 DONNÉES BRUTES (échantillon) :
-${JSON.stringify(rawData.slice(0, 10), null, 2)}
+${JSON.stringify(sampleData, null, 2)}
 
 Fournissez une analyse approfondie avec :
 1. Un score global de performance (0-100)
@@ -63,16 +72,30 @@ Soyez spécifique et actionnable dans vos recommandations.
 `
 
     const { object } = await generateObject({
-      model: openai.responses("gpt-5"),
+      model: openai("gpt-4o"),
       schema: salesAnalysisSchema,
       prompt,
-      maxOutputTokens: 2000,
+      maxTokens: 2000,
       temperature: 0.3,
     })
 
+    console.log("[v0] AI Analysis completed successfully")
     return Response.json({ aiAnalysis: object })
   } catch (error) {
-    console.error("AI Analysis error:", error)
-    return Response.json({ error: "Erreur lors de l'analyse IA" }, { status: 500 })
+    console.error("[v0] AI Analysis error:", error)
+    return Response.json(
+      {
+        error: "Erreur lors de l'analyse IA",
+        aiAnalysis: {
+          overallScore: 0,
+          insights: ["Erreur lors de l'analyse IA"],
+          recommendations: [],
+          riskFactors: ["Erreur technique"],
+          opportunities: [],
+          nextActions: ["Réessayez l'analyse"],
+        },
+      },
+      { status: 500 },
+    )
   }
 }

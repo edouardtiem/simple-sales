@@ -22,6 +22,7 @@ interface FileUploadState {
 interface ParsedData {
   headers: string[]
   data: any[]
+  rows: any[]
   totalRows: number
 }
 
@@ -152,19 +153,32 @@ export default function ForecasterPage() {
     setMapping(newMapping)
 
     if (parsedData) {
-      const dataToAnalyze = parsedData.data || []
+      const dataToAnalyze = parsedData.data || parsedData.rows || []
       console.log("[v0] Data to analyze:", dataToAnalyze.length, "rows")
       console.log("[v0] Sample data:", dataToAnalyze.slice(0, 2))
+      console.log("[v0] ParsedData structure:", Object.keys(parsedData))
 
       if (dataToAnalyze.length === 0) {
         console.log("[v0] No data available for analysis")
         setAnalysisData({
           totalDeals: 0,
-          totalValue: 0,
+          totalPipeline: 0,
+          weightedPipeline: 0,
+          averageDealSize: 0,
           conversionRate: 0,
-          avgCycleTime: 0,
-          stageDistribution: {},
-          topDeals: [],
+          averageSalesCycle: 45,
+          dealsByStage: [],
+          riskAnalysis: { highRisk: 0, mediumRisk: 0, lowRisk: 0 },
+          recommendations: [
+            {
+              type: "warning",
+              title: "Aucune donnée à analyser",
+              description: `Le fichier contient des données valides, mais les données n'ont pas pu être parsées correctement.`,
+              impact:
+                "Vérifiez le format de votre fichier et assurez-vous que les colonnes contiennent des données valides.",
+            },
+          ],
+          overallScore: 0,
           aiInsights: {
             overallScore: 0,
             insights: ["Aucune donnée disponible pour l'analyse"],
