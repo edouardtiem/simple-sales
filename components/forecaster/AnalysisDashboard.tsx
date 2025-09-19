@@ -20,20 +20,7 @@ import {
   Zap,
   Calendar,
 } from "lucide-react"
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-  LineChart,
-  Line,
-} from "recharts"
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts"
 import AnalysisTimer from "./AnalysisTimer"
 import ValueGateModal from "./ValueGateModal"
 
@@ -525,21 +512,14 @@ export default function AnalysisDashboard({ data, onExportPDF, onBackToMapping }
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
-                  <LineChart data={data.monthlyPipeline}>
+                  <BarChart data={data.monthlyPipeline}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="month" tickFormatter={formatMonthName} />
                     <YAxis tickFormatter={(value) => `${Math.round(value / 1000)}k€`} />
                     <Tooltip content={<MonthlyTooltip />} />
-                    <Line type="monotone" dataKey="totalValue" stroke="#10b981" strokeWidth={2} name="Pipeline Total" />
-                    <Line
-                      type="monotone"
-                      dataKey="weightedValue"
-                      stroke="#3b82f6"
-                      strokeWidth={2}
-                      strokeDasharray="5 5"
-                      name="Pipeline Pondéré"
-                    />
-                  </LineChart>
+                    <Bar dataKey="totalValue" fill="#10b981" name="Pipeline Total" />
+                    <Bar dataKey="weightedValue" fill="#3b82f6" name="Pipeline Pondéré" />
+                  </BarChart>
                 </ResponsiveContainer>
                 <div className="mt-4 flex flex-wrap gap-4 text-sm">
                   <div className="flex items-center gap-2">
@@ -548,7 +528,7 @@ export default function AnalysisDashboard({ data, onExportPDF, onBackToMapping }
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 bg-blue-500 rounded"></div>
-                    <span>Pipeline Pondéré (probabilités améliorées)</span>
+                    <span>Pipeline Pondéré (probabilités révisées)</span>
                   </div>
                 </div>
               </CardContent>

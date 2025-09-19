@@ -228,40 +228,60 @@ function calculateEnhancedProbability(deal: any): number {
     notes.includes("pas de retour") ||
     notes.includes("difficile") ||
     notes.includes("bloqué") ||
-    notes.includes("problème")
+    notes.includes("problème") ||
+    notes.includes("silence") ||
+    notes.includes("ne répond pas")
 
   const isPositiveNote =
     notes.includes("intéressé") ||
     notes.includes("positif") ||
     notes.includes("avance") ||
     notes.includes("rdv") ||
-    notes.includes("meeting")
+    notes.includes("meeting") ||
+    notes.includes("proposition") ||
+    notes.includes("budget")
 
+  // Base probabilities - more conservative
   let baseProbability = 50
-  if (stage.includes("discovery") || stage.includes("découverte")) baseProbability = 10
-  else if (stage.includes("qualification")) baseProbability = 25
-  else if (stage.includes("proposal") || stage.includes("proposition")) baseProbability = 50
-  else if (stage.includes("negotiation") || stage.includes("négociation")) baseProbability = 70
-  else if (stage.includes("closing") || stage.includes("signature")) baseProbability = 85
+  if (stage.includes("discovery") || stage.includes("découverte")) baseProbability = 8
+  else if (stage.includes("qualification")) baseProbability = 20
+  else if (stage.includes("proposal") || stage.includes("proposition")) baseProbability = 45
+  else if (stage.includes("negotiation") || stage.includes("négociation")) baseProbability = 60
+  else if (stage.includes("closing") || stage.includes("signature")) baseProbability = 80
   else if (stage.includes("won") || stage.includes("gagné")) baseProbability = 100
   else if (stage.includes("lost") || stage.includes("perdu")) baseProbability = 0
 
-  let modifier = 1
+  // More aggressive modifiers
+  let finalProbability = baseProbability
 
   if (hasNextActivity) {
-    if (isPositiveNote) modifier = 1.5
-    else if (!isWarningNote) modifier = 1.2
+    if (isPositiveNote) {
+      // Boost for positive notes with next activity
+      finalProbability = Math.min(baseProbability * 1.8, 95)
+    } else if (!isWarningNote) {
+      // Slight boost for neutral notes with next activity
+      finalProbability = Math.min(baseProbability * 1.3, 85)
+    } else {
+      // Warning note but has next activity - still concerning
+      finalProbability = Math.max(baseProbability * 0.4, 5)
+    }
   } else {
-    if (isWarningNote) modifier = 0.2
-    else modifier = 0.7
+    // No next activity is a major red flag
+    if (isWarningNote) {
+      // Critical: no activity + warning notes
+      finalProbability = Math.max(baseProbability * 0.1, 2)
+    } else {
+      // No activity but no warning - still concerning
+      finalProbability = Math.max(baseProbability * 0.3, 5)
+    }
   }
 
-  if (isWarningNote && baseProbability > 50) {
-    modifier = Math.min(modifier, 0.3)
+  // Special case: high-stage deals without activity are very concerning
+  if (!hasNextActivity && baseProbability >= 60) {
+    finalProbability = Math.min(finalProbability, 15)
   }
 
-  const enhancedProbability = Math.max(0, Math.min(100, baseProbability * modifier))
-  return Math.round(enhancedProbability)
+  return Math.round(Math.max(0, Math.min(100, finalProbability)))
 }
 
 function calculateMonthlyPipeline(deals: any[]): Array<{
