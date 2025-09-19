@@ -183,11 +183,39 @@ export default function AnalysisDashboard({ data, onExportPDF, onBackToMapping }
 
   const displayScore = data.aiInsights?.overallScore || data.overallScore
   const scoreBadge = getScoreBadge(displayScore)
+
   const riskData = [
-    { name: "Faible risque", value: data.riskAnalysis.lowRisk, color: COLORS[0] },
-    { name: "Risque moyen", value: data.riskAnalysis.mediumRisk, color: COLORS[1] },
-    { name: "Risque élevé", value: data.riskAnalysis.highRisk, color: COLORS[2] },
+    { name: "Faible risque", value: data.riskAnalysis?.lowRisk || 0, color: COLORS[0] },
+    { name: "Risque moyen", value: data.riskAnalysis?.mediumRisk || 0, color: COLORS[1] },
+    { name: "Risque élevé", value: data.riskAnalysis?.highRisk || 0, color: COLORS[2] },
   ]
+
+  if (!data || data.totalDeals === 0) {
+    return (
+      <div className="min-h-screen bg-background">
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="mb-8">
+              <AlertTriangle className="w-16 h-16 text-amber-500 mx-auto mb-4" />
+              <h1 className="text-3xl font-bold text-slate-900 mb-2">Aucune donnée à analyser</h1>
+              <p className="text-slate-600 mb-6">
+                Le fichier contient des données valides, mais les données n'ont pas pu être parsées correctement.
+              </p>
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6">
+                <p className="text-sm text-amber-800">
+                  <strong>Impact:</strong> Vérifiez le format de votre fichier et assurez-vous que les colonnes
+                  contiennent des données valides.
+                </p>
+              </div>
+              <Button onClick={onBackToMapping} className="bg-emerald-600 hover:bg-emerald-700">
+                Retour au mapping
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-background">
