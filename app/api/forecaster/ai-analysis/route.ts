@@ -63,7 +63,9 @@ Soyez spécifique et actionnable dans vos recommandations.
 `
 
     const { text } = await generateText({
-      model: openai("gpt-4o"),
+      model: openai("gpt-4o", {
+        apiKey: process.env.OpenAI || process.env.OPENAI_API_KEY,
+      }),
       prompt,
       maxTokens: 2000,
       temperature: 0.3,
