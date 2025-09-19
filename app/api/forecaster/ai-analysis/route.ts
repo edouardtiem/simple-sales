@@ -24,6 +24,20 @@ export async function POST(req: Request) {
   try {
     const { analysisData, rawData } = await req.json()
 
+    if (!rawData || !Array.isArray(rawData) || rawData.length === 0) {
+      return Response.json({
+        error: "Aucune donnée à analyser",
+        aiAnalysis: {
+          overallScore: 0,
+          insights: ["Aucune donnée disponible pour l'analyse"],
+          recommendations: [],
+          riskFactors: ["Données manquantes"],
+          opportunities: [],
+          nextActions: ["Vérifiez le format de votre fichier"],
+        },
+      })
+    }
+
     const prompt = `
 Analysez ce pipeline commercial et fournissez des recommandations stratégiques basées sur les données suivantes :
 

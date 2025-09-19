@@ -154,6 +154,29 @@ export default function ForecasterPage() {
     if (parsedData) {
       const dataToAnalyze = parsedData.data || []
       console.log("[v0] Data to analyze:", dataToAnalyze.length, "rows")
+      console.log("[v0] Sample data:", dataToAnalyze.slice(0, 2))
+
+      if (dataToAnalyze.length === 0) {
+        console.log("[v0] No data available for analysis")
+        setAnalysisData({
+          totalDeals: 0,
+          totalValue: 0,
+          conversionRate: 0,
+          avgCycleTime: 0,
+          stageDistribution: {},
+          topDeals: [],
+          aiInsights: {
+            overallScore: 0,
+            insights: ["Aucune donnée disponible pour l'analyse"],
+            recommendations: [],
+            riskFactors: ["Données manquantes"],
+            opportunities: [],
+            nextActions: ["Vérifiez le format de votre fichier"],
+          },
+        })
+        setCurrentStep("analysis")
+        return
+      }
 
       const analysis = analyzeDeals(dataToAnalyze, newMapping)
 
@@ -166,7 +189,7 @@ export default function ForecasterPage() {
           },
           body: JSON.stringify({
             analysisData: analysis,
-            rawData: parsedData.data,
+            rawData: dataToAnalyze,
           }),
         })
 
