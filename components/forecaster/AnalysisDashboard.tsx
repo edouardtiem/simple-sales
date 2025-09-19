@@ -30,7 +30,14 @@ interface AnalysisData {
   conversionRate: number
   averageSalesCycle: number
   totalDeals: number
-  dealsByStage: Array<{ stage: string; count: number; value: number }>
+  dealsByStage: Array<{
+    stage: string
+    count: number
+    value: number
+    status?: "healthy" | "at-risk" | "lost" | "won"
+    lostCount?: number
+    atRiskCount?: number
+  }>
   riskAnalysis: {
     highRisk: number
     mediumRisk: number
@@ -149,6 +156,73 @@ export default function AnalysisDashboard({ data, onExportPDF, onBackToMapping }
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(amount)
+  }
+
+  const getStageColor = (stage: any) => {
+    const stageName = stage.stage.toLowerCase()
+
+    // Rouge pour les deals perdus ou les étapes avec beaucoup de deals perdus
+    if (
+      stageName.includes("lost") ||
+      stageName.includes("perdu") ||
+      stageName.includes("fermé - perdu") ||
+      (stage.lostCount && stage.lostCount > stage.count * 0.3)
+    ) {
+      return "#ef4444" // Rouge
+    }
+
+    // Orange pour les deals à risque ou les étapes problématiques
+    if (
+      stageName.includes("négociation") ||
+      stageName.includes("proposition") ||
+      stageName.includes("qualification") ||
+      stage.status === "at-risk" ||
+      (stage.atRiskCount && stage.atRiskCount > stage.count * 0.2)
+    ) {
+      return "#f59e0b" // Orange
+    }
+
+    // Bleu pour les deals gagnés
+    if (
+      stageName.includes("won") ||
+      stageName.includes("gagné") ||
+      stageName.includes("fermé - gagné") ||
+      stageName.includes("gagnés") ||
+      stage.status === "won"
+    ) {
+      return "#3b82f6" // Bleu
+    }
+
+    // Vert pour les étapes saines
+    return "#10b981" // Vert (défaut)
+  }
+
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      const data = payload[0].payload
+      return (
+        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
+          <p className="font-semibold text-gray-900">{label}</p>
+          <p className="text-gray-700">
+            <span className="font-medium">Valeur:</span> {formatCurrency(payload[0].value)}
+          </p>
+          <p className="text-gray-700">
+            <span className="font-medium">Nombre de deals:</span> {data.count}
+          </p>
+          {data.lostCount && (
+            <p className="text-red-600">
+              <span className="font-medium">Deals perdus:</span> {data.lostCount}
+            </p>
+          )}
+          {data.atRiskCount && (
+            <p className="text-orange-600">
+              <span className="font-medium">Deals à risque:</span> {data.atRiskCount}
+            </p>
+          )}
+        </div>
+      )
+    }
+    return null
   }
 
   if (isAnalyzing) {
@@ -403,10 +477,32 @@ export default function AnalysisDashboard({ data, onExportPDF, onBackToMapping }
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="stage" />
                     <YAxis />
-                    <Tooltip formatter={(value) => formatCurrency(Number(value))} />
-                    <Bar dataKey="value" fill="#10b981" />
+                    <Tooltip content={<CustomTooltip />} />
+                    <Bar dataKey="value">
+                      {data.dealsByStage.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={getStageColor(entry)} />
+                      ))}
+                    </Bar>
                   </BarChart>
                 </ResponsiveContainer>
+                <div className="mt-4 flex flex-wrap gap-4 text-sm">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-green-500 rounded"></div>
+                    <span>Étapes saines</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-orange-500 rounded"></div>
+                    <span>Étapes à risque</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-red-500 rounded"></div>
+                    <span>Deals perdus</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-blue-500 rounded"></div>
+                    <span>Deals gagnés</span>
+                  </div>
+                </div>
               </CardContent>
             </Card>
 
