@@ -185,7 +185,7 @@ export default function ForecasterPage() {
           <div className="max-w-4xl mx-auto">
             <MappingStep
               headers={parsedData.headers}
-              sampleData={parsedData.data.slice(0, 5)}
+              sampleData={parsedData.data ? parsedData.data.slice(0, 5) : []}
               onMappingComplete={handleMappingComplete}
               onBack={handleBackToUpload}
             />
