@@ -6,7 +6,19 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Button } from "@/components/ui/button"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { TrendingUp, AlertTriangle, CheckCircle, DollarSign, Target, Download, Clock } from "lucide-react"
+import {
+  TrendingUp,
+  AlertTriangle,
+  CheckCircle,
+  DollarSign,
+  Target,
+  Download,
+  Clock,
+  Brain,
+  Lightbulb,
+  Shield,
+  Zap,
+} from "lucide-react"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts"
 import AnalysisTimer from "./AnalysisTimer"
 import ValueGateModal from "./ValueGateModal"
@@ -31,6 +43,19 @@ interface AnalysisData {
     impact: string
   }>
   overallScore: number
+  aiInsights?: {
+    overallScore: number
+    insights: string[]
+    recommendations: Array<{
+      title: string
+      description: string
+      priority: "high" | "medium" | "low"
+      impact: string
+    }>
+    riskFactors: string[]
+    opportunities: string[]
+    nextActions: string[]
+  }
 }
 
 interface AnalysisDashboardProps {
@@ -106,6 +131,17 @@ export default function AnalysisDashboard({ data, onExportPDF, onBackToMapping }
     return { label: "À améliorer", variant: "destructive" as const }
   }
 
+  const getPriorityColor = (priority: "high" | "medium" | "low") => {
+    switch (priority) {
+      case "high":
+        return "bg-red-50 border-red-200 text-red-800"
+      case "medium":
+        return "bg-amber-50 border-amber-200 text-amber-800"
+      case "low":
+        return "bg-blue-50 border-blue-200 text-blue-800"
+    }
+  }
+
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("fr-FR", {
       style: "currency",
@@ -145,7 +181,8 @@ export default function AnalysisDashboard({ data, onExportPDF, onBackToMapping }
     )
   }
 
-  const scoreBadge = getScoreBadge(data.overallScore)
+  const displayScore = data.aiInsights?.overallScore || data.overallScore
+  const scoreBadge = getScoreBadge(displayScore)
   const riskData = [
     { name: "Faible risque", value: data.riskAnalysis.lowRisk, color: COLORS[0] },
     { name: "Risque moyen", value: data.riskAnalysis.mediumRisk, color: COLORS[1] },
@@ -188,17 +225,91 @@ export default function AnalysisDashboard({ data, onExportPDF, onBackToMapping }
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-lg font-semibold text-slate-900 mb-1">Score Global de Performance</h3>
-                  <p className="text-slate-600">Évaluation générale de la santé de votre pipeline</p>
+                  <p className="text-slate-600">
+                    {data.aiInsights
+                      ? "Évaluation IA de la santé de votre pipeline"
+                      : "Évaluation générale de la santé de votre pipeline"}
+                  </p>
                 </div>
                 <div className="text-center">
-                  <div className={`text-4xl font-bold ${getScoreColor(data.overallScore)} mb-2`}>
-                    {data.overallScore}/100
-                  </div>
+                  <div className={`text-4xl font-bold ${getScoreColor(displayScore)} mb-2`}>{displayScore}/100</div>
                   <Badge className={scoreBadge.className}>{scoreBadge.label}</Badge>
+                  {data.aiInsights && (
+                    <div className="flex items-center gap-1 mt-2 text-xs text-slate-500">
+                      <Brain className="w-3 h-3" />
+                      <span>Analyse IA</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </CardContent>
           </Card>
+
+          {data.aiInsights && (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+              {/* AI Insights */}
+              <Card className="border-blue-200">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Brain className="w-5 h-5 text-blue-600" />
+                    Insights IA
+                  </CardTitle>
+                  <CardDescription>Analyse approfondie de votre pipeline</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {data.aiInsights.insights.map((insight, index) => (
+                      <div key={index} className="flex items-start gap-2">
+                        <Lightbulb className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                        <p className="text-sm text-slate-700">{insight}</p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Risk Factors & Opportunities */}
+              <div className="space-y-6">
+                <Card className="border-red-200">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Shield className="w-5 h-5 text-red-600" />
+                      Facteurs de Risque
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-2">
+                      {data.aiInsights.riskFactors.map((risk, index) => (
+                        <div key={index} className="flex items-start gap-2">
+                          <AlertTriangle className="w-3 h-3 text-red-600 mt-1 flex-shrink-0" />
+                          <p className="text-xs text-slate-600">{risk}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-green-200">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Zap className="w-5 h-5 text-green-600" />
+                      Opportunités
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-2">
+                      {data.aiInsights.opportunities.map((opportunity, index) => (
+                        <div key={index} className="flex items-start gap-2">
+                          <CheckCircle className="w-3 h-3 text-green-600 mt-1 flex-shrink-0" />
+                          <p className="text-xs text-slate-600">{opportunity}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          )}
 
           {/* Key Metrics */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -299,41 +410,105 @@ export default function AnalysisDashboard({ data, onExportPDF, onBackToMapping }
             </Card>
           </div>
 
-          {/* Recommendations */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Recommandations Personnalisées</CardTitle>
-              <CardDescription>Actions prioritaires pour améliorer votre performance</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {data.recommendations.map((rec, index) => {
-                  const Icon = rec.type === "critical" ? AlertTriangle : rec.type === "warning" ? Clock : CheckCircle
-                  const iconColor =
-                    rec.type === "critical"
-                      ? "text-red-600"
-                      : rec.type === "warning"
-                        ? "text-amber-600"
-                        : "text-emerald-600"
-                  const bgColor =
-                    rec.type === "critical" ? "bg-red-50" : rec.type === "warning" ? "bg-amber-50" : "bg-emerald-50"
+          <div className="space-y-6">
+            {/* AI Recommendations */}
+            {data.aiInsights && (
+              <Card className="border-purple-200">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Brain className="w-5 h-5 text-purple-600" />
+                    Recommandations IA
+                  </CardTitle>
+                  <CardDescription>Actions stratégiques basées sur l'analyse IA</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {data.aiInsights.recommendations.map((rec, index) => (
+                      <Alert key={index} className={`${getPriorityColor(rec.priority)} border-l-4`}>
+                        <div>
+                          <div className="flex items-center justify-between mb-2">
+                            <h4 className="font-semibold">{rec.title}</h4>
+                            <Badge variant="outline" className="text-xs">
+                              {rec.priority === "high"
+                                ? "Priorité Haute"
+                                : rec.priority === "medium"
+                                  ? "Priorité Moyenne"
+                                  : "Priorité Basse"}
+                            </Badge>
+                          </div>
+                          <AlertDescription className="mb-2">{rec.description}</AlertDescription>
+                          <Badge variant="outline" className="text-xs">
+                            Impact: {rec.impact}
+                          </Badge>
+                        </div>
+                      </Alert>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
 
-                  return (
-                    <Alert key={index} className={`${bgColor} border-l-4`}>
-                      <Icon className={`h-4 w-4 ${iconColor}`} />
-                      <div>
-                        <h4 className="font-semibold text-slate-900 mb-1">{rec.title}</h4>
-                        <AlertDescription className="text-slate-700 mb-2">{rec.description}</AlertDescription>
-                        <Badge variant="outline" className="text-xs">
-                          Impact: {rec.impact}
-                        </Badge>
+            {/* Next Actions */}
+            {data.aiInsights && (
+              <Card className="border-green-200">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <CheckCircle className="w-5 h-5 text-green-600" />
+                    Actions Prioritaires
+                  </CardTitle>
+                  <CardDescription>Plan d'action immédiat recommandé par l'IA</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {data.aiInsights.nextActions.map((action, index) => (
+                      <div key={index} className="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
+                        <div className="w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+                          {index + 1}
+                        </div>
+                        <p className="text-sm text-slate-700">{action}</p>
                       </div>
-                    </Alert>
-                  )
-                })}
-              </div>
-            </CardContent>
-          </Card>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Original Recommendations */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Recommandations Personnalisées</CardTitle>
+                <CardDescription>Actions prioritaires pour améliorer votre performance</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {data.recommendations.map((rec, index) => {
+                    const Icon = rec.type === "critical" ? AlertTriangle : rec.type === "warning" ? Clock : CheckCircle
+                    const iconColor =
+                      rec.type === "critical"
+                        ? "text-red-600"
+                        : rec.type === "warning"
+                          ? "text-amber-600"
+                          : "text-emerald-600"
+                    const bgColor =
+                      rec.type === "critical" ? "bg-red-50" : rec.type === "warning" ? "bg-amber-50" : "bg-emerald-50"
+
+                    return (
+                      <Alert key={index} className={`${bgColor} border-l-4`}>
+                        <Icon className={`h-4 w-4 ${iconColor}`} />
+                        <div>
+                          <h4 className="font-semibold text-slate-900 mb-1">{rec.title}</h4>
+                          <AlertDescription className="text-slate-700 mb-2">{rec.description}</AlertDescription>
+                          <Badge variant="outline" className="text-xs">
+                            Impact: {rec.impact}
+                          </Badge>
+                        </div>
+                      </Alert>
+                    )
+                  })}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </div>

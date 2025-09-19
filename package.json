@@ -9,6 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@ai-sdk/openai": "latest",
     "@notionhq/client": "latest",
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-alert-dialog": "^1.1.2",
@@ -31,6 +32,7 @@
     "@remix-run/react": "latest",
     "@sveltejs/kit": "latest",
     "@vercel/analytics": "latest",
+    "ai": "latest",
     "chart.js": "latest",
     "chartjs-plugin-annotation": "latest",
     "class-variance-authority": "^0.7.1",
@@ -49,7 +51,8 @@
     "tailwindcss-animate": "^1.0.7",
     "vue": "latest",
     "vue-router": "latest",
-    "xlsx": "latest"
+    "xlsx": "latest",
+    "zod": "4.1.9"
   },
   "devDependencies": {
     "@types/node": "^22",

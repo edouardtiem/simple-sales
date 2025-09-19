@@ -147,12 +147,35 @@ export default function ForecasterPage() {
     })
   }
 
-  const handleMappingComplete = (newMapping: Record<string, string | null>) => {
+  const handleMappingComplete = async (newMapping: Record<string, string | null>) => {
     console.log("[v0] Mapping completed:", newMapping)
     setMapping(newMapping)
 
     if (parsedData) {
       const analysis = analyzeDeals(parsedData.data, newMapping)
+
+      // Call AI analysis API
+      try {
+        const aiResponse = await fetch("/api/forecaster/ai-analysis", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            analysisData: analysis,
+            rawData: parsedData.data,
+          }),
+        })
+
+        if (aiResponse.ok) {
+          const aiResult = await aiResponse.json()
+          analysis.aiInsights = aiResult.aiAnalysis
+        }
+      } catch (error) {
+        console.error("[v0] AI analysis failed:", error)
+        // Continue without AI insights if API fails
+      }
+
       setAnalysisData(analysis)
     }
 
