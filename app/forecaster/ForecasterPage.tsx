@@ -9,6 +9,7 @@ import { Upload, FileSpreadsheet, AlertCircle, CheckCircle2 } from "lucide-react
 import { useDropzone } from "react-dropzone"
 import MappingStep from "@/components/forecaster/MappingStep"
 import AnalysisDashboard from "@/components/forecaster/AnalysisDashboard"
+import AnalysisStreamingPage from "@/components/forecaster/AnalysisStreamingPage"
 import { analyzeDeals } from "@/lib/analysis-engine"
 
 interface FileUploadState {
@@ -26,7 +27,7 @@ interface ParsedData {
   totalRows: number
 }
 
-type Step = "upload" | "mapping" | "analysis"
+type Step = "upload" | "mapping" | "streaming" | "analysis"
 
 export default function ForecasterPage() {
   const [currentStep, setCurrentStep] = useState<Step>("upload")
@@ -155,8 +156,6 @@ export default function ForecasterPage() {
     if (parsedData) {
       const dataToAnalyze = parsedData.data || parsedData.rows || []
       console.log("[v0] Data to analyze:", dataToAnalyze.length, "rows")
-      console.log("[v0] Sample data:", dataToAnalyze.slice(0, 2))
-      console.log("[v0] ParsedData structure:", Object.keys(parsedData))
 
       if (dataToAnalyze.length === 0) {
         console.log("[v0] No data available for analysis")
@@ -193,32 +192,19 @@ export default function ForecasterPage() {
       }
 
       const analysis = analyzeDeals(dataToAnalyze, newMapping)
-
-      // Call AI analysis API
-      try {
-        const aiResponse = await fetch("/api/forecaster/ai-analysis", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            analysisData: analysis,
-            rawData: dataToAnalyze,
-          }),
-        })
-
-        if (aiResponse.ok) {
-          const aiResult = await aiResponse.json()
-          analysis.aiInsights = aiResult.aiAnalysis
-        }
-      } catch (error) {
-        console.error("[v0] AI analysis failed:", error)
-        // Continue without AI insights if API fails
-      }
-
       setAnalysisData(analysis)
-    }
 
+      setCurrentStep("streaming")
+    }
+  }
+
+  const handleAnalysisComplete = (aiInsights: any) => {
+    if (aiInsights && analysisData) {
+      setAnalysisData({
+        ...analysisData,
+        aiInsights,
+      })
+    }
     setCurrentStep("analysis")
   }
 
@@ -255,6 +241,17 @@ export default function ForecasterPage() {
           </div>
         </div>
       </div>
+    )
+  }
+
+  if (currentStep === "streaming" && analysisData && parsedData) {
+    return (
+      <AnalysisStreamingPage
+        analysisData={analysisData}
+        rawData={parsedData.data || parsedData.rows || []}
+        onAnalysisComplete={handleAnalysisComplete}
+        onBack={handleBackToMapping}
+      />
     )
   }
 
