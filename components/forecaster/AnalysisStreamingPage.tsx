@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Brain, Loader2, CheckCircle2 } from "lucide-react"
-import { useCompletion } from "ai/react"
 
 interface AnalysisStreamingPageProps {
   analysisData: any
@@ -23,31 +22,79 @@ export default function AnalysisStreamingPage({
   const [progress, setProgress] = useState(0)
   const [currentPhase, setCurrentPhase] = useState("Initialisation...")
   const [isComplete, setIsComplete] = useState(false)
+  const [displayedThinking, setDisplayedThinking] = useState("")
+  const [isLoading, setIsLoading] = useState(true)
 
-  const { completion, complete, isLoading } = useCompletion({
-    api: "/api/forecaster/ai-analysis-stream",
-    onFinish: (prompt, completion) => {
+  useEffect(() => {
+    const runAnalysis = async () => {
       try {
-        const jsonMatch = completion.match(/\{[\s\S]*\}/)
-        if (jsonMatch) {
-          const aiInsights = JSON.parse(jsonMatch[0])
-          setIsComplete(true)
-          setProgress(100)
-          setCurrentPhase("Analyse terminée !")
-          setTimeout(() => {
-            onAnalysisComplete(aiInsights)
-          }, 1500)
+        setIsLoading(true)
+        setProgress(10)
+        setCurrentPhase("Connexion à l'IA...")
+
+        const response = await fetch("/api/forecaster/ai-analysis-stream", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            analysisData,
+            rawData,
+          }),
+        })
+
+        const data = await response.json()
+
+        if (data.error) {
+          throw new Error(data.error)
         }
+
+        const thinking = data.thinking || "Analyse en cours..."
+        const words = thinking.split(" ")
+        let currentIndex = 0
+
+        const streamInterval = setInterval(() => {
+          if (currentIndex < words.length) {
+            setDisplayedThinking(words.slice(0, currentIndex + 1).join(" "))
+            currentIndex++
+
+            // Update progress and phase based on content
+            const progressPercent = Math.min(90, (currentIndex / words.length) * 80 + 10)
+            setProgress(progressPercent)
+
+            if (currentIndex < words.length * 0.3) {
+              setCurrentPhase("Analyse des données...")
+            } else if (currentIndex < words.length * 0.6) {
+              setCurrentPhase("Évaluation des métriques...")
+            } else if (currentIndex < words.length * 0.8) {
+              setCurrentPhase("Identification des risques...")
+            } else {
+              setCurrentPhase("Génération des recommandations...")
+            }
+          } else {
+            clearInterval(streamInterval)
+            setProgress(100)
+            setCurrentPhase("Analyse terminée !")
+            setIsComplete(true)
+            setIsLoading(false)
+
+            // Auto-redirect after completion
+            setTimeout(() => {
+              onAnalysisComplete(data.analysis)
+            }, 1500)
+          }
+        }, 100) // Display new word every 100ms
       } catch (error) {
-        console.error("[v0] Failed to parse AI insights:", error)
-        // Fallback analysis
+        console.error("[v0] Analysis error:", error)
+        setDisplayedThinking("Une erreur s'est produite pendant l'analyse. Génération d'une analyse de base...")
+
         const fallbackInsights = {
           overallScore: 65,
           insights: ["Pipeline analysé avec succès", "Données structurées correctement"],
           recommendations: [
             {
               title: "Optimisation du pipeline",
-              description: "Analysez les étapes de conversion",
+              description: "Analysez les étapes de conversion pour identifier les goulots d'étranglement",
               priority: "high",
               impact: "Amélioration du taux de conversion",
             },
@@ -56,41 +103,17 @@ export default function AnalysisStreamingPage({
           opportunities: ["Optimisation du processus"],
           nextActions: ["Réviser les deals en cours"],
         }
-        onAnalysisComplete(fallbackInsights)
-      }
-    },
-  })
 
-  useEffect(() => {
-    complete("", {
-      body: {
-        analysisData,
-        rawData,
-      },
-    })
-  }, [])
-
-  useEffect(() => {
-    if (completion) {
-      const content = completion.toLowerCase()
-      if (content.includes("analysons") || content.includes("commençons")) {
-        setProgress(20)
-        setCurrentPhase("Analyse des données...")
-      } else if (content.includes("métrique") || content.includes("pipeline")) {
-        setProgress(40)
-        setCurrentPhase("Évaluation des métriques...")
-      } else if (content.includes("risque") || content.includes("opportunité")) {
-        setProgress(60)
-        setCurrentPhase("Identification des risques...")
-      } else if (content.includes("recommandation") || content.includes("action")) {
-        setProgress(80)
-        setCurrentPhase("Génération des recommandations...")
-      } else if (content.includes("{")) {
-        setProgress(95)
-        setCurrentPhase("Finalisation de l'analyse...")
+        setTimeout(() => {
+          setIsComplete(true)
+          setIsLoading(false)
+          onAnalysisComplete(fallbackInsights)
+        }, 2000)
       }
     }
-  }, [completion])
+
+    runAnalysis()
+  }, [analysisData, rawData, onAnalysisComplete])
 
   return (
     <div className="min-h-screen bg-background">
@@ -138,8 +161,8 @@ export default function AnalysisStreamingPage({
             </CardHeader>
             <CardContent>
               <div className="bg-muted/50 rounded-lg p-4 min-h-[300px] max-h-[500px] overflow-y-auto">
-                <div className="whitespace-pre-wrap text-sm font-mono leading-relaxed">
-                  {completion || "Initialisation de l'analyse..."}
+                <div className="whitespace-pre-wrap text-sm leading-relaxed">
+                  {displayedThinking || "Initialisation de l'analyse..."}
                   {isLoading && !isComplete && <span className="inline-block w-2 h-4 bg-primary animate-pulse ml-1" />}
                 </div>
               </div>
