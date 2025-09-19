@@ -18,8 +18,22 @@ import {
   Lightbulb,
   Shield,
   Zap,
+  Calendar,
 } from "lucide-react"
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts"
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+  LineChart,
+  Line,
+} from "recharts"
 import AnalysisTimer from "./AnalysisTimer"
 import ValueGateModal from "./ValueGateModal"
 
@@ -50,6 +64,14 @@ interface AnalysisData {
     impact: string
   }>
   overallScore: number
+  monthlyPipeline?: Array<{
+    month: string
+    totalValue: number
+    weightedValue: number
+    dealCount: number
+    deals: any[]
+  }>
+  enhancedDeals?: any[]
   aiInsights?: {
     overallScore: number
     insights: string[]
@@ -219,6 +241,33 @@ export default function AnalysisDashboard({ data, onExportPDF, onBackToMapping }
               <span className="font-medium">Deals à risque:</span> {data.atRiskCount}
             </p>
           )}
+        </div>
+      )
+    }
+    return null
+  }
+
+  const formatMonthName = (monthKey: string) => {
+    const [year, month] = monthKey.split("-")
+    const date = new Date(Number.parseInt(year), Number.parseInt(month) - 1)
+    return date.toLocaleDateString("fr-FR", { month: "short", year: "numeric" })
+  }
+
+  const MonthlyTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      const data = payload[0].payload
+      return (
+        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
+          <p className="font-semibold text-gray-900">{formatMonthName(label)}</p>
+          <p className="text-gray-700">
+            <span className="font-medium">Pipeline Total:</span> {formatCurrency(data.totalValue)}
+          </p>
+          <p className="text-blue-700">
+            <span className="font-medium">Pipeline Pondéré:</span> {formatCurrency(data.weightedValue)}
+          </p>
+          <p className="text-gray-700">
+            <span className="font-medium">Nombre de deals:</span> {data.dealCount}
+          </p>
         </div>
       )
     }
@@ -464,6 +513,48 @@ export default function AnalysisDashboard({ data, onExportPDF, onBackToMapping }
             </Card>
           </div>
 
+          {/* Monthly Pipeline Chart */}
+          {data.monthlyPipeline && data.monthlyPipeline.length > 0 && (
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Calendar className="w-5 h-5 text-indigo-600" />
+                  Pipeline par Mois
+                </CardTitle>
+                <CardDescription>Évolution prévue de votre pipeline sur les prochains mois</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <LineChart data={data.monthlyPipeline}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="month" tickFormatter={formatMonthName} />
+                    <YAxis tickFormatter={(value) => `${Math.round(value / 1000)}k€`} />
+                    <Tooltip content={<MonthlyTooltip />} />
+                    <Line type="monotone" dataKey="totalValue" stroke="#10b981" strokeWidth={2} name="Pipeline Total" />
+                    <Line
+                      type="monotone"
+                      dataKey="weightedValue"
+                      stroke="#3b82f6"
+                      strokeWidth={2}
+                      strokeDasharray="5 5"
+                      name="Pipeline Pondéré"
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+                <div className="mt-4 flex flex-wrap gap-4 text-sm">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-green-500 rounded"></div>
+                    <span>Pipeline Total</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-blue-500 rounded"></div>
+                    <span>Pipeline Pondéré (probabilités améliorées)</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
           {/* Charts */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             <Card>
@@ -534,6 +625,7 @@ export default function AnalysisDashboard({ data, onExportPDF, onBackToMapping }
             </Card>
           </div>
 
+          {/* Recommendations */}
           <div className="space-y-6">
             {/* AI Recommendations */}
             {data.aiInsights && (

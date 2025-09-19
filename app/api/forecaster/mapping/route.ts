@@ -26,6 +26,8 @@ async function performMapping(headers: string[], sampleData: any[]) {
     probability: null,
     contact: null,
     company: null,
+    notes: null,
+    next_activity_date: null,
   }
 
   const confidence = { total: 0, count: 0 }
@@ -117,6 +119,32 @@ async function performMapping(headers: string[], sampleData: any[]) {
     ) {
       mapping.company = header
       confidence.total += 0.7
+      confidence.count++
+    }
+
+    // Notes mapping
+    if (
+      lowerHeader.includes("note") ||
+      lowerHeader.includes("comment") ||
+      lowerHeader.includes("description") ||
+      lowerHeader.includes("remarque")
+    ) {
+      mapping.notes = header
+      confidence.total += 0.8
+      confidence.count++
+    }
+
+    // Next activity date mapping
+    if (
+      lowerHeader.includes("next") ||
+      lowerHeader.includes("prochaine") ||
+      lowerHeader.includes("activity") ||
+      lowerHeader.includes("activité") ||
+      lowerHeader.includes("follow") ||
+      lowerHeader.includes("suivi")
+    ) {
+      mapping.next_activity_date = header
+      confidence.total += 0.8
       confidence.count++
     }
   })

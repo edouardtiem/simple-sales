@@ -21,6 +21,8 @@ const FIELD_LABELS = {
   probability: "Probabilité (%)",
   contact: "Contact",
   company: "Entreprise",
+  notes: "Notes/Commentaires",
+  next_activity_date: "Prochaine Activité",
 }
 
 const FIELD_DESCRIPTIONS = {
@@ -31,6 +33,8 @@ const FIELD_DESCRIPTIONS = {
   probability: "Le pourcentage de chance de conclure",
   contact: "La personne de contact principale",
   company: "Le nom de l'entreprise cliente",
+  notes: "Les dernières notes ou commentaires sur le deal",
+  next_activity_date: "La date de la prochaine action planifiée",
 }
 
 export default function MappingStep({ headers, sampleData, onMappingComplete, onBack }: MappingStepProps) {

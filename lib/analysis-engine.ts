@@ -22,6 +22,14 @@ interface AnalysisResult {
     impact: string
   }>
   overallScore: number
+  monthlyPipeline: Array<{
+    month: string
+    totalValue: number
+    weightedValue: number
+    dealCount: number
+    deals: any[]
+  }>
+  enhancedDeals: any[]
 }
 
 export function analyzeDeals(deals: Deal[], mapping: Record<string, string | null>): AnalysisResult {
@@ -44,6 +52,8 @@ export function analyzeDeals(deals: Deal[], mapping: Record<string, string | nul
         },
       ],
       overallScore: 0,
+      monthlyPipeline: [],
+      enhancedDeals: [],
     }
   }
 
@@ -55,15 +65,23 @@ export function analyzeDeals(deals: Deal[], mapping: Record<string, string | nul
     probability: Number.parseFloat(deal[mapping.probability || ""] || "50") || 50,
     contact: deal[mapping.contact || ""] || "",
     company: deal[mapping.company || ""] || "",
+    notes: deal[mapping.notes || ""] || "",
+    nextActivityDate: deal[mapping.next_activity_date || ""] || "",
   }))
 
-  // Calculate basic metrics
+  const enhancedMappedDeals = mappedDeals.map((deal) => ({
+    ...deal,
+    enhancedProbability: calculateEnhancedProbability(deal),
+  }))
+
   const totalPipeline = mappedDeals.reduce((sum, deal) => sum + deal.amount, 0)
-  const weightedPipeline = mappedDeals.reduce((sum, deal) => sum + (deal.amount * deal.probability) / 100, 0)
+  const weightedPipeline = enhancedMappedDeals.reduce(
+    (sum, deal) => sum + (deal.amount * deal.enhancedProbability) / 100,
+    0,
+  )
   const averageDealSize = totalPipeline / mappedDeals.length || 0
   const totalDeals = mappedDeals.length
 
-  // Analyze deals by stage
   const stageGroups = mappedDeals.reduce(
     (acc, deal) => {
       const stage = deal.stage
@@ -83,7 +101,6 @@ export function analyzeDeals(deals: Deal[], mapping: Record<string, string | nul
     value: data.value,
   }))
 
-  // Risk analysis
   const riskAnalysis = mappedDeals.reduce(
     (acc, deal) => {
       if (deal.probability >= 70) acc.lowRisk++
@@ -94,7 +111,6 @@ export function analyzeDeals(deals: Deal[], mapping: Record<string, string | nul
     { highRisk: 0, mediumRisk: 0, lowRisk: 0 },
   )
 
-  // Generate recommendations
   const recommendations = generateRecommendations(mappedDeals, {
     totalPipeline,
     weightedPipeline,
@@ -102,24 +118,29 @@ export function analyzeDeals(deals: Deal[], mapping: Record<string, string | nul
     riskAnalysis,
   })
 
-  // Calculate overall score
   const overallScore = calculateOverallScore(mappedDeals, {
     totalPipeline,
     weightedPipeline,
     riskAnalysis,
   })
 
+  const monthlyPipeline = calculateMonthlyPipeline(enhancedMappedDeals)
+
+  const enhancedDeals = enhancedMappedDeals // Declare enhancedDeals variable
+
   return {
     totalPipeline,
     weightedPipeline,
     averageDealSize,
-    conversionRate: 0, // Would need historical data
-    averageSalesCycle: 45, // Would need date analysis
+    conversionRate: 0,
+    averageSalesCycle: 45,
     totalDeals,
     dealsByStage,
     riskAnalysis,
     recommendations,
     overallScore,
+    monthlyPipeline,
+    enhancedDeals,
   }
 }
 
@@ -139,7 +160,6 @@ function generateRecommendations(
 }> {
   const recommendations = []
 
-  // High risk deals
   if (metrics.riskAnalysis.highRisk > deals.length * 0.3) {
     recommendations.push({
       type: "critical" as const,
@@ -149,7 +169,6 @@ function generateRecommendations(
     })
   }
 
-  // Pipeline concentration
   const avgDealSize = metrics.averageDealSize
   const bigDeals = deals.filter((deal) => deal.amount > avgDealSize * 2).length
   if (bigDeals > deals.length * 0.2) {
@@ -161,7 +180,6 @@ function generateRecommendations(
     })
   }
 
-  // Good performance
   if (metrics.riskAnalysis.lowRisk > deals.length * 0.5) {
     recommendations.push({
       type: "success" as const,
@@ -182,22 +200,118 @@ function calculateOverallScore(
     riskAnalysis: { highRisk: number; mediumRisk: number; lowRisk: number }
   },
 ): number {
-  let score = 50 // Base score
+  let score = 50
 
-  // Pipeline health (30 points)
   const pipelineRatio = metrics.weightedPipeline / metrics.totalPipeline
   score += pipelineRatio * 30
 
-  // Risk distribution (40 points)
   const lowRiskRatio = metrics.riskAnalysis.lowRisk / deals.length
   const highRiskRatio = metrics.riskAnalysis.highRisk / deals.length
   score += lowRiskRatio * 40 - highRiskRatio * 20
 
-  // Deal diversity (10 points)
   const avgAmount = metrics.totalPipeline / deals.length
   const variance = deals.reduce((acc, deal) => acc + Math.pow(deal.amount - avgAmount, 2), 0) / deals.length
   const diversity = Math.min(variance / (avgAmount * avgAmount), 1)
   score += (1 - diversity) * 10
 
   return Math.max(0, Math.min(100, Math.round(score)))
+}
+
+function calculateEnhancedProbability(deal: any): number {
+  const stage = deal.stage.toLowerCase()
+  const hasNextActivity = deal.nextActivityDate && deal.nextActivityDate.trim() !== ""
+  const notes = deal.notes.toLowerCase()
+
+  const isWarningNote =
+    notes.includes("warning") ||
+    notes.includes("relancé") ||
+    notes.includes("pas de retour") ||
+    notes.includes("difficile") ||
+    notes.includes("bloqué") ||
+    notes.includes("problème")
+
+  const isPositiveNote =
+    notes.includes("intéressé") ||
+    notes.includes("positif") ||
+    notes.includes("avance") ||
+    notes.includes("rdv") ||
+    notes.includes("meeting")
+
+  let baseProbability = 50
+  if (stage.includes("discovery") || stage.includes("découverte")) baseProbability = 10
+  else if (stage.includes("qualification")) baseProbability = 25
+  else if (stage.includes("proposal") || stage.includes("proposition")) baseProbability = 50
+  else if (stage.includes("negotiation") || stage.includes("négociation")) baseProbability = 70
+  else if (stage.includes("closing") || stage.includes("signature")) baseProbability = 85
+  else if (stage.includes("won") || stage.includes("gagné")) baseProbability = 100
+  else if (stage.includes("lost") || stage.includes("perdu")) baseProbability = 0
+
+  let modifier = 1
+
+  if (hasNextActivity) {
+    if (isPositiveNote) modifier = 1.5
+    else if (!isWarningNote) modifier = 1.2
+  } else {
+    if (isWarningNote) modifier = 0.2
+    else modifier = 0.7
+  }
+
+  if (isWarningNote && baseProbability > 50) {
+    modifier = Math.min(modifier, 0.3)
+  }
+
+  const enhancedProbability = Math.max(0, Math.min(100, baseProbability * modifier))
+  return Math.round(enhancedProbability)
+}
+
+function calculateMonthlyPipeline(deals: any[]): Array<{
+  month: string
+  totalValue: number
+  weightedValue: number
+  dealCount: number
+  deals: any[]
+}> {
+  const monthlyData: Record<
+    string,
+    {
+      totalValue: number
+      weightedValue: number
+      dealCount: number
+      deals: any[]
+    }
+  > = {}
+
+  deals.forEach((deal) => {
+    if (!deal.closeDate) return
+
+    try {
+      const closeDate = new Date(deal.closeDate)
+      if (isNaN(closeDate.getTime())) return
+
+      const monthKey = `${closeDate.getFullYear()}-${String(closeDate.getMonth() + 1).padStart(2, "0")}`
+
+      if (!monthlyData[monthKey]) {
+        monthlyData[monthKey] = {
+          totalValue: 0,
+          weightedValue: 0,
+          dealCount: 0,
+          deals: [],
+        }
+      }
+
+      monthlyData[monthKey].totalValue += deal.amount
+      monthlyData[monthKey].weightedValue += (deal.amount * deal.enhancedProbability) / 100
+      monthlyData[monthKey].dealCount++
+      monthlyData[monthKey].deals.push(deal)
+    } catch (error) {
+      // Skip invalid dates
+    }
+  })
+
+  return Object.entries(monthlyData)
+    .map(([month, data]) => ({
+      month,
+      ...data,
+    }))
+    .sort((a, b) => a.month.localeCompare(b.month))
 }
