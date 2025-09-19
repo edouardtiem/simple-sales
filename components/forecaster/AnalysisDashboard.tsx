@@ -170,25 +170,9 @@ export default function AnalysisDashboard({ data, onExportPDF, onBackToMapping }
   const getStageColor = (stage: any) => {
     const stageName = stage.stage.toLowerCase()
 
-    // Rouge pour les deals perdus ou les étapes avec beaucoup de deals perdus
-    if (
-      stageName.includes("lost") ||
-      stageName.includes("perdu") ||
-      stageName.includes("fermé - perdu") ||
-      (stage.lostCount && stage.lostCount > stage.count * 0.3)
-    ) {
+    // Rouge pour les deals perdus
+    if (stageName.includes("lost") || stageName.includes("perdu") || stageName.includes("fermé - perdu")) {
       return "#ef4444" // Rouge
-    }
-
-    // Orange pour les deals à risque ou les étapes problématiques
-    if (
-      stageName.includes("négociation") ||
-      stageName.includes("proposition") ||
-      stageName.includes("qualification") ||
-      stage.status === "at-risk" ||
-      (stage.atRiskCount && stage.atRiskCount > stage.count * 0.2)
-    ) {
-      return "#f59e0b" // Orange
     }
 
     // Bleu pour les deals gagnés
@@ -196,13 +180,23 @@ export default function AnalysisDashboard({ data, onExportPDF, onBackToMapping }
       stageName.includes("won") ||
       stageName.includes("gagné") ||
       stageName.includes("fermé - gagné") ||
-      stageName.includes("gagnés") ||
-      stage.status === "won"
+      stageName.includes("gagnés")
     ) {
       return "#3b82f6" // Bleu
     }
 
-    // Vert pour les étapes saines
+    // Orange pour les deals à risque ou les étapes problématiques
+    if (
+      stageName.includes("négociation") ||
+      stageName.includes("negotiation") ||
+      stageName.includes("proposition") ||
+      stageName.includes("proposal") ||
+      stageName.includes("qualification")
+    ) {
+      return "#f59e0b" // Orange
+    }
+
+    // Vert pour les étapes saines (discovery, appointment scheduled, etc.)
     return "#10b981" // Vert (défaut)
   }
 
@@ -676,32 +670,45 @@ export default function AnalysisDashboard({ data, onExportPDF, onBackToMapping }
                 <CardDescription>Actions prioritaires pour améliorer votre performance</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  {data.recommendations.map((rec, index) => {
-                    const Icon = rec.type === "critical" ? AlertTriangle : rec.type === "warning" ? Clock : CheckCircle
-                    const iconColor =
-                      rec.type === "critical"
-                        ? "text-red-600"
-                        : rec.type === "warning"
-                          ? "text-amber-600"
-                          : "text-emerald-600"
-                    const bgColor =
-                      rec.type === "critical" ? "bg-red-50" : rec.type === "warning" ? "bg-amber-50" : "bg-emerald-50"
+                {data.recommendations.length === 0 ? (
+                  <div className="text-center py-8 text-slate-500">
+                    <Lightbulb className="w-12 h-12 mx-auto mb-4 text-slate-300" />
+                    <h3 className="text-lg font-medium mb-2">Recommandations en cours de génération</h3>
+                    <p className="text-sm">
+                      Cette section affiche normalement des recommandations personnalisées basées sur l'analyse de votre
+                      pipeline. Les recommandations incluent des actions prioritaires, des alertes sur les deals à
+                      risque, et des suggestions d'optimisation de votre processus commercial.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {data.recommendations.map((rec, index) => {
+                      const Icon =
+                        rec.type === "critical" ? AlertTriangle : rec.type === "warning" ? Clock : CheckCircle
+                      const iconColor =
+                        rec.type === "critical"
+                          ? "text-red-600"
+                          : rec.type === "warning"
+                            ? "text-amber-600"
+                            : "text-emerald-600"
+                      const bgColor =
+                        rec.type === "critical" ? "bg-red-50" : rec.type === "warning" ? "bg-amber-50" : "bg-emerald-50"
 
-                    return (
-                      <Alert key={index} className={`${bgColor} border-l-4`}>
-                        <Icon className={`h-4 w-4 ${iconColor}`} />
-                        <div>
-                          <h4 className="font-semibold text-slate-900 mb-1">{rec.title}</h4>
-                          <AlertDescription className="text-slate-700 mb-2">{rec.description}</AlertDescription>
-                          <Badge variant="outline" className="text-xs">
-                            Impact: {rec.impact}
-                          </Badge>
-                        </div>
-                      </Alert>
-                    )
-                  })}
-                </div>
+                      return (
+                        <Alert key={index} className={`${bgColor} border-l-4`}>
+                          <Icon className={`h-4 w-4 ${iconColor}`} />
+                          <div>
+                            <h4 className="font-semibold text-slate-900 mb-1">{rec.title}</h4>
+                            <AlertDescription className="text-slate-700 mb-2">{rec.description}</AlertDescription>
+                            <Badge variant="outline" className="text-xs">
+                              Impact: {rec.impact}
+                            </Badge>
+                          </div>
+                        </Alert>
+                      )
+                    })}
+                  </div>
+                )}
               </CardContent>
             </Card>
           </div>

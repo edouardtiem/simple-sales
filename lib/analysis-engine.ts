@@ -95,11 +95,13 @@ export function analyzeDeals(deals: Deal[], mapping: Record<string, string | nul
     {} as Record<string, { count: number; value: number }>,
   )
 
-  const dealsByStage = Object.entries(stageGroups).map(([stage, data]) => ({
-    stage,
-    count: data.count,
-    value: data.value,
-  }))
+  const dealsByStage = Object.entries(stageGroups)
+    .map(([stage, data]) => ({
+      stage,
+      count: data.count,
+      value: data.value,
+    }))
+    .sort((a, b) => getStageOrder(a.stage) - getStageOrder(b.stage))
 
   const riskAnalysis = mappedDeals.reduce(
     (acc, deal) => {
@@ -230,7 +232,10 @@ function calculateEnhancedProbability(deal: any): number {
     notes.includes("bloqué") ||
     notes.includes("problème") ||
     notes.includes("silence") ||
-    notes.includes("ne répond pas")
+    notes.includes("ne répond pas") ||
+    notes.includes("injoignable") ||
+    notes.includes("report") ||
+    notes.includes("annulé")
 
   const isPositiveNote =
     notes.includes("intéressé") ||
@@ -239,46 +244,41 @@ function calculateEnhancedProbability(deal: any): number {
     notes.includes("rdv") ||
     notes.includes("meeting") ||
     notes.includes("proposition") ||
-    notes.includes("budget")
+    notes.includes("budget") ||
+    notes.includes("validé") ||
+    notes.includes("ok")
 
-  // Base probabilities - more conservative
   let baseProbability = 50
-  if (stage.includes("discovery") || stage.includes("découverte")) baseProbability = 8
-  else if (stage.includes("qualification")) baseProbability = 20
-  else if (stage.includes("proposal") || stage.includes("proposition")) baseProbability = 45
-  else if (stage.includes("negotiation") || stage.includes("négociation")) baseProbability = 60
-  else if (stage.includes("closing") || stage.includes("signature")) baseProbability = 80
+  if (stage.includes("discovery") || stage.includes("découverte")) baseProbability = 5
+  else if (stage.includes("appointment") || stage.includes("scheduled"))
+    baseProbability = 12 // Added appointment scheduled stage
+  else if (stage.includes("qualification")) baseProbability = 18
+  else if (stage.includes("proposal") || stage.includes("proposition")) baseProbability = 40
+  else if (stage.includes("negotiation") || stage.includes("négociation")) baseProbability = 55
+  else if (stage.includes("closing") || stage.includes("signature")) baseProbability = 75
   else if (stage.includes("won") || stage.includes("gagné")) baseProbability = 100
   else if (stage.includes("lost") || stage.includes("perdu")) baseProbability = 0
 
-  // More aggressive modifiers
   let finalProbability = baseProbability
 
   if (hasNextActivity) {
     if (isPositiveNote) {
-      // Boost for positive notes with next activity
-      finalProbability = Math.min(baseProbability * 1.8, 95)
+      finalProbability = Math.min(baseProbability * 2.2, 95)
     } else if (!isWarningNote) {
-      // Slight boost for neutral notes with next activity
-      finalProbability = Math.min(baseProbability * 1.3, 85)
+      finalProbability = Math.min(baseProbability * 1.5, 80)
     } else {
-      // Warning note but has next activity - still concerning
-      finalProbability = Math.max(baseProbability * 0.4, 5)
+      finalProbability = Math.max(baseProbability * 0.3, 3)
     }
   } else {
-    // No next activity is a major red flag
     if (isWarningNote) {
-      // Critical: no activity + warning notes
-      finalProbability = Math.max(baseProbability * 0.1, 2)
+      finalProbability = Math.max(baseProbability * 0.05, 1) // Even more aggressive for warning + no activity
     } else {
-      // No activity but no warning - still concerning
-      finalProbability = Math.max(baseProbability * 0.3, 5)
+      finalProbability = Math.max(baseProbability * 0.2, 3) // More aggressive for no activity
     }
   }
 
-  // Special case: high-stage deals without activity are very concerning
-  if (!hasNextActivity && baseProbability >= 60) {
-    finalProbability = Math.min(finalProbability, 15)
+  if (!hasNextActivity && baseProbability >= 40) {
+    finalProbability = Math.min(finalProbability, 8)
   }
 
   return Math.round(Math.max(0, Math.min(100, finalProbability)))
@@ -334,4 +334,17 @@ function calculateMonthlyPipeline(deals: any[]): Array<{
       ...data,
     }))
     .sort((a, b) => a.month.localeCompare(b.month))
+}
+
+function getStageOrder(stage: string): number {
+  const stageLower = stage.toLowerCase()
+  if (stageLower.includes("discovery") || stageLower.includes("découverte")) return 1
+  if (stageLower.includes("appointment") || stageLower.includes("scheduled")) return 2
+  if (stageLower.includes("qualification")) return 3
+  if (stageLower.includes("proposal") || stageLower.includes("proposition")) return 4
+  if (stageLower.includes("negotiation") || stageLower.includes("négociation")) return 5
+  if (stageLower.includes("closing") || stageLower.includes("signature")) return 6
+  if (stageLower.includes("won") || stageLower.includes("gagné")) return 7
+  if (stageLower.includes("lost") || stageLower.includes("perdu")) return 8
+  return 9 // Unknown stages at the end
 }
