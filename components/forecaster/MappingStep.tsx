@@ -4,7 +4,6 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Badge } from "@/components/ui/badge"
 import { CheckCircle, AlertCircle, Loader2 } from "lucide-react"
 
 interface MappingStepProps {
@@ -115,9 +114,7 @@ export default function MappingStep({ headers, sampleData, onMappingComplete, on
                     <div className="flex items-center gap-2 mb-1">
                       <h4 className="font-medium text-slate-900">{label}</h4>
                       {isRequired && (
-                        <Badge variant="destructive" className="text-xs">
-                          Requis
-                        </Badge>
+                        <span className="px-2 py-1 text-xs bg-red-100 text-red-800 rounded-full">Requis</span>
                       )}
                       {selectedHeader && <CheckCircle className="w-4 h-4 text-emerald-600" />}
                     </div>
