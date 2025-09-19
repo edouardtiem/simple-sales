@@ -25,6 +25,28 @@ interface AnalysisResult {
 }
 
 export function analyzeDeals(deals: Deal[], mapping: Record<string, string | null>): AnalysisResult {
+  if (!deals || !Array.isArray(deals) || deals.length === 0) {
+    return {
+      totalPipeline: 0,
+      weightedPipeline: 0,
+      averageDealSize: 0,
+      conversionRate: 0,
+      averageSalesCycle: 45,
+      totalDeals: 0,
+      dealsByStage: [],
+      riskAnalysis: { highRisk: 0, mediumRisk: 0, lowRisk: 0 },
+      recommendations: [
+        {
+          type: "warning",
+          title: "Aucune donnée à analyser",
+          description: "Le fichier ne contient pas de données valides ou les données n'ont pas pu être parsées.",
+          impact: "Vérifiez le format de votre fichier",
+        },
+      ],
+      overallScore: 0,
+    }
+  }
+
   const mappedDeals = deals.map((deal) => ({
     name: deal[mapping.deal_name || ""] || "Deal sans nom",
     amount: Number.parseFloat(deal[mapping.amount || ""] || "0") || 0,

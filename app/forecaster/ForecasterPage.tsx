@@ -152,7 +152,10 @@ export default function ForecasterPage() {
     setMapping(newMapping)
 
     if (parsedData) {
-      const analysis = analyzeDeals(parsedData.data, newMapping)
+      const dataToAnalyze = parsedData.data || []
+      console.log("[v0] Data to analyze:", dataToAnalyze.length, "rows")
+
+      const analysis = analyzeDeals(dataToAnalyze, newMapping)
 
       // Call AI analysis API
       try {
