@@ -478,11 +478,7 @@ export default function AnalysisDashboard({ data, onExportPDF, onBackToMapping }
                     <XAxis dataKey="stage" />
                     <YAxis />
                     <Tooltip content={<CustomTooltip />} />
-                    <Bar dataKey="value">
-                      {data.dealsByStage.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={getStageColor(entry)} />
-                      ))}
-                    </Bar>
+                    <Bar dataKey="value" fill={(entry: any) => getStageColor(entry)} />
                   </BarChart>
                 </ResponsiveContainer>
                 <div className="mt-4 flex flex-wrap gap-4 text-sm">
