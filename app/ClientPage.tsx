@@ -367,7 +367,7 @@ export default function ClientPage() {
 
             <div className="text-center mt-14">
               <Button
-                className="w-auto md:w-auto bg-[#f6c344] px-5 md:px-8 py-3 md:py-5 text-sm md:text-base font-medium text-[#1a1a1a] hover:bg-[#f4b82e] rounded-lg max-w-sm md:max-w-none mx-auto"
+                className="w-auto md:w-auto bg-[#f6c344] px-5 md:px-8 py-3 md:py-5 text-sm md:text-base font-medium text-black hover:bg-[#f4b82e] hover:text-black rounded-lg max-w-sm md:max-w-none mx-auto"
                 onClick={() => handleCTAClick("problems_section")}
               >
                 Obtenir mon Score Gratuit
@@ -534,7 +534,7 @@ export default function ClientPage() {
               Prêt à transformer vos angles morts en opportunités ?
             </h2>
             <Button
-              className="w-auto md:w-auto bg-[#f6c344] px-5 md:px-8 py-3 md:py-5 text-base md:text-lg font-medium text-[#1a1a1a] hover:bg-[#f4b82e] rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              className="w-auto md:w-auto bg-[#f6c344] px-5 md:px-8 py-3 md:py-5 text-base md:text-lg font-medium text-black hover:bg-[#f4b82e] hover:text-black rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               onClick={() => handleCTAClick("final_cta")}
             >
               🎯 Obtenir mon Scan Gratuit

@@ -1,6 +1,8 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { JetBrains_Mono } from "next/font/google"
+import { Analytics } from "@vercel/analytics/next"
+import { Suspense } from "react"
 import "./globals.css"
 
 const jetbrainsMono = JetBrains_Mono({
@@ -26,7 +28,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className={jetbrainsMono.variable}>
-      <body className="font-mono">{children}</body>
+      <body className="font-mono">
+        <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+        <Analytics debug={process.env.NODE_ENV === "development"} />
+      </body>
     </html>
   )
 }
