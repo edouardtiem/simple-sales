@@ -215,7 +215,7 @@ export default function ClientPage() {
 
           {/* Social proof avec logos - directement sous le CTA */}
           <div className="mt-10 md:mt-14">
-            <h3 className="text-sm md:text-base font-medium mb-2 md:mb-3">
+            <h3 className="text-xs md:text-sm font-medium mb-2 md:mb-3">
               Une approche éprouvée auprès de leaders comme :
             </h3>
             <div className="flex flex-wrap items-end justify-center gap-5 md:gap-7 py-3 md:py-5">
@@ -367,7 +367,7 @@ export default function ClientPage() {
 
             <div className="text-center mt-14">
               <Button
-                className="w-auto md:w-auto bg-[#f6c344] px-5 md:px-8 py-3 md:py-5 text-sm md:text-base font-medium text-[#1a1a1a] hover:bg-[#f4b82e] rounded-lg max-w-sm md:max-w-none mx-auto"
+                className="w-auto md:w-auto bg-[#f6c344] px-5 md:px-8 py-3 md:py-5 text-sm md:text-base font-medium text-black hover:bg-[#f4b82e] hover:text-black rounded-lg max-w-sm md:max-w-none mx-auto"
                 onClick={() => handleCTAClick("problems_section")}
               >
                 Obtenir mon Score Gratuit
@@ -534,7 +534,7 @@ export default function ClientPage() {
               Prêt à transformer vos angles morts en opportunités ?
             </h2>
             <Button
-              className="w-auto md:w-auto bg-[#f6c344] px-5 md:px-8 py-3 md:py-5 text-base md:text-lg font-medium text-[#1a1a1a] hover:bg-[#f4b82e] rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              className="w-auto md:w-auto bg-[#f6c344] px-5 md:px-8 py-3 md:py-5 text-base md:text-lg font-medium text-black hover:bg-[#f4b82e] hover:text-black rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               onClick={() => handleCTAClick("final_cta")}
             >
               🎯 Obtenir mon Scan Gratuit
@@ -546,8 +546,8 @@ export default function ClientPage() {
       {/* Footer restructuré */}
       <footer className="bg-gray-800 text-white py-14">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-7">
-            {/* Colonne 1 : Logo + Slogan */}
+          <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-7 md:gap-x-12">
+            {/* Colonne 1 : Logo + Slogan - Plus large */}
             <div className="space-y-4">
               <h3 className="text-lg font-medium">simple.sales</h3>
               <p className="text-gray-300 leading-relaxed">
@@ -568,19 +568,23 @@ export default function ClientPage() {
             <div className="space-y-4">
               <h3 className="text-lg font-medium">Nos Solutions</h3>
               <div className="space-y-2">
-                <a href="#" className="block text-gray-300 hover:text-white transition-colors">
-                  Le Diagnostic (Offert)
-                </a>
-                <a href="#" className="block text-gray-300 hover:text-white transition-colors">
-                  Le Plan d'Accélération
-                </a>
-                <a href="#" className="block text-gray-300 hover:text-white transition-colors">
-                  Le Partenariat Stratégique
+                <a href="/notre-approche" className="block text-gray-300 hover:text-white transition-colors">
+                  Notre approche
                 </a>
               </div>
             </div>
 
-            {/* Colonne 3 : Légal */}
+            {/* Colonne 3 : Les Ressources */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium">Les Ressources</h3>
+              <div className="space-y-2">
+                <a href="/nos-guides" className="block text-gray-300 hover:text-white transition-colors">
+                  Nos guides
+                </a>
+              </div>
+            </div>
+
+            {/* Colonne 4 : Légal */}
             <div className="space-y-4">
               <h3 className="text-lg font-medium">Légal</h3>
               <div className="space-y-2">

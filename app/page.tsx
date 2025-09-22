@@ -10,18 +10,6 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      {/* Google tag (gtag.js) */}
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ51W42YFS"></script>
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-NZ51W42YFS');
-          `,
-        }}
-      />
       <ClientPage />
     </>
   )
