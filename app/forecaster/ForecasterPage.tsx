@@ -7,7 +7,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Upload, FileSpreadsheet, AlertCircle, CheckCircle2, HelpCircle } from "lucide-react"
 import MappingStep from "@/components/forecaster/MappingStep"
 import AnalysisDashboard from "@/components/forecaster/AnalysisDashboard"
 import AnalysisStreamingPage from "@/components/forecaster/AnalysisStreamingPage"
@@ -289,8 +288,7 @@ export default function ForecasterPage() {
           <Card className="mb-8">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Upload className="h-5 w-5" />
-                Déposez votre Pipeline, Révélez la Vérité en 90 Secondes
+                📤 Déposez votre Pipeline, Révélez la Vérité en 90 Secondes
               </CardTitle>
               <CardDescription>
                 Formats acceptés : CSV, Excel (.xlsx, .xls) - Taille max : 10MB. Notre outil analyse automatiquement la
@@ -307,7 +305,7 @@ export default function ForecasterPage() {
                     className="hidden"
                     id="file-upload"
                   />
-                  <FileSpreadsheet className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                  <div className="text-6xl mb-4">📊</div>
                   <p className="text-foreground font-medium mb-2">Sélectionnez votre fichier CRM</p>
                   <p className="text-muted-foreground text-sm mb-4">Formats acceptés : CSV, Excel (.xlsx, .xls)</p>
                   <Button variant="outline" asChild>
@@ -320,7 +318,7 @@ export default function ForecasterPage() {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between p-4 bg-card rounded-lg">
                     <div className="flex items-center gap-3">
-                      <FileSpreadsheet className="h-8 w-8 text-primary" />
+                      <div className="text-2xl">📊</div>
                       <div>
                         <p className="font-medium text-foreground">{uploadState.file.name}</p>
                         <p className="text-sm text-muted-foreground">
@@ -347,7 +345,7 @@ export default function ForecasterPage() {
 
                   {uploadState.success && (
                     <Alert className="border-green-200 bg-green-50">
-                      <CheckCircle2 className="h-4 w-4 text-green-600" />
+                      <div className="text-green-600">✅</div>
                       <AlertDescription className="text-green-800">
                         Fichier uploadé avec succès ! Passage au diagnostic de fiabilité...
                       </AlertDescription>
@@ -364,7 +362,7 @@ export default function ForecasterPage() {
 
               {uploadState.error && (
                 <Alert variant="destructive" className="mt-4">
-                  <AlertCircle className="h-4 w-4" />
+                  <div className="text-red-600">⚠️</div>
                   <AlertDescription>{uploadState.error}</AlertDescription>
                 </Alert>
               )}
@@ -415,8 +413,7 @@ export default function ForecasterPage() {
           <Card className="mb-8">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <HelpCircle className="h-5 w-5" />
-                Les Questions que votre Pipeline ne Pose Jamais
+                ❓ Les Questions que votre Pipeline ne Pose Jamais
               </CardTitle>
               <CardDescription>
                 Réponses aux questions essentielles sur la fiabilité de vos prévisions commerciales
