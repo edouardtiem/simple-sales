@@ -2,7 +2,6 @@
 
 import { JetBrains_Mono } from "next/font/google"
 import Link from "next/link"
-import Footer from "@/components/footer"
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -223,9 +222,6 @@ export default function PolitiqueConfidentialitePage() {
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <Footer />
     </main>
   )
 }

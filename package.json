@@ -9,6 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@ai-sdk/openai": "latest",
     "@notionhq/client": "latest",
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-alert-dialog": "^1.1.2",
@@ -31,20 +32,27 @@
     "@remix-run/react": "latest",
     "@sveltejs/kit": "latest",
     "@vercel/analytics": "latest",
+    "ai": "latest",
     "chart.js": "latest",
     "chartjs-plugin-annotation": "latest",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.454.0",
+    "nanoid": "latest",
     "next": "15.2.4",
     "next-themes": "latest",
+    "papaparse": "latest",
     "react": "^19",
     "react-dom": "^19",
+    "react-dropzone": "latest",
+    "recharts": "latest",
     "svelte": "latest",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "xlsx": "latest",
+    "zod": "4.1.9"
   },
   "devDependencies": {
     "@types/node": "^22",

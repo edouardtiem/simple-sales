@@ -3,6 +3,7 @@
 import type React from "react"
 import "./globals.css"
 import { JetBrains_Mono } from "next/font/google"
+import { Analytics } from "@vercel/analytics/react"
 import { Suspense } from "react"
 
 // Font
@@ -38,7 +39,12 @@ const jsonLd = {
 }
 
 function ClientLayoutContent({ children }: { children: React.ReactNode }) {
-  return <>{children}</>
+  return (
+    <>
+      {children}
+      <Analytics />
+    </>
+  )
 }
 
 export default function ClientLayout({

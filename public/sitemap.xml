@@ -1,64 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <!-- corrected domain from simple-sales.fr to simplesales.fr -->
-    <loc>https://simplesales.fr</loc>
+    <loc>https://simple-sales.fr</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <!-- corrected domain from simple-sales.fr to simplesales.fr -->
-    <loc>https://simplesales.fr/onboarding</loc>
+    <loc>https://simple-sales.fr/onboarding</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <!-- corrected domain from simple-sales.fr to simplesales.fr -->
-    <loc>https://simplesales.fr/mentions-legales</loc>
+    <loc>https://simple-sales.fr/mentions-legales</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <!-- corrected domain from simple-sales.fr to simplesales.fr -->
-    <loc>https://simplesales.fr/politique-confidentialite</loc>
+    <loc>https://simple-sales.fr/politique-confidentialite</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <!-- corrected domain from simple-sales.fr to simplesales.fr -->
-    <loc>https://simplesales.fr/conditions-generales</loc>
-    <lastmod>2024-01-15</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <!-- corrected domain from simple-sales.fr to simplesales.fr -->
-    <loc>https://simplesales.fr/nos-guides</loc>
-    <lastmod>2024-01-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <!-- corrected domain from simple-sales.fr to simplesales.fr -->
-    <loc>https://simplesales.fr/nos-guides/processus-commercial</loc>
-    <lastmod>2024-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <!-- corrected domain from simple-sales.fr to simplesales.fr -->
-    <loc>https://simplesales.fr/notre-approche</loc>
-    <lastmod>2024-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <!-- corrected domain from simple-sales.fr to simplesales.fr -->
-    <loc>https://simplesales.fr/success</loc>
+    <loc>https://simple-sales.fr/conditions-generales</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
