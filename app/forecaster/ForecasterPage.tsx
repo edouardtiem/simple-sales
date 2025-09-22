@@ -5,12 +5,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Upload, FileSpreadsheet, AlertCircle, CheckCircle2 } from "lucide-react"
+import { Upload, FileSpreadsheet, AlertCircle, CheckCircle2, HelpCircle } from "lucide-react"
 import { useDropzone } from "react-dropzone"
 import MappingStep from "@/components/forecaster/MappingStep"
 import AnalysisDashboard from "@/components/forecaster/AnalysisDashboard"
 import AnalysisStreamingPage from "@/components/forecaster/AnalysisStreamingPage"
 import { analyzeDeals } from "@/lib/analysis-engine"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 
 interface FileUploadState {
   file: File | null
@@ -261,14 +262,35 @@ export default function ForecasterPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "Simple Sales Forecaster",
+            applicationCategory: "BusinessApplication",
+            operatingSystem: "Web",
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "EUR",
+            },
+            description: "Outil gratuit d'analyse de pipeline commercial pour fiabiliser vos prévisions de ventes",
+            url: "https://simplesales.fr/forecaster",
+          }),
+        }}
+      />
+
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
-          {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-foreground mb-4">Simple Sales Forecaster</h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Uploadez votre fichier CRM et obtenez une analyse complète de votre pipeline commercial avec des
-              recommandations personnalisées en moins de 90 secondes.
+            <h1 className="text-4xl font-bold text-foreground mb-4 text-balance">
+              Le Diagnostic Instantané pour Fiabiliser votre Prévision Commerciale
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
+              Vos prévisions de ventes sont-elles fiables ? Révélez la vérité de votre pipeline en 90 secondes.
+              Identifiez les deals à risque et passez du doute à la décision avec notre diagnostic gratuit.
             </p>
           </div>
 
@@ -277,9 +299,12 @@ export default function ForecasterPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Upload className="h-5 w-5" />
-                Importer votre fichier CRM
+                Déposez votre Pipeline, Révélez la Vérité en 90 Secondes
               </CardTitle>
-              <CardDescription>Formats acceptés : CSV, Excel (.xlsx, .xls) - Taille max : 10MB</CardDescription>
+              <CardDescription>
+                Formats acceptés : CSV, Excel (.xlsx, .xls) - Taille max : 10MB. Notre outil analyse automatiquement la
+                fiabilité de chaque deal.
+              </CardDescription>
             </CardHeader>
             <CardContent>
               {!uploadState.file ? (
@@ -302,6 +327,7 @@ export default function ForecasterPage() {
                   )}
                 </div>
               ) : (
+                // ... existing file display logic ...
                 <div className="space-y-4">
                   <div className="flex items-center justify-between p-4 bg-card rounded-lg">
                     <div className="flex items-center gap-3">
@@ -323,7 +349,7 @@ export default function ForecasterPage() {
                   {uploadState.uploading && (
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
-                        <span>Upload en cours...</span>
+                        <span>Analyse de la fiabilité en cours...</span>
                         <span>{Math.round(uploadState.progress)}%</span>
                       </div>
                       <Progress value={uploadState.progress} className="w-full" />
@@ -334,14 +360,14 @@ export default function ForecasterPage() {
                     <Alert className="border-green-200 bg-green-50">
                       <CheckCircle2 className="h-4 w-4 text-green-600" />
                       <AlertDescription className="text-green-800">
-                        Fichier uploadé avec succès ! Passage au mapping des colonnes...
+                        Fichier uploadé avec succès ! Passage au diagnostic de fiabilité...
                       </AlertDescription>
                     </Alert>
                   )}
 
                   {!uploadState.uploading && !uploadState.success && (
                     <Button onClick={handleUpload} className="w-full" size="lg">
-                      Analyser mon pipeline
+                      Diagnostiquer la Fiabilité de mon Pipeline
                     </Button>
                   )}
                 </div>
@@ -356,42 +382,141 @@ export default function ForecasterPage() {
             </CardContent>
           </Card>
 
-          {/* Features Preview */}
-          <div className="grid md:grid-cols-3 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Mapping Automatique</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground text-sm">
-                  Notre IA reconnaît automatiquement les colonnes de votre CRM (montants, dates, étapes) sans
-                  configuration manuelle.
-                </p>
-              </CardContent>
-            </Card>
+          <div className="mb-12">
+            <h2 className="text-2xl font-bold text-center mb-8">Comment Fonctionne Notre Outil de Diagnostic ?</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Analyse de Fiabilité Automatique</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground text-sm">
+                    Notre algorithme évalue 6 critères silencieux pour pondérer chaque deal : étape, montant, activité
+                    récente, notes de qualification, et signaux d'alerte pour révéler votre pipeline probable.
+                  </p>
+                </CardContent>
+              </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Analyse Instantanée</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground text-sm">
-                  Obtenez votre diagnostic complet en moins de 90 secondes avec des recommandations concrètes.
-                </p>
-              </CardContent>
-            </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Détection des Deals à Risque</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground text-sm">
+                    Identifiez instantanément les deals sans "next step" daté ou sans champion interne validé.
+                    Distinguez l'optimisme de la réalité dans vos prévisions commerciales.
+                  </p>
+                </CardContent>
+              </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Rapport Détaillé</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground text-sm">
-                  Dashboard interactif avec scores, graphiques et plan d'action personnalisé pour améliorer vos ventes.
-                </p>
-              </CardContent>
-            </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Score de Fiabilité Précis</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground text-sm">
+                    Obtenez un score global de santé de pipeline avec recommandations actionnables pour réduire
+                    l'incertitude et améliorer la précision de vos forecasts.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
           </div>
+
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <HelpCircle className="h-5 w-5" />
+                Les Questions que votre Pipeline ne Pose Jamais
+              </CardTitle>
+              <CardDescription>
+                Réponses aux questions essentielles sur la fiabilité de vos prévisions commerciales
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                  __html: JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "FAQPage",
+                    mainEntity: [
+                      {
+                        "@type": "Question",
+                        name: "Comment savoir si mon forecast est réaliste ?",
+                        acceptedAnswer: {
+                          "@type": "Answer",
+                          text: "Un forecast réaliste prend en compte plus que le montant et l'étape. Notre outil analyse 6 points de qualification silencieux pour pondérer chaque deal et vous donner un score de fiabilité précis, distinguant le pipeline brut du pipeline probable.",
+                        },
+                      },
+                      {
+                        "@type": "Question",
+                        name: "Quel est le principal risque dans un pipeline commercial ?",
+                        acceptedAnswer: {
+                          "@type": "Answer",
+                          text: "Souvent, le principal risque est l'optimisme. Des deals sans 'next step' daté ou sans 'champion interne' validé peuvent sembler acquis alors qu'ils sont fragiles. Notre diagnostic met en lumière ces deals à risque critique.",
+                        },
+                      },
+                      {
+                        "@type": "Question",
+                        name: "Pourquoi mes prévisions sont-elles toujours trop optimistes ?",
+                        acceptedAnswer: {
+                          "@type": "Answer",
+                          text: "L'optimisme vient du manque de pondération. Un deal en négociation sans activité récente n'a pas la même probabilité qu'un deal avec un rendez-vous planifié. Notre algorithme applique des coefficients réalistes selon l'activité et les signaux de qualification.",
+                        },
+                      },
+                    ],
+                  }),
+                }}
+              />
+              <Accordion type="single" collapsible className="w-full">
+                <AccordionItem value="item-1">
+                  <AccordionTrigger>Comment savoir si mon forecast est réaliste ?</AccordionTrigger>
+                  <AccordionContent>
+                    Un forecast réaliste prend en compte plus que le montant et l'étape. Notre outil analyse 6 points de
+                    qualification silencieux pour pondérer chaque deal et vous donner un score de fiabilité précis,
+                    distinguant le pipeline brut du pipeline probable.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-2">
+                  <AccordionTrigger>Quel est le principal risque dans un pipeline commercial ?</AccordionTrigger>
+                  <AccordionContent>
+                    Souvent, le principal risque est l'optimisme. Des deals sans "next step" daté ou sans "champion
+                    interne" validé peuvent sembler acquis alors qu'ils sont fragiles. Notre diagnostic met en lumière
+                    ces deals à risque critique.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-3">
+                  <AccordionTrigger>Pourquoi mes prévisions sont-elles toujours trop optimistes ?</AccordionTrigger>
+                  <AccordionContent>
+                    L'optimisme vient du manque de pondération. Un deal en négociation sans activité récente n'a pas la
+                    même probabilité qu'un deal avec un rendez-vous planifié. Notre algorithme applique des coefficients
+                    réalistes selon l'activité et les signaux de qualification.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-4">
+                  <AccordionTrigger>Mes données sont-elles sécurisées ?</AccordionTrigger>
+                  <AccordionContent>
+                    Absolument. Vos données sont traitées localement et ne sont jamais stockées sur nos serveurs.
+                    L'analyse se fait en temps réel et les fichiers sont automatiquement supprimés après traitement.
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </CardContent>
+          </Card>
+
+          <Card className="text-center bg-primary/5 border-primary/20">
+            <CardContent className="pt-6">
+              <h2 className="text-2xl font-bold mb-4">Passez du Doute à la Décision</h2>
+              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+                Ne laissez plus l'incertitude guider vos décisions commerciales. Obtenez un diagnostic précis de votre
+                pipeline et des recommandations actionnables en moins de 90 secondes.
+              </p>
+              <Button size="lg" className="text-lg px-8">
+                Commencer le Diagnostic Gratuit
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
