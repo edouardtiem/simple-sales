@@ -377,6 +377,53 @@ export default function AnalysisDashboard({ data, onExportPDF, onBackToMapping }
             </CardContent>
           </Card>
 
+          {/* Pipeline Explanation Section */}
+          <Card className="mb-8 bg-blue-50 border-blue-200">
+            <CardContent className="pt-6">
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Target className="w-4 h-4 text-blue-600" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold text-slate-900 mb-2">Explication du Pipeline Pondéré</h3>
+                  <div className="space-y-3 text-sm text-slate-700">
+                    <p>
+                      <strong>Pipeline Total :</strong> {formatCurrency(data.totalPipeline)} - Somme brute de tous vos
+                      deals en cours
+                    </p>
+                    <p>
+                      <strong>Pipeline Pondéré :</strong> {formatCurrency(data.weightedPipeline)} - Représente{" "}
+                      <span className="font-semibold text-blue-600">
+                        {Math.round((data.weightedPipeline / data.totalPipeline) * 100)}%
+                      </span>{" "}
+                      du pipeline total après ajustement des probabilités
+                    </p>
+                    <div className="bg-white p-3 rounded-lg border border-blue-200">
+                      <p className="font-medium text-slate-800 mb-2">Facteurs impactant la pondération :</p>
+                      <ul className="space-y-1 text-xs text-slate-600">
+                        <li>
+                          • <strong>Dates de clôture irréalistes</strong> - Deals avec des échéances trop optimistes
+                        </li>
+                        <li>
+                          • <strong>Informations manquantes</strong> - Notes de qualification incomplètes
+                        </li>
+                        <li>
+                          • <strong>Prochaines actions floues</strong> - Next steps sans objectifs précis
+                        </li>
+                        <li>
+                          • <strong>Stagnation dans les étapes</strong> - Deals sans progression récente
+                        </li>
+                        <li>
+                          • <strong>Données incohérentes</strong> - Montants ou probabilités aberrantes
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           {data.aiInsights && (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
               {/* AI Insights */}
@@ -675,10 +722,19 @@ export default function AnalysisDashboard({ data, onExportPDF, onBackToMapping }
                     <Lightbulb className="w-12 h-12 mx-auto mb-4 text-slate-300" />
                     <h3 className="text-lg font-medium mb-2">Recommandations en cours de génération</h3>
                     <p className="text-sm">
-                      Cette section affiche normalement des recommandations personnalisées basées sur l'analyse de votre
-                      pipeline. Les recommandations incluent des actions prioritaires, des alertes sur les deals à
-                      risque, et des suggestions d'optimisation de votre processus commercial.
+                      Nous n'avons pas de recommandations personnalisées spécifiques pour ce pipeline actuellement. Les
+                      recommandations sont générées en fonction de patterns détectés dans vos données commerciales et
+                      nécessitent un volume suffisant d'informations pour être pertinentes.
                     </p>
+                    <div className="mt-4 p-3 bg-slate-100 rounded-lg text-xs text-left">
+                      <p className="font-medium mb-1">Les recommandations incluent normalement :</p>
+                      <ul className="space-y-1">
+                        <li>• Actions prioritaires sur les deals à risque</li>
+                        <li>• Optimisations du processus commercial</li>
+                        <li>• Suggestions de qualification des prospects</li>
+                        <li>• Alertes sur les échéances critiques</li>
+                      </ul>
+                    </div>
                   </div>
                 ) : (
                   <div className="space-y-4">
