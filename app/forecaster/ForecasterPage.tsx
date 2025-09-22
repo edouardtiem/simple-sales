@@ -1,12 +1,13 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useCallback } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Upload, FileSpreadsheet, AlertCircle, CheckCircle2, HelpCircle } from "lucide-react"
-import { useDropzone } from "react-dropzone"
 import MappingStep from "@/components/forecaster/MappingStep"
 import AnalysisDashboard from "@/components/forecaster/AnalysisDashboard"
 import AnalysisStreamingPage from "@/components/forecaster/AnalysisStreamingPage"
@@ -43,8 +44,8 @@ export default function ForecasterPage() {
   const [mapping, setMapping] = useState<Record<string, string | null>>({})
   const [analysisData, setAnalysisData] = useState<any>(null)
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    const file = acceptedFiles[0]
+  const handleFileSelect = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
     if (!file) return
 
     // Validate file type
@@ -78,16 +79,6 @@ export default function ForecasterPage() {
       success: false,
     }))
   }, [])
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accept: {
-      "text/csv": [".csv"],
-      "application/vnd.ms-excel": [".xls"],
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [".xlsx"],
-    },
-    multiple: false,
-  })
 
   const handleUpload = async () => {
     if (!uploadState.file) return
@@ -308,26 +299,24 @@ export default function ForecasterPage() {
             </CardHeader>
             <CardContent>
               {!uploadState.file ? (
-                <div
-                  {...getRootProps()}
-                  className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
-                    isDragActive ? "border-primary bg-primary/5" : "border-border hover:border-primary/50"
-                  }`}
-                >
-                  <input {...getInputProps()} />
+                <div className="border-2 border-dashed rounded-lg p-8 text-center">
+                  <input
+                    type="file"
+                    accept=".csv,.xlsx,.xls"
+                    onChange={handleFileSelect}
+                    className="hidden"
+                    id="file-upload"
+                  />
                   <FileSpreadsheet className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  {isDragActive ? (
-                    <p className="text-primary font-medium">Déposez votre fichier ici...</p>
-                  ) : (
-                    <>
-                      <p className="text-foreground font-medium mb-2">Glissez-déposez votre fichier CRM ici</p>
-                      <p className="text-muted-foreground text-sm mb-4">ou cliquez pour sélectionner un fichier</p>
-                      <Button variant="outline">Choisir un fichier</Button>
-                    </>
-                  )}
+                  <p className="text-foreground font-medium mb-2">Sélectionnez votre fichier CRM</p>
+                  <p className="text-muted-foreground text-sm mb-4">Formats acceptés : CSV, Excel (.xlsx, .xls)</p>
+                  <Button variant="outline" asChild>
+                    <label htmlFor="file-upload" className="cursor-pointer">
+                      Choisir un fichier
+                    </label>
+                  </Button>
                 </div>
               ) : (
-                // ... existing file display logic ...
                 <div className="space-y-4">
                   <div className="flex items-center justify-between p-4 bg-card rounded-lg">
                     <div className="flex items-center gap-3">
@@ -463,6 +452,14 @@ export default function ForecasterPage() {
                         acceptedAnswer: {
                           "@type": "Answer",
                           text: "L'optimisme vient du manque de pondération. Un deal en négociation sans activité récente n'a pas la même probabilité qu'un deal avec un rendez-vous planifié. Notre algorithme applique des coefficients réalistes selon l'activité et les signaux de qualification.",
+                        },
+                      },
+                      {
+                        "@type": "Question",
+                        name: "Mes données sont-elles sécurisées ?",
+                        acceptedAnswer: {
+                          "@type": "Answer",
+                          text: "Absolument. Vos données sont traitées localement et ne sont jamais stockées sur nos serveurs. L'analyse se fait en temps réel et les fichiers sont automatiquement supprimés après traitement.",
                         },
                       },
                     ],

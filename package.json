@@ -44,7 +44,7 @@
     "papaparse": "latest",
     "react": "^19",
     "react-dom": "^19",
-    "react-dropzone": "latest",
+    "react-dropzone": "14.3.8",
     "recharts": "latest",
     "svelte": "latest",
     "tailwind-merge": "^2.5.5",
