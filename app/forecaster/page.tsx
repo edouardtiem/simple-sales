@@ -2,17 +2,16 @@ import type { Metadata } from "next"
 import ForecasterPage from "./ForecasterPage"
 
 export const metadata: Metadata = {
-  title: "Diagnostic Commercial Gratuit | Analysez Votre Pipeline de Vente",
+  title: "Forecaster Commercial - Prédisez vos Ventes avec Précision | Simple Sales",
   description:
-    "Obtenez un diagnostic complet de votre processus commercial en 5 minutes. Identifiez les blocages de votre pipeline et découvrez des solutions concrètes pour augmenter vos ventes.",
-  keywords: "diagnostic commercial, analyse pipeline, processus vente, blocage commercial, audit commercial gratuit",
+    "Transformez vos données commerciales en prévisions fiables. Notre outil de forecasting révèle vos angles morts et optimise votre pipeline de vente.",
+  keywords: "forecaster commercial, prévision ventes, pipeline commercial, CRM analytics, performance commerciale",
   openGraph: {
-    title: "Diagnostic Commercial Gratuit | Analysez Votre Pipeline de Vente",
+    title: "Forecaster Commercial - Prédisez vos Ventes avec Précision",
     description:
-      "Obtenez un diagnostic complet de votre processus commercial en 5 minutes. Identifiez les blocages de votre pipeline et découvrez des solutions concrètes pour augmenter vos ventes.",
+      "Transformez vos données commerciales en prévisions fiables. Notre outil de forecasting révèle vos angles morts et optimise votre pipeline de vente.",
     type: "website",
   },
-  robots: "index, follow",
 }
 
 export default function Page() {
