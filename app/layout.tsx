@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { JetBrains_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
+import Script from "next/script"
 import "./globals.css"
 
 const jetbrainsMono = JetBrains_Mono({
@@ -29,6 +30,10 @@ export default function RootLayout({
   return (
     <html lang="fr" className={jetbrainsMono.variable}>
       <body className="font-mono">
+        <Script
+          src="https://app.lemlist.com/api/visitors/tracking?k=NPtst5jGEtlTfexZH1hwoKuHD8ekFDW3Qog%2BiV7SQww%3D&t=tea_2XDo294Wtks6F4K9e"
+          strategy="afterInteractive"
+        />
         <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
         <Analytics debug={process.env.NODE_ENV === "development"} />
       </body>

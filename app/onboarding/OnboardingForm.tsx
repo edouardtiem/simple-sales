@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Checkbox } from "@/components/ui/checkbox"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { useRouter } from "next/navigation"
 
@@ -35,7 +36,7 @@ interface FormData {
   cycleDuration: string
 
   // Question 9
-  currentSymptom: string
+  currentSymptom: string[]
 
   // Question 10 - Nouvelle question
   symptomImpact: string
@@ -59,7 +60,7 @@ const initialFormData: FormData = {
   weeklyProposals: "",
   weeklyContracts: "",
   cycleDuration: "",
-  currentSymptom: "",
+  currentSymptom: [],
   symptomImpact: "",
   firstName: "",
   lastName: "",
@@ -88,7 +89,7 @@ const questions = [
     field: "sector" as keyof FormData,
     options: [
       { value: "services-b2b", label: "Services B2B (Conseil, Agence...)" },
-      { value: "produits-b2b", label: "Produits B2B (Distribution...)" },
+      { value: "produits-b2b", label: "Produits B2B (Fabricant, Distribution...)" },
       { value: "saas-logiciel", label: "SaaS / Logiciel" },
       { value: "industrie", label: "Industrie" },
       { value: "autre", label: "Autre" },
@@ -162,7 +163,7 @@ const questions = [
   {
     id: 9,
     title: "Lequel de ces symptômes décrit le mieux votre situation actuelle ?",
-    type: "radio",
+    type: "checkbox",
     field: "currentSymptom" as keyof FormData,
     options: [
       {
@@ -223,7 +224,6 @@ export default function OnboardingForm() {
   const totalSteps = questions.length
   const currentQuestion = questions[currentStep - 1]
 
-  // Récupérer l'email depuis sessionStorage au chargement
   useEffect(() => {
     const leadInfo = sessionStorage.getItem("leadInfo")
     if (leadInfo) {
@@ -243,6 +243,17 @@ export default function OnboardingForm() {
 
   const handleInputChange = (field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
+  }
+
+  const handleCheckboxChange = (field: keyof FormData, value: string, checked: boolean) => {
+    setFormData((prev) => {
+      const currentValues = (prev[field] as string[]) || []
+      if (checked) {
+        return { ...prev, [field]: [...currentValues, value] }
+      } else {
+        return { ...prev, [field]: currentValues.filter((v) => v !== value) }
+      }
+    })
   }
 
   const nextStep = () => {
@@ -271,6 +282,10 @@ export default function OnboardingForm() {
     switch (currentQuestion.type) {
       case "radio":
         return formData[currentQuestion.field] !== ""
+      case "checkbox":
+        return (
+          Array.isArray(formData[currentQuestion.field]) && (formData[currentQuestion.field] as string[]).length > 0
+        )
       case "number":
         return formData[currentQuestion.field] !== "" && !isNaN(Number(formData[currentQuestion.field]))
       case "textarea":
@@ -406,6 +421,36 @@ export default function OnboardingForm() {
                         </div>
                       ))}
                     </RadioGroup>
+                  </div>
+                )}
+
+                {/* Checkbox Questions */}
+                {currentQuestion?.type === "checkbox" && currentQuestion.options && (
+                  <div className="space-y-4">
+                    {currentQuestion.options.map((option) => {
+                      const isChecked =
+                        Array.isArray(formData[currentQuestion.field]) &&
+                        (formData[currentQuestion.field] as string[]).includes(option.value)
+
+                      return (
+                        <div
+                          key={option.value}
+                          className="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:border-[#f6c344] transition-colors cursor-pointer"
+                        >
+                          <Checkbox
+                            id={option.value}
+                            checked={isChecked}
+                            onCheckedChange={(checked) =>
+                              handleCheckboxChange(currentQuestion.field, option.value, checked as boolean)
+                            }
+                            className="mt-1"
+                          />
+                          <Label htmlFor={option.value} className="flex-1 text-base leading-relaxed cursor-pointer">
+                            {option.label}
+                          </Label>
+                        </div>
+                      )
+                    })}
                   </div>
                 )}
 
