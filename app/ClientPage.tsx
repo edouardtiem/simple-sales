@@ -192,8 +192,7 @@ export default function ClientPage() {
             className="text-xl font-medium tracking-tight md:text-2xl lg:text-3xl [font-family:var(--font-jetbrains-mono),Monaco,Menlo,'Ubuntu_Mono',monospace] mb-7"
             style={{ lineHeight: "1.8" }}
           >
-            Vos ventes stagnent ?<br />
-            Le vrai problème est rarement celui que vous croyez.
+            Vos ventes stagnent ? Identifions ensemble vos angles morts cachés.
           </h1>
           <div className="mx-auto max-w-md lg:max-w-lg">
             <h2 className="mt-3 md:mt-5 text-sm md:text-base lg:text-lg font-medium text-gray-700 leading-relaxed">
@@ -205,7 +204,7 @@ export default function ClientPage() {
               className="group bg-[#f6c344] px-5 md:px-8 py-3 md:py-5 text-base md:text-lg font-medium text-[#1a1a1a] hover:bg-[#f4b82e] rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 flex items-center justify-center gap-2 md:gap-3 w-auto max-w-sm md:max-w-none"
               onClick={() => handleCTAClick("hero")}
             >
-              <span className="text-center leading-tight">Révéler mon Score d'Efficacité</span>
+              <span className="text-center leading-tight">Démarrer mon Diagnostic Gratuit</span>
               <ArrowRight className="h-4 w-4 md:h-5 md:w-5 transition-transform duration-300 group-hover:translate-x-1 flex-shrink-0" />
             </Button>
           </div>
