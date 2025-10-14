@@ -41,7 +41,7 @@ export default function ContactModal({ isOpen, onClose, variant = "original" }: 
       <div className="relative bg-white rounded-lg shadow-xl max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
-          <h2 className="text-xl font-medium font-mono">Je commande mon scan gratuit</h2>
+          <h2 className="text-xl font-medium font-mono">Démarrer mon Diagnostic Gratuit</h2>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-600 transition-colors">
             <X className="h-5 w-5" />
           </button>

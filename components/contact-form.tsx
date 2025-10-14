@@ -137,7 +137,7 @@ export default function ContactForm({ onSuccess, variant = "original", formType 
         className="w-full bg-[#f6c344] font-medium text-black hover:bg-[#f4b82e] hover:text-black"
         disabled={isSubmitting}
       >
-        {isSubmitting ? "Envoi en cours..." : "Je commence mon audit gratuit"}
+        {isSubmitting ? "Envoi en cours..." : "Démarrer mon Diagnostic Gratuit"}
       </Button>
     </form>
   )

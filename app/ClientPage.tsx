@@ -180,7 +180,7 @@ export default function ClientPage() {
           onClick={() => handleCTAClick("floating")}
           className="bg-[#f6c344] hover:bg-[#f4b82e] text-[#1a1a1a] px-6 py-3 rounded-full shadow-lg font-medium text-sm md:text-base whitespace-nowrap"
         >
-          Obtenir mon Score Gratuit
+          Démarrer mon Diagnostic Gratuit
         </Button>
       </div>
 
@@ -369,7 +369,7 @@ export default function ClientPage() {
                 className="w-auto md:w-auto bg-[#f6c344] px-5 md:px-8 py-3 md:py-5 text-sm md:text-base font-medium text-black hover:bg-[#f4b82e] hover:text-black rounded-lg max-w-sm md:max-w-none mx-auto"
                 onClick={() => handleCTAClick("problems_section")}
               >
-                Obtenir mon Score Gratuit
+                Démarrer mon Diagnostic Gratuit
               </Button>
             </div>
           </div>
@@ -503,7 +503,7 @@ export default function ClientPage() {
       <section id="contact" className="bg-[#F9FAFB] py-20">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-lg">
-            <h2 className="mb-7 text-center text-xl font-medium md:text-2xl">Obtenir mon Score Gratuit</h2>
+            <h2 className="mb-7 text-center text-xl font-medium md:text-2xl">Démarrer mon Diagnostic Gratuit</h2>
             <ContactForm variant="original" formType="page_bottom" />
           </div>
         </div>
@@ -536,7 +536,7 @@ export default function ClientPage() {
               className="w-auto md:w-auto bg-[#f6c344] px-5 md:px-8 py-3 md:py-5 text-base md:text-lg font-medium text-black hover:bg-[#f4b82e] hover:text-black rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               onClick={() => handleCTAClick("final_cta")}
             >
-              🎯 Obtenir mon Scan Gratuit
+              Démarrer mon Diagnostic Gratuit
             </Button>
           </div>
         </div>
