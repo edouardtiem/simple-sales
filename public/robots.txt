@@ -1,4 +1,36 @@
+# Robots.txt - Simple Sales
+# Optimisé pour le référencement traditionnel (SEO) et génératif (GEO)
+
+
+# OpenAI (ChatGPT)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+
+# Google AI (Gemini, Bard)
+User-agent: Google-Extended
+Allow: /
+
+# Common Crawl (utilisé par plusieurs IA)
+User-agent: CCBot
+Allow: /
+
+# Tous les autres robots (moteurs de recherche traditionnels)
 User-agent: *
 Allow: /
 
-Sitemap: https://simple-sales.fr/sitemap.xml
+# Sitemap
+Sitemap: https://simplesales.fr/sitemap.xml
+
+# Fichier pour IA génératives
+# Les LLMs peuvent consulter /llms.txt pour comprendre la structure du site
