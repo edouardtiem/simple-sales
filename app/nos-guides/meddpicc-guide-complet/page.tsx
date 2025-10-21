@@ -260,6 +260,20 @@ export default function MeddpiccPage() {
           </p>
         </div>
 
+        <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg mb-6">
+          <p className="text-sm">
+            💡 <strong>Lien avec la négociation :</strong> Une fois vos métriques quantifiées avec MEDDPICC, vous serez
+            armé pour{" "}
+            <a
+              href="/nos-guides/negociation-commerciale-avancee#objections"
+              className="text-blue-600 hover:text-blue-800 underline font-medium"
+            >
+              traiter l'objection prix en négociation
+            </a>{" "}
+            avec des arguments chiffrés et défendre votre valeur.
+          </p>
+        </div>
+
         <h3 className="text-2xl font-medium mb-4">Les 3 Types de Métriques à Identifier</h3>
 
         <div className="bg-white border border-gray-200 p-6 rounded-lg mb-6">
@@ -372,6 +386,20 @@ Objectif : ________________
           <p>
             73% des deals échouent car l'Economic Buyer n'est jamais rencontré. Vos commerciaux parlent aux utilisateurs
             ou sponsors, mais pas à celui qui contrôle le budget.
+          </p>
+        </div>
+
+        <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg mb-6">
+          <p className="text-sm">
+            💡 <strong>Lien avec la négociation :</strong> L'Economic Buyer identifié avec MEDDPICC devient votre
+            interlocuteur clé en{" "}
+            <a
+              href="/nos-guides/negociation-commerciale-avancee#closing"
+              className="text-blue-600 hover:text-blue-800 underline font-medium"
+            >
+              phase de closing
+            </a>
+            . C'est lui qui validera l'investissement et signera le contrat.
           </p>
         </div>
 
@@ -939,6 +967,20 @@ RISQUES DE BLOCAGE :
             Vos commerciaux entendent "on a un problème" mais ne creusent pas assez. Résultat : ils vendent des
             fonctionnalités au lieu de résoudre des douleurs. Sans douleur profonde, pas d'urgence, pas de budget, pas
             de closing.
+          </p>
+        </div>
+
+        <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg mb-6">
+          <p className="text-sm">
+            💡 <strong>Lien avec la négociation :</strong> Une douleur profonde et quantifiée facilite considérablement
+            la{" "}
+            <a
+              href="/nos-guides/negociation-commerciale-avancee#objections"
+              className="text-blue-600 hover:text-blue-800 underline font-medium"
+            >
+              négociation et le traitement des objections prix
+            </a>
+            . Plus la douleur est forte, moins le prix devient un sujet de discussion.
           </p>
         </div>
 

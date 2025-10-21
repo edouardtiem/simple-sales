@@ -439,6 +439,19 @@ function NegociationClientPage() {
                 <p className="text-sm mb-2">
                   Ne négociez qu'avec des prospects qualifiés qui ont le budget, l'autorité, et l'urgence.
                 </p>
+                <div className="bg-blue-50 border border-blue-200 p-3 rounded mb-3">
+                  <p className="text-sm">
+                    💡 <strong>Approfondissez votre qualification :</strong> Maîtrisez la{" "}
+                    <a
+                      href="/nos-guides/meddpicc-guide-complet"
+                      className="text-blue-600 hover:text-blue-800 underline font-medium"
+                    >
+                      méthodologie MEDDPICC complète
+                    </a>{" "}
+                    pour ne négocier qu'avec des prospects réellement qualifiés et réduire drastiquement vos cycles de
+                    vente.
+                  </p>
+                </div>
                 <div className="bg-gray-50 p-3 rounded text-sm">
                   <p className="font-semibold mb-1">Checklist avant négociation :</p>
                   <ul className="list-disc list-inside space-y-1">
