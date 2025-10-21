@@ -183,7 +183,7 @@ export default function NotreApprochePage() {
                 className="bg-[#f6c344] hover:bg-[#f4b82e] text-[#1a1a1a] px-8 py-4 text-lg font-medium rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 flex items-center gap-3 mx-auto"
                 onClick={() => handleCTAClick("step1")}
               >
-                <span>Démarrer mon Diagnostic Offert</span>
+                <span>Démarrer notre Diagnostic Offert</span>
                 <ArrowRight className="h-5 w-5" />
               </Button>
             </div>
@@ -398,7 +398,7 @@ export default function NotreApprochePage() {
             className="bg-[#f6c344] hover:bg-[#f4b82e] text-[#1a1a1a] px-8 py-4 text-lg font-medium rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 flex items-center gap-3 mx-auto"
             onClick={() => handleCTAClick("final")}
           >
-            <span>Démarrer mon Diagnostic Offert</span>
+            <span>Démarrer notre Diagnostic Offert</span>
             <ArrowRight className="h-5 w-5" />
           </Button>
         </div>

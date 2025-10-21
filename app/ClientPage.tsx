@@ -283,7 +283,8 @@ export default function ClientPage() {
             </h2>
 
             <p className="text-base text-gray-300 text-center mb-14 max-w-lg mx-auto">
-              Derrière chaque plateau de performance, je retrouve systématiquement une combinaison de ces symptômes :
+              Derrière chaque plateau de performance, nous retrouvons systématiquement une combinaison de ces symptômes
+              :
             </p>
 
             <div className="relative">
@@ -445,9 +446,9 @@ export default function ClientPage() {
             {/* Contenu texte */}
             <div className="max-w-3xl space-y-6 text-gray-700 leading-relaxed">
               <p>
-                Après 15 ans à diriger des équipes commerciales, j'ai vu la même histoire se répéter : des dirigeants
-                brillants, la tête dans le guidon, qui sentaient leur croissance ralentir sans en comprendre la cause
-                profonde.
+                Après 15 ans à diriger des équipes commerciales, le fondateur d'Edouard Tiem a vu la même histoire se
+                répéter : des dirigeants brillants, la tête dans le guidon, qui sentaient leur croissance ralentir sans
+                en comprendre la cause profonde.
               </p>
 
               <p>
@@ -457,7 +458,7 @@ export default function ClientPage() {
               </p>
 
               <p>
-                Au fil du temps, j'ai compris que le véritable changement ne vient jamais d'un outil miracle, mais de
+                Au fil du temps, il a compris que le véritable changement ne vient jamais d'un outil miracle, mais de
                 trois étapes immuables :
               </p>
 
@@ -489,10 +490,10 @@ export default function ClientPage() {
               </div>
 
               <p className="mt-8">
-                C'est pour orchestrer ces <span className="font-semibold text-[#f6c344]">trois temps</span> que j'ai
+                C'est pour orchestrer ces <span className="font-semibold text-[#f6c344]">trois temps</span> qu'il a
                 fondé Simple Sales : pour transformer une prise de conscience en une{" "}
-                <span className="font-semibold text-[#f6c344]">machine de croissance pérenne</span>, et vous redonner le
-                contrôle.
+                <span className="font-semibold text-[#f6c344]">machine de croissance pérenne</span>, et redonner le
+                contrôle aux dirigeants.
               </p>
             </div>
           </div>
@@ -503,7 +504,7 @@ export default function ClientPage() {
       <section id="contact" className="bg-[#F9FAFB] py-20">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-lg">
-            <h2 className="mb-7 text-center text-xl font-medium md:text-2xl">Démarrer mon Diagnostic Gratuit</h2>
+            <h2 className="mb-7 text-center text-xl font-medium md:text-2xl">Démarrer notre Diagnostic Gratuit</h2>
             <ContactForm variant="original" formType="page_bottom" />
           </div>
         </div>
@@ -536,7 +537,7 @@ export default function ClientPage() {
               className="w-auto md:w-auto bg-[#f6c344] px-5 md:px-8 py-3 md:py-5 text-base md:text-lg font-medium text-black hover:bg-[#f4b82e] hover:text-black rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               onClick={() => handleCTAClick("final_cta")}
             >
-              Démarrer mon Diagnostic Gratuit
+              Démarrer notre Diagnostic Gratuit
             </Button>
           </div>
         </div>

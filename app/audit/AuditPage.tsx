@@ -100,7 +100,7 @@ export default function AuditPage() {
             className="bg-[#f6c344] hover:bg-[#f4b82e] text-[#1a1a1a] px-8 py-6 text-xl font-medium rounded-lg"
             onClick={() => handleCTAClick("hero")}
           >
-            Démarrer mon diagnostic gratuit →
+            Démarrer notre diagnostic gratuit →
           </Button>
         </div>
       </section>
@@ -165,7 +165,7 @@ export default function AuditPage() {
                 className="w-full md:w-auto bg-[#f6c344] hover:bg-[#f4b82e] text-[#1a1a1a] px-8 py-6 text-xl font-medium rounded-lg"
                 onClick={() => handleCTAClick("main_cta")}
               >
-                Commencer mon diagnostic gratuit maintenant →
+                Commencer notre diagnostic gratuit maintenant →
               </Button>
             </div>
 

@@ -20,19 +20,23 @@
   </url>
   <url>
     <loc>https://simplesales.fr/nos-guides</loc>
-    <!-- Updated lastmod to reflect new guide addition -->
     <lastmod>2025-10-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- Added new expert guide URL -->
   <url>
-    <loc>https://simplesales.fr/nos-guides/processus-commercial</loc>
-    <!-- Updated lastmod to reflect cross-reference updates -->
+    <loc>https://simplesales.fr/nos-guides/processus-commercial-expert</loc>
     <lastmod>2025-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Added new guide URL for outils commerciaux -->
+  <url>
+    <loc>https://simplesales.fr/nos-guides/processus-commercial</loc>
+    <lastmod>2025-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://simplesales.fr/nos-guides/outils-commerciaux-b2b</loc>
     <lastmod>2025-10-21</lastmod>

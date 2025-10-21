@@ -94,7 +94,7 @@ const questions = [
       { value: "industrie", label: "Industrie" },
       { value: "autre", label: "Autre" },
     ],
-    valueText: "💡 Essentiel pour que je puisse comparer votre performance aux bonnes références de votre marché.",
+    valueText: "💡 Essentiel pour que nous puissions comparer votre performance aux bonnes références de votre marché.",
   },
   {
     id: 3,
