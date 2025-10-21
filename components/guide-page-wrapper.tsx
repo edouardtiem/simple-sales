@@ -3,11 +3,10 @@
 import type React from "react"
 
 import Link from "next/link"
-import { useState } from "react"
 import Footer from "@/components/footer"
 import GuideSidePanel, { type GuideSection } from "@/components/guide-side-panel"
+import { FloatingHelpCTA } from "@/components/floating-help-cta"
 import { getLastUpdateDate } from "@/lib/date-utils"
-import { Share } from "lucide-react"
 
 interface GuidePageWrapperProps {
   children: React.ReactNode
@@ -34,20 +33,10 @@ export function GuidePageWrapper({
   previousGuide,
   nextGuide,
 }: GuidePageWrapperProps) {
-  const [copied, setCopied] = useState(false)
-
-  const handleShare = async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    } catch (err) {
-      console.error("Failed to copy:", err)
-    }
-  }
-
   return (
     <div className="min-h-screen bg-[#f5f1eb] text-[#1a1a1a] font-sans">
+      <FloatingHelpCTA />
+
       <div className="fixed top-0 left-0 right-0 z-10 bg-white px-4 py-4 border-b border-gray-200 shadow-sm">
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
@@ -72,15 +61,8 @@ export function GuidePageWrapper({
                   </Link>
                 </div>
 
-                <div className="mb-6 flex items-center justify-between">
+                <div className="mb-6">
                   <p className="text-sm text-gray-600">Dernière mise à jour : {getLastUpdateDate()}</p>
-                  <button
-                    onClick={handleShare}
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-[#f4d03f] text-[#1a1a1a] rounded-full text-sm font-medium hover:bg-[#e5c230] transition-colors"
-                  >
-                    <Share className="w-4 h-4" />
-                    {copied ? "Lien copié !" : "Partager"}
-                  </button>
                 </div>
 
                 <div className="mb-4">

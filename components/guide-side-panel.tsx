@@ -1,7 +1,6 @@
 "use client"
-
-import Link from "next/link"
 import { useEffect, useState } from "react"
+import { Linkedin, Mail, MessageCircle, Copy, Check } from "lucide-react"
 
 export interface GuideSection {
   id: string
@@ -15,6 +14,7 @@ interface GuideSidePanelProps {
 
 export default function GuideSidePanel({ sections, guideTitle = "Plan du Guide" }: GuideSidePanelProps) {
   const [activeSection, setActiveSection] = useState<string>("overview")
+  const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     const observerOptions = {
@@ -63,6 +63,31 @@ export default function GuideSidePanel({ sections, guideTitle = "Plan du Guide" 
     return `${((sectionIndex + 1) / (sections.length + 1)) * 100}%`
   }
 
+  const handleShare = (platform: string) => {
+    const url = typeof window !== "undefined" ? window.location.href : ""
+    const title = "Guide SimpleSales"
+    const message = "Découvrez ce guide complet pour améliorer vos performances commerciales"
+
+    switch (platform) {
+      case "linkedin":
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, "_blank")
+        break
+      case "email":
+        window.location.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(
+          message + " " + url,
+        )}`
+        break
+      case "whatsapp":
+        window.open(`https://wa.me/?text=${encodeURIComponent(message + " " + url)}`, "_blank")
+        break
+      case "copy":
+        navigator.clipboard.writeText(url)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+        break
+    }
+  }
+
   return (
     <aside className="sticky top-24 space-y-6">
       {/* Plan du Guide */}
@@ -105,16 +130,49 @@ export default function GuideSidePanel({ sections, guideTitle = "Plan du Guide" 
         </nav>
       </div>
 
-      {/* CTA Audit */}
-      <div className="bg-[#1a1a1a] text-white rounded-lg p-6">
-        <h3 className="text-sm font-semibold mb-2">Besoin d'aide ?</h3>
-        <p className="text-sm text-gray-300 mb-4">Audit Express gratuit - 20 minutes</p>
-        <Link
-          href="/audit"
-          className="block w-full bg-[#f6c344] text-[#1a1a1a] text-center py-2 px-4 rounded font-medium hover:bg-[#f4b82e] transition-colors text-sm"
-        >
-          Réserver mon audit
-        </Link>
+      {/* Partager ces méthodes */}
+      <div className="bg-gray-50 rounded-lg border border-gray-200 p-6">
+        <h3 className="text-sm font-semibold mb-2 text-[#1a1a1a]">Partager ces méthodes</h3>
+        <p className="text-sm text-gray-600 mb-4">Déployez ce guide dans les meilleures conditions</p>
+        <div className="grid grid-cols-2 gap-2">
+          <button
+            onClick={() => handleShare("linkedin")}
+            className="flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 py-2 px-3 rounded hover:bg-gray-50 transition-colors text-sm"
+          >
+            <Linkedin className="w-4 h-4 text-[#0077b5]" />
+            <span>LinkedIn</span>
+          </button>
+          <button
+            onClick={() => handleShare("email")}
+            className="flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 py-2 px-3 rounded hover:bg-gray-50 transition-colors text-sm"
+          >
+            <Mail className="w-4 h-4 text-gray-600" />
+            <span>Email</span>
+          </button>
+          <button
+            onClick={() => handleShare("whatsapp")}
+            className="flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 py-2 px-3 rounded hover:bg-gray-50 transition-colors text-sm"
+          >
+            <MessageCircle className="w-4 h-4 text-[#25D366]" />
+            <span>WhatsApp</span>
+          </button>
+          <button
+            onClick={() => handleShare("copy")}
+            className="flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 py-2 px-3 rounded hover:bg-gray-50 transition-colors text-sm"
+          >
+            {copied ? (
+              <>
+                <Check className="w-4 h-4 text-green-600" />
+                <span className="text-green-600">Copié !</span>
+              </>
+            ) : (
+              <>
+                <Copy className="w-4 h-4 text-gray-600" />
+                <span>Copier</span>
+              </>
+            )}
+          </button>
+        </div>
       </div>
     </aside>
   )
