@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import NegociationClientPage from "./negociation-client-page"
+import NegociationClientPage from "./content"
 import { getCurrentYear } from "@/lib/date-utils"
 
 export const metadata: Metadata = {

@@ -3,55 +3,17 @@
 import Link from "next/link"
 import { useEffect, useState } from "react"
 
-interface GuideSection {
+export interface GuideSection {
   id: string
   title: string
 }
 
-const guideSections: GuideSection[] = [
-  {
-    id: "challenge",
-    title: "Le Défi",
-  },
-  {
-    id: "statistics",
-    title: "État de la Prospection 2024",
-  },
-  {
-    id: "pillars",
-    title: "3 Piliers Modernes",
-  },
-  {
-    id: "cold-calling",
-    title: "Cold Calling 3.0",
-  },
-  {
-    id: "social-selling",
-    title: "Social Selling LinkedIn",
-  },
-  {
-    id: "ai-automation",
-    title: "IA et Automation",
-  },
-  {
-    id: "multichannel",
-    title: "Orchestration Multicanale",
-  },
-  {
-    id: "measurement",
-    title: "Mesure et Optimisation",
-  },
-  {
-    id: "implementation",
-    title: "Plan d'Implémentation",
-  },
-  {
-    id: "case-study",
-    title: "Cas Client",
-  },
-]
+interface GuideSidePanelProps {
+  sections: GuideSection[]
+  guideTitle?: string
+}
 
-export default function ProspectionGuideSidebar() {
+export default function GuideSidePanel({ sections, guideTitle = "Plan du Guide" }: GuideSidePanelProps) {
   const [activeSection, setActiveSection] = useState<string>("overview")
 
   useEffect(() => {
@@ -71,8 +33,7 @@ export default function ProspectionGuideSidebar() {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions)
 
-    // Observe all sections
-    guideSections.forEach((section) => {
+    sections.forEach((section) => {
       const element = document.getElementById(section.id)
       if (element) {
         observer.observe(element)
@@ -82,7 +43,7 @@ export default function ProspectionGuideSidebar() {
     return () => {
       observer.disconnect()
     }
-  }, [])
+  }, [sections])
 
   const handleSectionClick = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -97,16 +58,16 @@ export default function ProspectionGuideSidebar() {
   }
 
   const getProgressHeight = () => {
-    const sectionIndex = guideSections.findIndex((s) => s.id === activeSection)
+    const sectionIndex = sections.findIndex((s) => s.id === activeSection)
     if (sectionIndex === -1) return "0%"
-    return `${((sectionIndex + 1) / (guideSections.length + 1)) * 100}%`
+    return `${((sectionIndex + 1) / (sections.length + 1)) * 100}%`
   }
 
   return (
     <aside className="sticky top-24 space-y-6">
-      {/* Plan du Guide Prospection */}
+      {/* Plan du Guide */}
       <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h3 className="text-sm font-semibold mb-4 text-[#1a1a1a]">Plan du Guide</h3>
+        <h3 className="text-sm font-semibold mb-4 text-[#1a1a1a]">{guideTitle}</h3>
         <nav className="space-y-2 relative">
           <div className="absolute left-0 top-0 bottom-0 w-1 bg-gray-200 rounded-full" />
           <div
@@ -128,7 +89,7 @@ export default function ProspectionGuideSidebar() {
             Introduction
           </button>
 
-          {guideSections.map((section) => (
+          {sections.map((section) => (
             <button
               key={section.id}
               onClick={() => handleSectionClick(section.id)}
