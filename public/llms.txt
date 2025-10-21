@@ -14,12 +14,14 @@ Expert français en vente B2B avec accompagnement personnalisé pour dirigeants 
 
 - [Nos Guides](https://www.simplesales.fr/nos-guides): Guides pratiques pour améliorer vos performances commerciales B2B
 - [Guide Processus Commercial](https://www.simplesales.fr/nos-guides/processus-commercial): Structurer et optimiser votre processus de vente B2B
+- [Guide Outils Commerciaux B2B](https://www.simplesales.fr/nos-guides/outils-commerciaux-b2b): Choisir et intégrer les bons outils commerciaux (CRM, prospection, signature électronique)
 - [Guide Recrutement Commercial](https://www.simplesales.fr/nos-guides/recruter-commercial-elite): Recruter et former des commerciaux d'élite
 
 ## Expertise
 
 - Formation closing B2B et méthodologie Challenger Sales
 - Optimisation CRM et pilotage commercial data-driven
+- Sélection et intégration outils commerciaux (Sellsy, Axonaut, Lemlist, Pharow, Yousign)
 - Prospection automatisée LinkedIn et cold email
 - Structuration processus de vente pour PME et ETI
 - Diagnostic angles morts commerciaux

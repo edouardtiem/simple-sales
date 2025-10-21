@@ -5,11 +5,11 @@ import Footer from "@/components/footer"
 export const metadata: Metadata = {
   title: "Nos Guides Stratégiques B2B | Simple Sales - Ressources Gratuites",
   description:
-    "Guides pratiques gratuits pour dirigeants de PME B2B : processus commercial, recrutement commercial d'élite, management. Méthodes concrètes basées sur l'expérience terrain.",
+    "Guides pratiques gratuits pour dirigeants de PME B2B : processus commercial, outils commerciaux, recrutement commercial d'élite, management. Méthodes concrètes basées sur l'expérience terrain.",
   openGraph: {
     title: "Nos Guides Stratégiques B2B | Simple Sales",
     description:
-      "Collection de guides pratiques pour résoudre vos défis commerciaux : optimisation processus, recrutement, management. Actions concrètes et méthodes éprouvées.",
+      "Collection de guides pratiques pour résoudre vos défis commerciaux : optimisation processus, outils commerciaux, recrutement, management. Actions concrètes et méthodes éprouvées.",
     url: "https://simplesales.fr/nos-guides",
     siteName: "Simple Sales",
     locale: "fr_FR",
@@ -18,6 +18,8 @@ export const metadata: Metadata = {
   keywords: [
     "guide commercial B2B",
     "processus commercial",
+    "outils commerciaux",
+    "CRM",
     "recrutement commercial",
     "management commercial",
     "ressources gratuites",
@@ -37,7 +39,7 @@ export default function NosGuidesPage() {
             "@type": "CollectionPage",
             name: "Nos Guides Stratégiques pour Dirigeants de PME B2B",
             description:
-              "Collection de guides pratiques pour résoudre les défis commerciaux : processus de vente, recrutement commercial, management d'équipe.",
+              "Collection de guides pratiques pour résoudre les défis commerciaux : processus de vente, outils commerciaux, recrutement commercial, management d'équipe.",
             url: "https://simplesales.fr/nos-guides",
             publisher: {
               "@type": "Organization",
@@ -50,6 +52,22 @@ export default function NosGuidesPage() {
                 description:
                   "Méthode en 5 étapes pour auditer votre cycle de vente, identifier les fuites de revenus cachées et transformer votre processus en machine de conversion.",
                 url: "https://simplesales.fr/nos-guides/processus-commercial",
+                author: {
+                  "@type": "Person",
+                  "@id": "https://simplesales.fr/#founder",
+                },
+                publisher: {
+                  "@type": "Organization",
+                  "@id": "https://simplesales.fr/#organization",
+                },
+                inLanguage: "fr-FR",
+              },
+              {
+                "@type": "Article",
+                headline: "Les Outils Commerciaux B2B en 2025 : Le Guide Définitif pour Transformer Votre Performance",
+                description:
+                  "Méthode en 5 étapes pour choisir, intégrer et optimiser vos outils commerciaux. De l'audit à l'optimisation continue, découvrez comment créer un écosystème cohérent.",
+                url: "https://simplesales.fr/nos-guides/outils-commerciaux-b2b",
                 author: {
                   "@type": "Person",
                   "@id": "https://simplesales.fr/#founder",
@@ -136,7 +154,31 @@ export default function NosGuidesPage() {
                   </div>
                 </Link>
 
-                {/* Guide 2 - Recruitment */}
+                <Link href="/nos-guides/outils-commerciaux-b2b" className="block">
+                  <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer min-h-96 flex flex-col">
+                    {/* Visual element */}
+                    <div className="w-full h-28 bg-gradient-to-br from-[#f6c344] to-[#f4b82e] rounded-lg mb-5 flex items-center justify-center">
+                      <div className="text-[#1a1a1a] text-2xl font-bold">🛠️</div>
+                    </div>
+
+                    {/* Category tag */}
+                    <div className="inline-block bg-[#f6c344] text-[#1a1a1a] text-xs font-medium px-3 py-1 rounded-full mb-4 w-fit">
+                      OUTILS COMMERCIAUX
+                    </div>
+
+                    <h2 className="text-lg font-semibold mb-4 leading-tight flex-grow">
+                      Les Outils Commerciaux B2B en 2025 : Le Guide Définitif
+                    </h2>
+
+                    {/* Description */}
+                    <p className="text-gray-600 leading-relaxed text-sm">
+                      Transformez vos outils en accélérateurs de performance. Méthode en 5 étapes : de l'audit à
+                      l'optimisation continue, créez un écosystème cohérent qui amplifie votre stratégie.
+                    </p>
+                  </div>
+                </Link>
+
+                {/* Guide 3 - Recruitment */}
                 <Link href="/nos-guides/recruter-commercial-elite" className="block">
                   <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer min-h-96 flex flex-col">
                     {/* Visual element */}
@@ -160,21 +202,6 @@ export default function NosGuidesPage() {
                     </p>
                   </div>
                 </Link>
-
-                {/* Placeholder card for future guides */}
-                <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm opacity-50 min-h-96 flex flex-col">
-                  <div className="w-full h-28 bg-gray-100 rounded-lg mb-5 flex items-center justify-center">
-                    <div className="text-gray-400 text-2xl">📈</div>
-                  </div>
-                  <div className="inline-block bg-gray-200 text-gray-600 text-xs font-medium px-3 py-1 rounded-full mb-4 w-fit">
-                    MANAGEMENT
-                  </div>
-                  <h2 className="text-lg font-semibold mb-4 text-gray-400 flex-grow">Prochain guide en préparation</h2>
-                  <p className="text-gray-400 text-sm">
-                    Un nouveau guide sera bientôt disponible pour vous accompagner dans vos défis managériaux.
-                  </p>
-                  <span className="text-gray-400 font-medium text-sm mt-auto">Bientôt disponible</span>
-                </div>
               </div>
             </div>
           </div>

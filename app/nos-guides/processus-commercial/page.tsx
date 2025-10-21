@@ -114,13 +114,21 @@ La méthode est simple, mais le premier pas est souvent le plus intimidant. Entr
   }
 
   const nextGuide = {
-    title: "Recruter un Commercial d'Élite",
-    url: "/nos-guides/recruter-commercial-elite",
-    description: "Découvrez notre guide sur le recrutement des commerciaux qui sauront appliquer votre méthode.",
-    category: "Recrutement",
+    title: "Les Outils Commerciaux B2B",
+    url: "/nos-guides/outils-commerciaux-b2b",
+    description:
+      "Une fois votre processus réparé, découvrez comment choisir et intégrer les bons outils pour l'amplifier.",
+    category: "Outils Commerciaux",
   }
 
   const relatedGuides = [
+    {
+      title: "Les Outils Commerciaux B2B",
+      url: "/nos-guides/outils-commerciaux-b2b",
+      description:
+        "Votre processus est réparé ? Découvrez maintenant comment choisir et intégrer les outils qui vont l'amplifier sans le complexifier.",
+      category: "Outils Commerciaux",
+    },
     {
       title: "Recruter un Commercial d'Élite",
       url: "/nos-guides/recruter-commercial-elite",
