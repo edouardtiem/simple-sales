@@ -2,13 +2,17 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import Footer from "@/components/footer"
 import GuideSidebar from "@/components/guide-sidebar"
+import { getCurrentYear, getLastUpdateDate } from "@/lib/date-utils"
+
+const currentYear = getCurrentYear()
+const lastUpdate = getLastUpdateDate()
 
 export const metadata: Metadata = {
   title: "Améliorer Performance Équipe Commerciale | Guide Expert",
   description:
     "Découvrez comment augmenter de 40% les performances de votre équipe commerciale. Méthodes MEDDPICC, closing avancé, audit gratuit 20min.",
   openGraph: {
-    title: "Comment Améliorer les Performances de votre Équipe Commerciale : Guide Expert 2024",
+    title: `Comment Améliorer les Performances de votre Équipe Commerciale : Guide Expert ${currentYear}`,
     description:
       "Le guide de référence pour les directeurs commerciaux qui veulent transformer leur organisation en machine à revenus. Méthodes prouvées, résultats mesurables.",
     url: "https://simplesales.fr/nos-guides",
@@ -32,6 +36,9 @@ export const metadata: Metadata = {
 }
 
 export default function GuideMainPage() {
+  const year = getCurrentYear()
+  const updateDate = getLastUpdateDate()
+
   return (
     <>
       <script
@@ -40,7 +47,7 @@ export default function GuideMainPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Article",
-            headline: "Comment Améliorer les Performances de votre Équipe Commerciale : Guide Expert 2024",
+            headline: `Comment Améliorer les Performances de votre Équipe Commerciale : Guide Expert ${year}`,
             description:
               "Le guide de référence pour les directeurs commerciaux qui veulent transformer leur organisation commerciale en machine à revenus.",
             url: "https://simplesales.fr/nos-guides",
@@ -54,7 +61,7 @@ export default function GuideMainPage() {
             },
             inLanguage: "fr-FR",
             datePublished: "2024-10-21",
-            dateModified: "2025-10-21",
+            dateModified: new Date().toISOString().split("T")[0],
           }),
         }}
       />
@@ -83,8 +90,9 @@ export default function GuideMainPage() {
                     <div className="inline-block bg-[#f6c344] text-[#1a1a1a] text-sm font-medium px-4 py-2 rounded-full mb-6">
                       Guide Expert
                     </div>
+                    <div className="text-sm text-gray-600 mb-4">Dernière mise à jour : {updateDate}</div>
                     <h1 className="text-4xl md:text-5xl font-medium mb-6 text-balance leading-tight">
-                      Comment Améliorer les Performances de votre Équipe Commerciale : Guide Expert 2024
+                      Comment Améliorer les Performances de votre Équipe Commerciale : Guide Expert {year}
                     </h1>
                     <p className="text-xl text-gray-700 leading-relaxed mb-8">
                       Le guide de référence pour les directeurs commerciaux qui veulent transformer leur organisation en
@@ -93,7 +101,7 @@ export default function GuideMainPage() {
 
                     <div className="bg-white border border-gray-200 rounded-lg p-8 mb-8 shadow-sm">
                       <h2 className="text-2xl font-semibold mb-6">
-                        Les Chiffres Alarmants du Management Commercial en 2024
+                        Les Chiffres Alarmants du Management Commercial en {year}
                       </h2>
                       <ul className="space-y-4 text-gray-700 text-left">
                         <li className="flex items-start gap-3">

@@ -3,20 +3,21 @@ import Link from "next/link"
 import { ArrowRight, CheckCircle2, TrendingUp, Target, Calculator, FileText, BarChart3 } from "lucide-react"
 import Footer from "@/components/footer"
 import GuideSidebar from "@/components/guide-sidebar"
+import { getCurrentYear, getLastUpdateDate } from "@/lib/date-utils"
 
 export const metadata: Metadata = {
-  title: "Audit Processus Commercial : Diagnostic Complet | Simple Sales",
+  title: `Audit Processus Commercial : Diagnostic Complet ${getCurrentYear()} | Simple Sales`,
   description:
     "Guide complet pour auditer votre processus commercial. Checklist 47 points, calculateur ROI, templates gratuits. Identifiez vos fuites de revenus.",
 }
 
 export default function DiagnosticPage() {
   return (
-    <div className="min-h-screen bg-[#f5f1eb] text-[#1a1a1a] font-mono">
+    <div className="min-h-screen bg-[#f5f1eb] text-[#1a1a1a] font-sans">
       <div className="fixed top-0 left-0 right-0 z-10 bg-white px-4 py-4 border-b border-gray-200 shadow-sm">
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
-            <a href="/" className="text-sm font-mono text-[#1a1a1a] hover:opacity-70 transition-opacity cursor-pointer">
+            <a href="/" className="text-sm font-sans text-[#1a1a1a] hover:opacity-70 transition-opacity cursor-pointer">
               simple.sales
             </a>
           </div>
@@ -27,7 +28,8 @@ export default function DiagnosticPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-[1fr_300px] gap-8">
-              <article className="prose prose-lg max-w-none">
+              {/* Removing prose prose-lg */}
+              <article className="max-w-none">
                 <div className="mb-8">
                   <Link
                     href="/nos-guides"
@@ -35,6 +37,10 @@ export default function DiagnosticPage() {
                   >
                     ← Retour au guide principal
                   </Link>
+                </div>
+
+                <div className="mb-6 text-sm text-gray-600">
+                  <p>Dernière mise à jour : {getLastUpdateDate()}</p>
                 </div>
 
                 <div className="mb-4">
@@ -59,7 +65,7 @@ export default function DiagnosticPage() {
                   </h2>
 
                   <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-8 mb-6 border-l-4 border-l-[#f4d03f]">
-                    <p className="text-lg mb-4 leading-relaxed">
+                    <p className="mb-4 leading-relaxed">
                       Vous le savez au fond de vous : quelque chose cloche dans vos ventes. Vos commerciaux travaillent
                       dur, vos produits sont bons, pourtant les résultats stagnent. Pire, vous avez cette sensation
                       désagréable de laisser de l'argent sur la table.
@@ -72,7 +78,7 @@ export default function DiagnosticPage() {
                       </p>
                     </div>
 
-                    <p className="text-lg font-medium leading-relaxed">
+                    <p className="font-medium leading-relaxed">
                       Ce guide vous donne la méthode exacte pour diagnostiquer votre organisation commerciale comme un
                       expert et identifier vos 3 leviers d'amélioration prioritaires.
                     </p>
@@ -90,7 +96,7 @@ export default function DiagnosticPage() {
                     <h3 className="text-2xl font-medium mb-4">
                       Niveau 1 : Audit Quantitatif - Les Mathématiques de vos Ventes
                     </h3>
-                    <p className="text-lg mb-6 leading-relaxed">
+                    <p className="mb-6 leading-relaxed">
                       <strong>Objectif :</strong> Mesurer vos ratios de conversion réels vs benchmarks sectoriels
                     </p>
 
@@ -182,7 +188,7 @@ export default function DiagnosticPage() {
 
                     <div className="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
                       <h5 className="font-medium text-blue-900 mb-3">Comment utiliser ce tableau :</h5>
-                      <ol className="list-decimal list-inside space-y-2 text-blue-900">
+                      <ol className="list-decimal list-inside space-y-2 text-blue-900 leading-relaxed">
                         <li>Remplissez vos volumes réels des 6 derniers mois</li>
                         <li>Calculez vos taux de conversion (Volume étape suivante ÷ Volume étape × 100)</li>
                         <li>Comparez avec les benchmarks sectoriels</li>
@@ -192,15 +198,15 @@ export default function DiagnosticPage() {
 
                     <h4 className="text-xl font-medium mb-4">Analyse des Résultats</h4>
                     <div className="space-y-3 mb-6">
-                      <div className="flex items-start gap-3">
+                      <div className="flex items-start gap-3 leading-relaxed">
                         <div className="w-24 flex-shrink-0 font-medium">&lt; 5%</div>
                         <div>Performance correcte, optimisation fine possible</div>
                       </div>
-                      <div className="flex items-start gap-3">
+                      <div className="flex items-start gap-3 leading-relaxed">
                         <div className="w-24 flex-shrink-0 font-medium">5-15%</div>
                         <div>Marge d'amélioration significative, action recommandée</div>
                       </div>
-                      <div className="flex items-start gap-3">
+                      <div className="flex items-start gap-3 leading-relaxed">
                         <div className="w-24 flex-shrink-0 font-medium">&gt; 15%</div>
                         <div>Fuite majeure, intervention urgente requise</div>
                       </div>
@@ -208,7 +214,7 @@ export default function DiagnosticPage() {
 
                     <div className="bg-gray-100 rounded-lg p-6 mb-6">
                       <h5 className="font-medium mb-3">Exemple concret :</h5>
-                      <div className="font-mono text-sm space-y-2">
+                      <div className="font-mono text-sm space-y-2 leading-relaxed">
                         <p>Entreprise SaaS B2B (50 commerciaux)</p>
                         <p>- RDV → Opportunité : 25% (vs 50% benchmark) = -50% d'efficacité</p>
                         <p>- Impact : 200 RDV/mois × 25% de perte = 50 opportunités perdues</p>
@@ -279,12 +285,11 @@ export default function DiagnosticPage() {
 
                 {/* Niveau 2: Audit Qualitatif */}
                 <section id="audit-qualitatif" className="mb-16">
-                  {/* Updated section with white background and green left border */}
                   <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-8 mb-8 border-l-4 border-l-green-500">
                     <h3 className="text-2xl font-medium mb-4">
                       Niveau 2 : Audit Qualitatif - Les Points de Friction Opérationnels
                     </h3>
-                    <p className="text-lg mb-6 leading-relaxed">
+                    <p className="mb-6 leading-relaxed">
                       <strong>Objectif :</strong> Identifier les blocages humains et organisationnels
                     </p>
 
@@ -296,7 +301,7 @@ export default function DiagnosticPage() {
                     <div className="space-y-6">
                       <div>
                         <h5 className="font-medium text-lg mb-3 text-[#d4a574]">PROSPECTION ET GÉNÉRATION DE LEADS</h5>
-                        <div className="space-y-2 text-sm">
+                        <div className="space-y-2 text-sm leading-relaxed">
                           <div className="flex items-start gap-2">
                             <input type="checkbox" className="mt-1" />
                             <label>
@@ -344,7 +349,7 @@ export default function DiagnosticPage() {
 
                       <div>
                         <h5 className="font-medium text-lg mb-3 text-[#d4a574]">QUALIFICATION ET DÉCOUVERTE</h5>
-                        <div className="space-y-2 text-sm">
+                        <div className="space-y-2 text-sm leading-relaxed">
                           <div className="flex items-start gap-2">
                             <input type="checkbox" className="mt-1" />
                             <label>
@@ -392,7 +397,7 @@ export default function DiagnosticPage() {
 
                       <div>
                         <h5 className="font-medium text-lg mb-3 text-[#d4a574]">PROPOSITION ET NÉGOCIATION</h5>
-                        <div className="space-y-2 text-sm">
+                        <div className="space-y-2 text-sm leading-relaxed">
                           <div className="flex items-start gap-2">
                             <input type="checkbox" className="mt-1" />
                             <label>
@@ -440,7 +445,7 @@ export default function DiagnosticPage() {
 
                       <div>
                         <h5 className="font-medium text-lg mb-3 text-[#d4a574]">CLOSING ET SIGNATURE</h5>
-                        <div className="space-y-2 text-sm">
+                        <div className="space-y-2 text-sm leading-relaxed">
                           <div className="flex items-start gap-2">
                             <input type="checkbox" className="mt-1" />
                             <label>
@@ -482,7 +487,7 @@ export default function DiagnosticPage() {
 
                       <div>
                         <h5 className="font-medium text-lg mb-3 text-[#d4a574]">MANAGEMENT ET PILOTAGE</h5>
-                        <div className="space-y-2 text-sm">
+                        <div className="space-y-2 text-sm leading-relaxed">
                           <div className="flex items-start gap-2">
                             <input type="checkbox" className="mt-1" />
                             <label>
@@ -530,7 +535,7 @@ export default function DiagnosticPage() {
 
                       <div>
                         <h5 className="font-medium text-lg mb-3 text-[#d4a574]">OUTILS ET TECHNOLOGIES</h5>
-                        <div className="space-y-2 text-sm">
+                        <div className="space-y-2 text-sm leading-relaxed">
                           <div className="flex items-start gap-2">
                             <input type="checkbox" className="mt-1" />
                             <label>
@@ -572,7 +577,7 @@ export default function DiagnosticPage() {
 
                       <div>
                         <h5 className="font-medium text-lg mb-3 text-[#d4a574]">CULTURE ET ORGANISATION</h5>
-                        <div className="space-y-2 text-sm">
+                        <div className="space-y-2 text-sm leading-relaxed">
                           <div className="flex items-start gap-2">
                             <input type="checkbox" className="mt-1" />
                             <label>
@@ -621,7 +626,7 @@ export default function DiagnosticPage() {
 
                     <div className="mt-8">
                       <h4 className="text-xl font-medium mb-4">Grille de Scoring</h4>
-                      <p className="mb-4">
+                      <p className="mb-4 leading-relaxed">
                         <strong>Votre Score : ___/47</strong>
                       </p>
                       <div className="overflow-x-auto">
@@ -668,12 +673,11 @@ export default function DiagnosticPage() {
 
                 {/* Niveau 3: Audit Stratégique */}
                 <section id="audit-strategique" className="mb-16">
-                  {/* Updated section with white background and purple left border */}
                   <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-8 mb-8 border-l-4 border-l-purple-500">
                     <h3 className="text-2xl font-medium mb-4">
                       Niveau 3 : Audit Stratégique - Évaluation de Maturité Commerciale
                     </h3>
-                    <p className="text-lg mb-6 leading-relaxed">
+                    <p className="mb-6 leading-relaxed">
                       <strong>Objectif :</strong> Situer votre organisation vs les top performers
                     </p>
 
@@ -776,7 +780,7 @@ export default function DiagnosticPage() {
 
                     <div className="mt-8">
                       <h4 className="text-xl font-medium mb-4">Benchmark de Maturité</h4>
-                      <p className="mb-4">
+                      <p className="mb-4 leading-relaxed">
                         <strong>SCORE TOTAL : ___/150</strong>
                       </p>
                       <div className="overflow-x-auto">
@@ -817,7 +821,6 @@ export default function DiagnosticPage() {
                             <tr>
                               <td className="border border-gray-300 p-3 font-medium">&lt; 30</td>
                               <td className="border border-gray-300 p-3 font-medium text-red-700">Critique</td>
-                              <td className="border border-gray-300 p-3">Bottom 10%</td>
                               <td className="border border-gray-300 p-3">Intervention urgente</td>
                             </tr>
                           </tbody>
@@ -844,7 +847,7 @@ export default function DiagnosticPage() {
 
                         <div className="mb-4">
                           <h5 className="font-medium mb-2">Semaine 1-2 : État des lieux complet</h5>
-                          <div className="space-y-2 text-sm">
+                          <div className="space-y-2 text-sm leading-relaxed">
                             <div className="flex items-start gap-2">
                               <input type="checkbox" className="mt-1" />
                               <label>Compléter l'audit quantitatif (ratios de conversion)</label>
@@ -866,7 +869,7 @@ export default function DiagnosticPage() {
 
                         <div className="mb-4">
                           <h5 className="font-medium mb-2">Semaine 3-4 : Actions correctives immédiates</h5>
-                          <div className="space-y-2 text-sm">
+                          <div className="space-y-2 text-sm leading-relaxed">
                             <div className="flex items-start gap-2">
                               <input type="checkbox" className="mt-1" />
                               <label>Corriger la fuite #1 identifiée</label>
@@ -898,7 +901,7 @@ export default function DiagnosticPage() {
 
                         <div className="mb-4">
                           <h5 className="font-medium mb-2">Semaine 5-6 : Process et outils</h5>
-                          <div className="space-y-2 text-sm">
+                          <div className="space-y-2 text-sm leading-relaxed">
                             <div className="flex items-start gap-2">
                               <input type="checkbox" className="mt-1" />
                               <label>Formaliser le processus commercial optimisé</label>
@@ -920,7 +923,7 @@ export default function DiagnosticPage() {
 
                         <div className="mb-4">
                           <h5 className="font-medium mb-2">Semaine 7-8 : Coaching et accompagnement</h5>
-                          <div className="space-y-2 text-sm">
+                          <div className="space-y-2 text-sm leading-relaxed">
                             <div className="flex items-start gap-2">
                               <input type="checkbox" className="mt-1" />
                               <label>Coaching individuel sur les nouvelles pratiques</label>
@@ -952,7 +955,7 @@ export default function DiagnosticPage() {
 
                         <div className="mb-4">
                           <h5 className="font-medium mb-2">Semaine 9-10 : Mesure et ajustement</h5>
-                          <div className="space-y-2 text-sm">
+                          <div className="space-y-2 text-sm leading-relaxed">
                             <div className="flex items-start gap-2">
                               <input type="checkbox" className="mt-1" />
                               <label>Mesurer l'impact des changements</label>
@@ -974,7 +977,7 @@ export default function DiagnosticPage() {
 
                         <div className="mb-4">
                           <h5 className="font-medium mb-2">Semaine 11-12 : Ancrage et évolution</h5>
-                          <div className="space-y-2 text-sm">
+                          <div className="space-y-2 text-sm leading-relaxed">
                             <div className="flex items-start gap-2">
                               <input type="checkbox" className="mt-1" />
                               <label>Ancrer les nouvelles habitudes</label>
@@ -1016,7 +1019,7 @@ export default function DiagnosticPage() {
                       <div className="grid md:grid-cols-2 gap-6 mb-6">
                         <div>
                           <h4 className="font-medium mb-3 text-red-700">Situation initiale :</h4>
-                          <ul className="space-y-2 text-sm">
+                          <ul className="space-y-2 text-sm leading-relaxed">
                             <li>• CA stagnant à 8M€ depuis 2 ans</li>
                             <li>• Taux de closing : 19%</li>
                             <li>• Cycle moyen : 8 mois</li>
@@ -1026,7 +1029,7 @@ export default function DiagnosticPage() {
 
                         <div>
                           <h4 className="font-medium mb-3 text-green-700">Résultats 6 mois :</h4>
-                          <ul className="space-y-2 text-sm">
+                          <ul className="space-y-2 text-sm leading-relaxed">
                             <li>• Taux de closing : 34% (+79%)</li>
                             <li>• Cycle moyen : 5,5 mois (-31%)</li>
                             <li>• CA : 12,5M€ (+56%)</li>
@@ -1037,7 +1040,7 @@ export default function DiagnosticPage() {
 
                       <div className="bg-gray-100 rounded-lg p-6 mb-6">
                         <h4 className="font-medium mb-3">Audit réalisé :</h4>
-                        <ul className="space-y-2 text-sm">
+                        <ul className="space-y-2 text-sm leading-relaxed">
                           <li>• Score maturité : 45/150 (Émergent)</li>
                           <li>• Fuite principale : RDV → Opportunité (25% vs 50% benchmark)</li>
                           <li>• Cause : Qualification insuffisante, pas de méthodologie</li>
@@ -1046,7 +1049,7 @@ export default function DiagnosticPage() {
 
                       <div className="bg-gray-100 rounded-lg p-6 mb-6">
                         <h4 className="font-medium mb-3">Plan d'action déployé :</h4>
-                        <ul className="space-y-2 text-sm">
+                        <ul className="space-y-2 text-sm leading-relaxed">
                           <li>
                             • <strong>Mois 1 :</strong> Formation MEDDPICC intensive (2 jours + coaching)
                           </li>
@@ -1073,7 +1076,7 @@ export default function DiagnosticPage() {
                   <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-8">
                     <h2 className="text-3xl font-medium mb-6">Votre Prochaine Étape</h2>
 
-                    <p className="text-lg mb-8 leading-relaxed">
+                    <p className="mb-8 leading-relaxed">
                       Vous avez maintenant tous les outils pour auditer votre processus commercial comme un expert et
                       identifier vos leviers d'amélioration prioritaires.
                     </p>
@@ -1081,7 +1084,7 @@ export default function DiagnosticPage() {
                     <div className="grid md:grid-cols-2 gap-6 mb-8">
                       <div className="border border-gray-200 rounded-lg p-6 shadow-sm">
                         <h3 className="text-xl font-medium mb-4">Option 1 : Vous lancez l'audit seul</h3>
-                        <ul className="space-y-3 mb-6 text-sm">
+                        <ul className="space-y-3 mb-6 text-sm leading-relaxed">
                           <li className="flex items-start gap-2">
                             <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
                             <span>Utilisez tous les templates et checklists fournis</span>
@@ -1099,7 +1102,7 @@ export default function DiagnosticPage() {
 
                       <div className="border-2 border-[#d4a574] rounded-lg p-6 bg-[#d4a574]/5 shadow-sm">
                         <h3 className="text-xl font-medium mb-4">Option 2 : Vous vous faites accompagner</h3>
-                        <ul className="space-y-3 mb-6 text-sm">
+                        <ul className="space-y-3 mb-6 text-sm leading-relaxed">
                           <li className="flex items-start gap-2">
                             <CheckCircle2 className="w-5 h-5 text-[#d4a574] flex-shrink-0 mt-0.5" />
                             <span>Audit express gratuit de 20 minutes pour identifier vos priorités</span>
@@ -1146,7 +1149,7 @@ export default function DiagnosticPage() {
                 </div>
 
                 <div className="mt-8 text-center text-sm text-gray-600">
-                  <p className="italic">
+                  <p className="italic leading-relaxed">
                     Cette section vous a donné les outils pour diagnostiquer précisément votre organisation commerciale.
                     La section suivante vous révèle comment générer un pipeline prévisible avec les techniques de
                     prospection moderne.

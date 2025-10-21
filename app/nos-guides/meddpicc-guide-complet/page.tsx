@@ -2,20 +2,21 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import Footer from "@/components/footer"
 import GuideSidebar from "@/components/guide-sidebar"
+import { getCurrentYear, getLastUpdateDate } from "@/lib/date-utils"
 
 export const metadata: Metadata = {
-  title: "MEDDPICC Guide Complet 2024 : Qualification Commerciale | Simple Sales",
+  title: `MEDDPICC Guide Complet ${getCurrentYear()} : Qualification Commerciale | Simple Sales`,
   description:
     "Maîtrisez MEDDPICC pour qualifier vos opportunités B2B. Templates, checklists, techniques d'écoute active. +67% de taux de closing garantis.",
 }
 
 export default function MeddpiccPage() {
   return (
-    <div className="min-h-screen bg-[#f5f1eb] text-[#1a1a1a] font-mono">
+    <div className="min-h-screen bg-[#f5f1eb] text-[#1a1a1a] font-sans">
       <div className="fixed top-0 left-0 right-0 z-10 bg-white px-4 py-4 border-b border-gray-200 shadow-sm">
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
-            <a href="/" className="text-sm font-mono text-[#1a1a1a] hover:opacity-70 transition-opacity cursor-pointer">
+            <a href="/" className="text-sm font-sans text-[#1a1a1a] hover:opacity-70 transition-opacity cursor-pointer">
               simple.sales
             </a>
           </div>
@@ -26,7 +27,7 @@ export default function MeddpiccPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-[1fr_300px] gap-8">
-              <article className="prose prose-lg max-w-none">
+              <article className="max-w-none">
                 <div className="mb-8">
                   <Link
                     href="/nos-guides"
@@ -34,6 +35,10 @@ export default function MeddpiccPage() {
                   >
                     ← Retour au guide principal
                   </Link>
+                </div>
+
+                <div className="mb-6 text-sm text-gray-600">
+                  <p>Dernière mise à jour : {getLastUpdateDate()}</p>
                 </div>
 
                 <div className="mb-4">

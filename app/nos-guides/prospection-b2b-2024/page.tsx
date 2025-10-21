@@ -3,20 +3,21 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import Footer from "@/components/footer"
 import ProspectionGuideSidebar from "@/components/prospection-guide-sidebar"
+import { getCurrentYear, getLastUpdateDate } from "@/lib/date-utils"
 
 export const metadata: Metadata = {
-  title: "Prospection B2B 2024 : Techniques Modernes + IA | Simple Sales",
+  title: `Prospection B2B ${getCurrentYear()} : Techniques Modernes + IA | Simple Sales`,
   description:
     "Maîtrisez la prospection B2B moderne : cold calling 3.0, social selling LinkedIn, IA et automation. Scripts, templates et workflows inclus.",
 }
 
 export default function ProspectionPage() {
   return (
-    <div className="min-h-screen bg-[#f5f1eb] text-[#1a1a1a] font-mono">
+    <div className="min-h-screen bg-[#f5f1eb] text-[#1a1a1a] font-sans">
       <div className="fixed top-0 left-0 right-0 z-10 bg-white px-4 py-4 border-b border-gray-200 shadow-sm">
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
-            <a href="/" className="text-sm font-mono text-[#1a1a1a] hover:opacity-70 transition-opacity cursor-pointer">
+            <a href="/" className="text-sm font-sans text-[#1a1a1a] hover:opacity-70 transition-opacity cursor-pointer">
               simple.sales
             </a>
           </div>
@@ -27,7 +28,7 @@ export default function ProspectionPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-[1fr_300px] gap-8">
-              <article className="prose prose-lg max-w-none">
+              <article className="max-w-none">
                 <div className="mb-8">
                   <Link
                     href="/nos-guides"
@@ -37,6 +38,10 @@ export default function ProspectionPage() {
                   </Link>
                 </div>
 
+                <div className="mb-6 text-sm text-gray-600">
+                  <p>Dernière mise à jour : {getLastUpdateDate()}</p>
+                </div>
+
                 <div className="mb-4">
                   <span className="inline-block bg-[#f4d03f] text-[#1a1a1a] px-3 py-1 rounded-full text-xs font-medium">
                     SECTION 2 : PROSPECTION
@@ -44,7 +49,7 @@ export default function ProspectionPage() {
                 </div>
 
                 <h1 className="text-4xl md:text-5xl font-medium mb-4 leading-tight">
-                  Prospection B2B 2024 : Comment Générer un Pipeline Prévisible
+                  Prospection B2B {getCurrentYear()} : Comment Générer un Pipeline Prévisible
                 </h1>
                 <p className="text-xl text-gray-600 mb-16 leading-relaxed">
                   Le guide complet des techniques de prospection modernes qui fonctionnent vraiment
